@@ -13,6 +13,6 @@ jobs:
       with:
         target-server: ftpupload.net
         remote-user: if0_37944711
-        private-ssh-key: ${{ secrets.ftp-password }}
+        private-ssh-key: ${{ secrets.ftp_password }}
         local-dir: ./
         server-dir: /htdocs/
