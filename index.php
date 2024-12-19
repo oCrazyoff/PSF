@@ -12,6 +12,7 @@
         <label for="usuario">email</label>
         <input type="email" name="email" id="email">
         <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha">
         <button type="submit">Entrar</button>
     </form>
 </body>
