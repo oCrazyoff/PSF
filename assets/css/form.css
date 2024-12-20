@@ -1,0 +1,130 @@
+/* Estilo geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+}
+
+/* Contêiner do formulário */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #333;
+}
+
+/* Título */
+.form-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #4e54c8;
+}
+
+/* Grupos do formulário */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Labels */
+label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    color: #4e54c8;
+}
+
+/* Campo de entrada */
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.input-group-text {
+    background-color: #4e54c8;
+    color: #fff;
+    padding: 15px 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border: none;
+    outline: none;
+    padding: 10px;
+    flex: 1;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #333;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+/* Botão */
+.btn-block {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #fff;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.btn-block:hover {
+    background: linear-gradient(135deg, #3e44b1, #7679e2);
+    cursor: pointer;
+}
+
+/* Link para cadastro */
+.text-center {
+    margin-top: 15px;
+}
+
+.register-link {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #4e54c8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link:hover {
+    color: #8f94fb;
+    text-decoration: underline;
+}
+
+/* Efeitos de foco */
+.input-group:focus-within {
+    border-color: #4e54c8;
+    box-shadow: 0 0 5px rgba(78, 84, 200, 0.5);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+    }
+}
