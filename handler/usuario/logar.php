@@ -8,7 +8,7 @@ $sql = "SELECT nome FROM pessoas WHERE email = ? AND senha = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
-    $stmt->bind_param("ss",$cpf,$senha);
+    $stmt->bind_param("ss",$email,$senha);
     $stmt->execute();
     $stmt->bind_result($nome);
     $stmt->fetch();
