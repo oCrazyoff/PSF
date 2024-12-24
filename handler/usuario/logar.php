@@ -4,23 +4,21 @@ include("../utils/conexao.php");
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
-$sql = "SELECT * FROM pessoas WHERE email = ? AND senha = ?";
+$sql = "SELECT nome FROM pessoas WHERE email = ? AND senha = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
-    if ($stmt->bind_param("ss", $email, $senha)) {
+    $stmt->bind_param("ss",$cpf,$senha);
+    $stmt->execute();
+    $stmt->bind_result($nome);
+    $stmt->fetch();
 
-        if ($stmt->execute()) {
-            header("Location: ../../pages/inicio.php");
-        } else {
-            header("location: ../index.php?erro=1");
-            die;
-        }
+    if($nome != ''){
+        session_start();
+        $_SESSION["nome"] = $nome;
+        header("Location: ../pages/inicio.php");
     } else {
-        header("location: ../index.php?erro=2");
+        header("Location: ../index.php?erro=1");
         die;
     }
-} else {
-    header("location: ../index.php?erro=3");
-    die;
 }
