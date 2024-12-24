@@ -16,9 +16,9 @@ if ($stmt) {
     if($nome != ''){
         session_start();
         $_SESSION["nome"] = $nome;
-        header("Location: ../pages/inicio.php");
+        header("Location: ../../pages/inicio.php");
     } else {
-        header("Location: ../index.php?erro=1");
+        header("Location: ../../index.php?erro=1");
         die;
     }
 }

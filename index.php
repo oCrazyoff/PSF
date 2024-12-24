@@ -41,7 +41,8 @@
 
 <script>
     <?php
-        switch($_GET["erro"]){
+    $erro = $_GET["erro"];
+        switch($erro){
             case 1:
                 ?>
                 windows.alert("Declaração não foi executada corretamente!");

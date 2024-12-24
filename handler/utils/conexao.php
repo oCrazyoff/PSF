@@ -8,7 +8,7 @@ $dbname = "if0_37944711_psf";
 /*$servidor = "localhost";
 $usuario = "root";
 $senha = "";
-$dbname = "psf";*/
+$dbname = "sistema";*/
 
 $conn = new mysqli($servidor, $usuario, $senha, $dbname);
 
