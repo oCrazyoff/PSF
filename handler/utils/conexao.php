@@ -10,6 +10,8 @@ $usuario = "root";
 $senha = "";
 $dbname = "sistema";*/
 
+/**/
+
 $conn = new mysqli($servidor, $usuario, $senha, $dbname);
 
 if ($conn->connect_error) {

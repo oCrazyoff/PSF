@@ -41,23 +41,12 @@
 
 <script>
     <?php
-    $erro = $_GET["erro"];
-        switch($erro){
-            case 1:
-                ?>
-                windows.alert("Declaração não foi executada corretamente!");
-                <?php
-            case 2:
-                ?>
-                windows.alert("Parâmetros não foram encontrados!");
-                <?php
-            case 3:
-                ?>
-                windows.alert("Declaração deu erro!");
-                <?php
-        }
+    if (isset($_GET["erro"]) && $_GET["erro"] == 1) {
     ?>
-    
+        window.alert("Usuário ou senha incorreto!");
+    <?php
+    }
+    ?>
 </script>
 
 </html>
