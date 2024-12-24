@@ -13,11 +13,14 @@ if ($stmt) {
         if ($stmt->execute()) {
             header("Location: ../../pages/inicio.php");
         } else {
-            die("Erro");
+            header("location: ../index.php?erro=1");
+            die;
         }
     } else {
-        die("Erro");
+        header("location: ../index.php?erro=2");
+        die;
     }
 } else {
-    die("Erro");
+    header("location: ../index.php?erro=3");
+    die;
 }

@@ -39,4 +39,24 @@
     </div>
 </body>
 
+<script>
+    <?php
+        switch($_GET["erro"]){
+            case 1:
+                ?>
+                windows.alert("Declaração não foi executada corretamente!");
+                <?php
+            case 2:
+                ?>
+                windows.alert("Parâmetros não foram encontrados!");
+                <?php
+            case 3:
+                ?>
+                windows.alert("Declaração deu erro!");
+                <?php
+        }
+    ?>
+    
+</script>
+
 </html>
