@@ -1,24 +1,12 @@
-/* Estilo geral */
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #f4f4f9;
-    color: #333;
-}
-
 /* Header */
-.admin-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
+header {
     background: #4e54c8;
     color: #fff;
     display: flex;
+    height: 3em;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 1em 2em;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,7 +38,7 @@ body {
 
 /* Ajuste para dispositivos menores */
 @media (max-width: 768px) {
-    .admin-header {
+    header {
         flex-direction: column;
         height: auto;
         padding: 10px;

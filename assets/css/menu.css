@@ -4,13 +4,12 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    box-sizing: border-box;
+    height: calc(100vh - 5em);
 }
 
 /* Estilo do menu lateral */
 .sidebar {
-    margin-top: 70px;
-    width: 250px;
-    height: 100vh;
     background: #4e54c8;
     color: #fff;
     display: flex;

@@ -1,25 +1,34 @@
-/* Estilo geral */
+/* Estilo Geral */
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    /* Gradiente de fundo */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     color: #fff;
+    /* Texto claro para contraste */
 }
 
-/* Contêiner do dashboard */
+/* Contêiner do Dashboard */
 .dashboard-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Fundo com leve transparência */
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    /* Sombra mais evidente */
+    width: 90%;
+    /* Ocupar 90% da largura da tela */
     max-width: 1200px;
+    /* Limite máximo para telas grandes */
     text-align: center;
     color: #333;
+    /* Texto escuro para melhor contraste */
+    box-sizing: border-box;
+    /* Inclui padding no cálculo de largura */
 }
 
 /* Título */
@@ -28,27 +37,48 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
     color: #4e54c8;
+    /* Cor do título */
 }
 
-/* Cards de informações */
+/* Estilo dos Cartões */
 .cards {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    /* Permite que os cartões quebrem para uma nova linha */
+    gap: 20px;
+    /* Espaçamento entre os cartões */
     margin-bottom: 40px;
 }
 
 .card {
-    background-color: #f2f2f2;
+    background-color: #f8f9fa;
+    /* Fundo leve */
     padding: 20px;
     border-radius: 8px;
-    width: 30%;
+    flex: 1 1 calc(33.333% - 20px);
+    /* Cada cartão ocupa um terço da largura menos o gap */
+    max-width: 300px;
+    /* Limite máximo para cartões */
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Sombra leve */
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Animação ao passar o mouse */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    /* Efeito de zoom */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    /* Sombra mais forte no hover */
 }
 
 .card h2 {
     font-size: 1.5rem;
     color: #555;
+    /* Cor do título */
+    margin-bottom: 10px;
 }
 
 .card .value {
@@ -60,26 +90,52 @@ body {
 /* Gráfico */
 .chart-container {
     margin-top: 50px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Gráfico ocupa 100% da largura */
+    box-sizing: border-box;
 }
 
+/* Canvas (Gráfico) */
 canvas {
     width: 100%;
-    height: 400px;
+    height: auto;
+    /* Ajusta automaticamente a altura */
 }
 
-/* Responsividade */
+/* Responsividade para Dispositivos Móveis */
 @media (max-width: 768px) {
     .cards {
         flex-direction: column;
+        /* Alinha os cartões verticalmente */
         align-items: center;
+        gap: 20px;
+        /* Espaçamento entre os cartões */
     }
 
     .card {
-        width: 80%;
-        margin-bottom: 20px;
+        flex: 1 1 100%;
+        /* Cada cartão ocupa toda a largura disponível */
+        max-width: 90%;
+        /* Limite de 90% da largura em telas menores */
     }
 
     .form-title {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.8rem;
+        /* Ajuste do tamanho do título para telas muito pequenas */
+    }
+
+    .card .value {
+        font-size: 1.5rem;
+        /* Reduz tamanho do texto nos cartões */
     }
 }

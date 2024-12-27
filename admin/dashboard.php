@@ -1,57 +1,104 @@
+<?php
+include("../handler/utils/valida.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Vendas</title>
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <title>Início</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/menu.css">
+    <!-- Link para Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Estilo do Dashboard */
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+            color: #4e54c8;
+        }
+
+        /* Estilo do Gráfico */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="dashboard-container">
-        <header>
-            <h1 class="form-title">Dashboard de Vendas</h1>
-        </header>
-        <div class="cards">
+    <?php include("../includes/header.php") ?>
+    <div class="content">
+        <?php include("../includes/menu.php") ?>
+
+        <!-- Dashboard de Vendas -->
+        <div class="dashboard">
+            <!-- Cartões de Vendas -->
             <div class="card">
-                <h2>Lucro</h2>
-                <p class="value">R$ 50.000</p>
+                <h3>Total de Vendas</h3>
+                <p>R$ 20.000,00</p>
             </div>
             <div class="card">
-                <h2>Vendas</h2>
-                <p class="value">2.500</p>
+                <h3>Vendas Hoje</h3>
+                <p>R$ 2.500,00</p>
             </div>
             <div class="card">
-                <h2>Clientes</h2>
-                <p class="value">1.200</p>
+                <h3>Novos Clientes</h3>
+                <p>150 Clientes</p>
             </div>
         </div>
+
+        <!-- Gráfico de Vendas -->
         <div class="chart-container">
             <canvas id="salesChart"></canvas>
         </div>
     </div>
 
     <script>
-        var ctx = document.getElementById('salesChart').getContext('2d');
-        var salesChart = new Chart(ctx, {
+        // Dados fictícios do gráfico de vendas
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [{
-                    label: 'Vendas Mensais',
-                    data: [500, 700, 800, 900, 650, 950],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
+                    label: 'Vendas (R$)',
+                    data: [1000, 2000, 1500, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 7000],
+                    borderColor: '#4e54c8',
+                    backgroundColor: 'rgba(78, 84, 200, 0.1)',
+                    fill: true,
+                    tension: 0.4
                 }]
             },
             options: {
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value;
+                            }
+                        }
                     }
                 }
             }
