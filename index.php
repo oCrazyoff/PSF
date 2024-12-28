@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logar</title>
-    <?php include("../includes/link_head.php") ?>
-    <link rel="stylesheet" href="../assets/css/form.css">
+    <?php include("includes/link_head.php") ?>
+    <link rel="stylesheet" href="assets/css/form.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
