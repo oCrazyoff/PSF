@@ -48,6 +48,51 @@ body {
     font-size: 1.2rem;
 }
 
+/* Submenu */
+.has-submenu .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    /* Altura inicial é 0 */
+    overflow: hidden;
+    /* Esconde o conteúdo que excede a altura */
+    background: #6a70f1;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    /* Transição suave */
+}
+
+.has-submenu.open .submenu {
+    max-height: 200px;
+    /* Altura suficiente para mostrar os itens */
+    padding-top: 5px;
+    /* Adiciona um pouco de espaçamento ao expandir */
+    padding-bottom: 5px;
+}
+
+/* Estilo dos links do submenu */
+.has-submenu .submenu li a {
+    padding: 10px 40px;
+    font-size: 0.9rem;
+}
+
+.has-submenu .submenu li a:hover {
+    background: #8f94fb;
+}
+
+.caret {
+    margin-left: auto;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.has-submenu.open .caret {
+    transform: rotate(180deg);
+    /* Rotaciona a seta ao expandir */
+}
+
+
+
 /* Conteúdo principal */
 .content {
     display: flex;

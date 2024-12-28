@@ -33,39 +33,39 @@ include("../database/utils/conexao.php");
                     </tr>
                 </thead>
                 <tbody>
-                        <?php
-                        $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
-                        $resultadoFuncionarios = $conn->query($sqlFuncionarios);
+                    <?php
+                    $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
+                    $resultadoFuncionarios = $conn->query($sqlFuncionarios);
 
-                        while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
+                    while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
 
-                            $cpf = $rowFuncionarios['cpf'];
-                            $salario = $rowFuncionarios['salario'];
-                            $data_admicao = $rowFuncionarios['data_admicao'];
-                            $data_demicao = $rowFuncionarios['data_demicao'];
-                            $status = $rowFuncionarios['status'];
+                        $cpf = $rowFuncionarios['cpf'];
+                        $salario = $rowFuncionarios['salario'];
+                        $data_admicao = $rowFuncionarios['data_admicao'];
+                        $data_demicao = $rowFuncionarios['data_demicao'];
+                        $status = $rowFuncionarios['status'];
 
-                            $sqlPessoas = "SELECT * FROM pessoas WHERE cpf = '$cpf'";
-                            $resultadoPessoas = $conn->query($sqlPessoas);
+                        $sqlPessoas = "SELECT * FROM pessoas WHERE cpf = '$cpf'";
+                        $resultadoPessoas = $conn->query($sqlPessoas);
 
-                            while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-                                $nome = $rowPessoas['nome'];
-                                $cargo = $rowPessoas['cargo'];
-                            }
+                        while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
+                            $nome = $rowPessoas['nome'];
+                            $cargo = $rowPessoas['cargo'];
+                        }
 
-                            echo "
+                        echo "
                             <tr>
                                 <td>" . $cpf . "</td>
                                 <td>" . $nome . "</td>
-                                <td>" . $salario . "</td>
+                                <td>R$ " . number_format($salario, 2, ',', '.') . "</td>
                                 <td>" . $data_admicao . "</td>
                                 <td>" . $data_demicao . "</td>
                                 <td>" . $cargo . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                             </tr>
-                                ";
-                        }
-                        ?>
+                            ";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
