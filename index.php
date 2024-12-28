@@ -15,7 +15,7 @@
         <form action="handler/usuario/logar.php" method="post">
             <h2 class="form-title">Login</h2>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">E-mail</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email"
