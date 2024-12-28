@@ -48,6 +48,8 @@ include("../database/utils/conexao.php");
                             $contato = $rowPessoas['contato'];
                             $tipo_pessoa = $rowPessoas['tipo_pessoa'];
                             $status = $rowPessoas['status'];
+                            $dataFormatada = DateTime::createFromFormat('Y-m-d', $data_nascimento)->format('d/m/Y');
+
 
                             $sqlTipo_pessoa = "SELECT tipo FROM tipo_pessoa WHERE id = '$tipo_pessoa'";
                             $resultadoTipo_pessoa = $conn->query($sqlTipo_pessoa);
@@ -61,7 +63,7 @@ include("../database/utils/conexao.php");
                                 <td>" . $nome . "</td>
                                 <td>" . $cpf . "</td>
                                 <td>" . $email . "</td>
-                                <td>" . $data_nascimento . "</td>
+                                <td>" . $dataFormatada . "</td>
                                 <td>" . $endereco . "</td>
                                 <td>" . $contato . "</td>
                                 <td>" . $tipo . "</td>

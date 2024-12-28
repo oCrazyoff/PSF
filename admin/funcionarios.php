@@ -44,13 +44,21 @@ include("../database/utils/conexao.php");
                         $data_admicao = $rowFuncionarios['data_admicao'];
                         $data_demicao = $rowFuncionarios['data_demicao'];
                         $status = $rowFuncionarios['status'];
+                        $dataAdmicaoFormatada = DateTime::createFromFormat('Y-m-d', $data_admicao)->format('d/m/Y');
 
-                        $sqlPessoas = "SELECT * FROM pessoas WHERE cpf = '$cpf'";
+                        $sqlPessoas = "SELECT nome, cargo FROM pessoas WHERE cpf = '$cpf' AND status = 1";
                         $resultadoPessoas = $conn->query($sqlPessoas);
 
                         while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
                             $nome = $rowPessoas['nome'];
-                            $cargo = $rowPessoas['cargo'];
+                            $cargoPessoa = $rowPessoas['cargo'];
+                        }
+
+                        $sqlCargo = "SELECT cargo FROM cargos WHERE id = '$cargoPessoa' AND status = 1";
+                        $resultadoCargo = $conn->query($sqlCargo);
+
+                        while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                            $cargo = $rowCargo['cargo'];
                         }
 
                         echo "
@@ -58,8 +66,8 @@ include("../database/utils/conexao.php");
                                 <td>" . $cpf . "</td>
                                 <td>" . $nome . "</td>
                                 <td>R$ " . number_format($salario, 2, ',', '.') . "</td>
-                                <td>" . $data_admicao . "</td>
-                                <td>" . $data_demicao . "</td>
+                                <td>" . $dataAdmicaoFormatada . "</td>
+                                <td>" . (empty($data_demicao) ? "Funcionário Ativo" : (DateTime::createFromFormat('Y-m-d', $data_demicao)->format('d/m/Y'))) . "</td>
                                 <td>" . $cargo . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                             </tr>

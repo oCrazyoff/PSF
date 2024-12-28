@@ -53,6 +53,7 @@ include("../database/utils/conexao.php");
                         $lucro = $preco_venda - $preco_custo;
                         $validade = $row['validade'];
                         $status = $row['status'];
+                        $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
 
                         echo "
                             <tr>
@@ -61,11 +62,11 @@ include("../database/utils/conexao.php");
                                 <td>" . $fornecedor . "</td>
                                 <td>" . $marca . "</td>
                                 <td>" . $grupo . "</td>
-                                <td>R$ " . $preco_custo . "</td>
-                                <td>R$ " . $preco_venda . "</td>
+                                <td>R$ " . number_format($preco_custo, 2, ',', '.') . "</td>
+                                <td>R$ " . number_format($preco_venda, 2, ',', '.') . "</td>
                                 <td>" . $quantidade . "</td>
                                 <td>R$ " . number_format($lucro, 2, ',', '.') . "</td>
-                                <td>" . $validade . "</td>
+                                <td>" . $validadeFormatada . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                             </tr>
                                 ";
