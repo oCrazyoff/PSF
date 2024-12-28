@@ -1,6 +1,6 @@
 <header>
     <div class="header-left">
-        <h1 class="system-name">Painel de Administração</h1>
+        <h1 class="system-name">PSF System</h1>
     </div>
     <div class="header-right">
         <div class="user-info">
