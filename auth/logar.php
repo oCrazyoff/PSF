@@ -1,5 +1,5 @@
 <?php
-include("../utils/conexao.php");
+include("../database/utils/conexao.php");
 
 $email = $_POST["email"];
 $senha = $_POST["senha"];
@@ -8,17 +8,17 @@ $sql = "SELECT nome FROM pessoas WHERE email = ? AND senha = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
-    $stmt->bind_param("ss",$email,$senha);
+    $stmt->bind_param("ss", $email, $senha);
     $stmt->execute();
     $stmt->bind_result($nome);
     $stmt->fetch();
 
-    if($nome != ''){
+    if ($nome != '') {
         session_start();
         $_SESSION["nome"] = $nome;
-        header("Location: ../../pages/inicio.php");
+        header("Location: ../pages/inicio.php");
     } else {
-        header("Location: ../../index.php?erro=1");
+        header("Location: ../index.php?erro=1");
         die;
     }
 }

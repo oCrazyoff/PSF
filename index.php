@@ -12,7 +12,7 @@
 
 <body>
     <div class="form-container">
-        <form action="handler/usuario/logar.php" method="post">
+        <form action="auth/logar.php" method="post">
             <h2 class="form-title">Login</h2>
             <div class="form-group">
                 <label for="email">E-mail</label>

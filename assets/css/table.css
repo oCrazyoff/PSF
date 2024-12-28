@@ -1,0 +1,73 @@
+/* Título da página */
+table h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #4e54c8;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+table th {
+    background-color: #4e54c8;
+    color: #fff;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+
+table td a {
+    color: #4e54c8;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+table td a:hover {
+    color: #8f94fb;
+    text-decoration: underline;
+}
+
+/* Estilo para as colunas de status */
+.status {
+    color: #4e54c8;
+}
+
+.status.inativo {
+    color: #ff6f61;
+    /* Vermelho para inativo */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .content {
+        padding: 15px;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}
