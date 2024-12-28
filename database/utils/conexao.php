@@ -1,14 +1,14 @@
 <?php
 
-$servidor = "sql112.infinityfree.com";
+/*$servidor = "sql112.infinityfree.com";
 $usuario = "if0_37944711";
 $senha = "obLVaJpCA6GF";
-$dbname = "if0_37944711_psf";
+$dbname = "if0_37944711_psf";*/
 
-/*$servidor = "localhost";
+$servidor = "localhost";
 $usuario = "root";
 $senha = "";
-$dbname = "psf";*/
+$dbname = "psf";
 
 $conn = new mysqli($servidor, $usuario, $senha, $dbname);
 

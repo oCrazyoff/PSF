@@ -33,9 +33,8 @@ include("../database/utils/conexao.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                         <?php
-                        $sqlFuncionarios = "SELECT * FROM funcionarios";
+                        $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
                         $resultadoFuncionarios = $conn->query($sqlFuncionarios);
 
                         while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
@@ -55,17 +54,18 @@ include("../database/utils/conexao.php");
                             }
 
                             echo "
+                            <tr>
                                 <td>" . $cpf . "</td>
                                 <td>" . $nome . "</td>
                                 <td>" . $salario . "</td>
                                 <td>" . $data_admicao . "</td>
                                 <td>" . $data_demicao . "</td>
                                 <td>" . $cargo . "</td>
-                                <td>" . $status . "</td>
+                                <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                            </tr>
                                 ";
                         }
                         ?>
-                    </tr>
                 </tbody>
             </table>
         </div>

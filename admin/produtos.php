@@ -37,28 +37,40 @@ include("../database/utils/conexao.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        $sql = "SELECT * FROM produtos";
-                        $resultado = $conn->query($sql);
+                    <?php
+                    $sql = "SELECT * FROM produtos WHERE status = 1";
+                    $resultado = $conn->query($sql);
 
-                        while ($row = $resultado->fetch_assoc()) {
-                            echo "
-                                <td>" . $row['nome'] . "</td>
-                                <td>" . $row['codigo_barra'] . "</td>
-                                <td>" . $row['fornecedor'] . "</td>
-                                <td>" . $row['marca'] . "</td>
-                                <td>" . $row['grupo'] . "</td>
-                                <td>" . $row['preco_custo'] . "</td>
-                                <td>" . $row['preco_venda'] . "</td>
-                                <td>" . $row['quantidade'] . "</td>
-                                <td>" . $row['lucro'] . "</td>
-                                <td>" . $row['validade'] . "</td>
-                                <td>" . $row['status'] . "</td>
+                    while ($row = $resultado->fetch_assoc()) {
+                        $nome = $row['nome'];
+                        $codigo_barra = $row['codigo_barra'];
+                        $fornecedor = $row['fornecedor'];
+                        $marca = $row['marca'];
+                        $grupo = $row['grupo'];
+                        $preco_custo = $row['preco_custo'];
+                        $preco_venda = $row['preco_venda'];
+                        $quantidade = $row['quantidade'];
+                        $lucro = $preco_venda - $preco_custo;
+                        $validade = $row['validade'];
+                        $status = $row['status'];
+
+                        echo "
+                            <tr>
+                                <td>" . $nome . "</td>
+                                <td>" . $codigo_barra . "</td>
+                                <td>" . $fornecedor . "</td>
+                                <td>" . $marca . "</td>
+                                <td>" . $grupo . "</td>
+                                <td>R$ " . $preco_custo . "</td>
+                                <td>R$ " . $preco_venda . "</td>
+                                <td>" . $quantidade . "</td>
+                                <td>R$ " . number_format($lucro, 2, ',', '.') . "</td>
+                                <td>" . $validade . "</td>
+                                <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                            </tr>
                                 ";
-                        }
-                        ?>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
