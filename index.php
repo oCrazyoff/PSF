@@ -39,11 +39,9 @@
 </body>
 
 <script>
-<?php
-    if (isset($_GET["erro"]) && $_GET["erro"] == 1) {
-    ?>
-window.alert("Usuário ou senha incorreto!");
-<?php
+    <?php
+    if (isset($_GET['resposta'])) {
+        echo "alert('" . $_GET['resposta'] . "')";
     }
     ?>
 </script>

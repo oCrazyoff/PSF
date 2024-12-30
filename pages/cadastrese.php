@@ -11,13 +11,21 @@
 
 <body>
     <div class="form-container">
-        <form action="cadastrar.php" method="post">
+        <form action="../database/cadastrar/cadastrar_cliente.php" method="post">
             <h2 class="form-title">Cadastro</h2>
             <div class="form-group">
                 <label for="nome">Nome Completo</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                     <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu nome completo"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Digite seu CPF"
                         required>
                 </div>
             </div>
@@ -53,5 +61,13 @@
         </form>
     </div>
 </body>
+
+<script>
+    <?php
+    if (isset($_GET['resposta'])) {
+        echo "alert('" . $_GET['resposta'] . "')";
+    }
+    ?>
+</script>
 
 </html>

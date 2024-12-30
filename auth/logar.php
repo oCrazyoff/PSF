@@ -18,7 +18,8 @@ if ($stmt) {
         $_SESSION["nome"] = $nome;
         header("Location: ../pages/inicio.php");
     } else {
-        header("Location: ../index.php?erro=1");
+        $resposta = "Usuário ou senha incorreto!";
+        header("Location: ../index.php?resposta=$resposta");
         die;
     }
 }
