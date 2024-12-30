@@ -59,14 +59,14 @@ include("../database/utils/conexao.php");
 
                     echo "
                             <tr>
-                                <td>" . $razao_social . "</td>
-                                <td>" . $nome_fantasia . "</td>
-                                <td>" . $cnpj . "</td>
-                                <td>" . $informacoes_fiscais . "</td>
-                                <td>" . $email . "</td>
-                                <td>" . $endereco . "</td>
-                                <td>" . $contato . "</td>
-                                <td>" . $tipo . "</td>
+                                <td>" . (empty($razao_social) ? "Não cadastrada" : $razao_social) . "</td>
+                                <td>" . (empty($nome_fantasia) ? "Não cadastrada" : $nome_fantasia) . "</td>
+                                <td>" . (empty($cnpj) ? "Não cadastrada" : $cnpj) . "</td>
+                                <td>" . (empty($informacoes_fiscais) ? "Não cadastrada" : $informacoes_fiscais) . "</td>
+                                <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
+                                <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
+                                <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
+                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo). "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";
