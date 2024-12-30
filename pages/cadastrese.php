@@ -22,14 +22,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="cpf">CPF</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                    <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Digite seu CPF"
-                        required>
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
