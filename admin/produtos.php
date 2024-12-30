@@ -16,46 +16,45 @@ include("../database/utils/conexao.php");
 
 <body>
     <?php include("../includes/header.php") ?>
+    <?php include("../includes/menu.php") ?>
     <div class="content">
-        <?php include("../includes/menu.php") ?>
-        <div class="container">
-            <table>
-                <h1>Lista de Produtos</h1>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Codigo de Barras</th>
-                        <th>Fornecedor</th>
-                        <th>Marca</th>
-                        <th>Grupo</th>
-                        <th>Preço de Custo</th>
-                        <th>Preço de Venda</th>
-                        <th>Quantidade</th>
-                        <th>Lucro</th>
-                        <th>Validade</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT * FROM produtos WHERE status = 1";
-                    $resultado = $conn->query($sql);
+        <table>
+            <h1>Lista de Produtos</h1>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Codigo de Barras</th>
+                    <th>Fornecedor</th>
+                    <th>Marca</th>
+                    <th>Grupo</th>
+                    <th>Preço de Custo</th>
+                    <th>Preço de Venda</th>
+                    <th>Quantidade</th>
+                    <th>Lucro</th>
+                    <th>Validade</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT * FROM produtos WHERE status = 1";
+                $resultado = $conn->query($sql);
 
-                    while ($row = $resultado->fetch_assoc()) {
-                        $nome = $row['nome'];
-                        $codigo_barra = $row['codigo_barra'];
-                        $fornecedor = $row['fornecedor'];
-                        $marca = $row['marca'];
-                        $grupo = $row['grupo'];
-                        $preco_custo = $row['preco_custo'];
-                        $preco_venda = $row['preco_venda'];
-                        $quantidade = $row['quantidade'];
-                        $lucro = $preco_venda - $preco_custo;
-                        $validade = $row['validade'];
-                        $status = $row['status'];
-                        $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
+                while ($row = $resultado->fetch_assoc()) {
+                    $nome = $row['nome'];
+                    $codigo_barra = $row['codigo_barra'];
+                    $fornecedor = $row['fornecedor'];
+                    $marca = $row['marca'];
+                    $grupo = $row['grupo'];
+                    $preco_custo = $row['preco_custo'];
+                    $preco_venda = $row['preco_venda'];
+                    $quantidade = $row['quantidade'];
+                    $lucro = $preco_venda - $preco_custo;
+                    $validade = $row['validade'];
+                    $status = $row['status'];
+                    $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
 
-                        echo "
+                    echo "
                             <tr>
                                 <td>" . $nome . "</td>
                                 <td>" . $codigo_barra . "</td>
@@ -70,11 +69,10 @@ include("../database/utils/conexao.php");
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                             </tr>
                                 ";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 </body>
 

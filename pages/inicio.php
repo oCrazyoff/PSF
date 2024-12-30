@@ -14,11 +14,9 @@ include("../auth/valida.php");
 
 <body>
     <?php include("../includes/header.php") ?>
+    <?php include("../includes/menu.php") ?>
     <div class="content">
-        <?php include("../includes/menu.php") ?>
-        <div class="container">
-            <h1>Bem Vindo!</h1>
-        </div>
+        <h1>Bem Vindo!</h1>
     </div>
 </body>
 

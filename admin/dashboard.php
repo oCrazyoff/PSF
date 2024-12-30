@@ -45,8 +45,8 @@ include("../auth/valida.php");
 
 <body>
     <?php include("../includes/header.php") ?>
+    <?php include("../includes/menu.php") ?>
     <div class="content">
-        <?php include("../includes/menu.php") ?>
 
         <!-- Dashboard de Vendas -->
         <div class="dashboard">

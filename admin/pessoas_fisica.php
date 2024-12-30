@@ -16,25 +16,24 @@ include("../database/utils/conexao.php");
 
 <body>
     <?php include("../includes/header.php") ?>
+    <?php include("../includes/menu.php") ?>
     <div class="content">
-        <?php include("../includes/menu.php") ?>
-        <div class="container">
-            <table>
-                <h1>Lista de Pessoas Físicas</h1>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>E-mail</th>
-                        <th>Data de Nascimento</th>
-                        <th>Endereço</th>
-                        <th>Contato</th>
-                        <th>Tipo</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <table>
+            <h1>Lista de Pessoas Físicas</h1>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Data de Nascimento</th>
+                    <th>Endereço</th>
+                    <th>Contato</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
                     $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 1)";
                     $resultadoPessoas = $conn->query($sqlPessoas);
 
@@ -72,9 +71,8 @@ include("../database/utils/conexao.php");
                                 ";
                     }
                     ?>
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </body>
 

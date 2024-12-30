@@ -16,52 +16,51 @@ include("../database/utils/conexao.php");
 
 <body>
     <?php include("../includes/header.php") ?>
+    <?php include("../includes/menu.php") ?>
     <div class="content">
-        <?php include("../includes/menu.php") ?>
-        <div class="container">
-            <table>
-                <h1>Lista de Funcionários</h1>
-                <thead>
-                    <tr>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>Salário</th>
-                        <th>Data de Admissão</th>
-                        <th>Data de Demissão</th>
-                        <th>Cargo</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
-                    $resultadoFuncionarios = $conn->query($sqlFuncionarios);
+        <table>
+            <h1>Lista de Funcionários</h1>
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Salário</th>
+                    <th>Data de Admissão</th>
+                    <th>Data de Demissão</th>
+                    <th>Cargo</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
+                $resultadoFuncionarios = $conn->query($sqlFuncionarios);
 
-                    while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
+                while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
 
-                        $cpf = $rowFuncionarios['cpf'];
-                        $salario = $rowFuncionarios['salario'];
-                        $data_admicao = $rowFuncionarios['data_admicao'];
-                        $data_demicao = $rowFuncionarios['data_demicao'];
-                        $status = $rowFuncionarios['status'];
-                        $dataAdmicaoFormatada = DateTime::createFromFormat('Y-m-d', $data_admicao)->format('d/m/Y');
+                    $cpf = $rowFuncionarios['cpf'];
+                    $salario = $rowFuncionarios['salario'];
+                    $data_admicao = $rowFuncionarios['data_admicao'];
+                    $data_demicao = $rowFuncionarios['data_demicao'];
+                    $status = $rowFuncionarios['status'];
+                    $dataAdmicaoFormatada = DateTime::createFromFormat('Y-m-d', $data_admicao)->format('d/m/Y');
 
-                        $sqlPessoas = "SELECT nome, cargo FROM pessoas WHERE cpf = '$cpf' AND status = 1";
-                        $resultadoPessoas = $conn->query($sqlPessoas);
+                    $sqlPessoas = "SELECT nome, cargo FROM pessoas WHERE cpf = '$cpf' AND status = 1";
+                    $resultadoPessoas = $conn->query($sqlPessoas);
 
-                        while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-                            $nome = $rowPessoas['nome'];
-                            $cargoPessoa = $rowPessoas['cargo'];
-                        }
+                    while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
+                        $nome = $rowPessoas['nome'];
+                        $cargoPessoa = $rowPessoas['cargo'];
+                    }
 
-                        $sqlCargo = "SELECT cargo FROM cargos WHERE id = '$cargoPessoa' AND status = 1";
-                        $resultadoCargo = $conn->query($sqlCargo);
+                    $sqlCargo = "SELECT cargo FROM cargos WHERE id = '$cargoPessoa' AND status = 1";
+                    $resultadoCargo = $conn->query($sqlCargo);
 
-                        while ($rowCargo = $resultadoCargo->fetch_assoc()) {
-                            $cargo = $rowCargo['cargo'];
-                        }
+                    while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                        $cargo = $rowCargo['cargo'];
+                    }
 
-                        echo "
+                    echo "
                             <tr>
                                 <td>" . $cpf . "</td>
                                 <td>" . $nome . "</td>
@@ -72,11 +71,10 @@ include("../database/utils/conexao.php");
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                             </tr>
                             ";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 </body>
 
