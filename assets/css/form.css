@@ -1,23 +1,20 @@
 /* Estilo geral */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    color: #fff;
+ 
 }
 
 /* Contêiner do formulário */
 .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
+    height: 100%;
     text-align: center;
     color: #333;
 }
