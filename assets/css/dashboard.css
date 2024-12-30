@@ -94,8 +94,6 @@ body {
     background: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    /* Gráfico ocupa 100% da largura */
     box-sizing: border-box;
 }
 
