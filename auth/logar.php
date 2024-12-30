@@ -5,6 +5,7 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 
 $sql = "SELECT nome FROM pessoas WHERE email = ? AND senha = ?";
+
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
