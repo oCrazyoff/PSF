@@ -72,7 +72,7 @@ body {
 
 /* Estilo dos links do submenu */
 .has-submenu .submenu li a {
-    padding: 10px 40px;
+    padding: 10px 20px;
     font-size: 0.9rem;
 }
 
