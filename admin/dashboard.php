@@ -1,5 +1,5 @@
 <?php
-include("../database/utils/valida.php");
+include("../auth/valida.php");
 ?>
 
 <!DOCTYPE html>
@@ -13,33 +13,33 @@ include("../database/utils/valida.php");
     <!-- Link para Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-    /* Estilo do Dashboard */
-    .dashboard {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        padding: 20px;
-    }
+        /* Estilo do Dashboard */
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
 
-    .card {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        width: 30%;
-        margin-bottom: 20px;
-    }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            margin-bottom: 20px;
+        }
 
-    .card h3 {
-        margin-bottom: 20px;
-        color: #4e54c8;
-    }
+        .card h3 {
+            margin-bottom: 20px;
+            color: #4e54c8;
+        }
 
-    /* Estilo do Gráfico */
-    .chart-container {
-        width: 100%;
-        height: 400px;
-    }
+        /* Estilo do Gráfico */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+        }
     </style>
 </head>
 
@@ -72,35 +72,35 @@ include("../database/utils/valida.php");
     </div>
 
     <script>
-    // Dados fictícios do gráfico de vendas
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    const salesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            datasets: [{
-                label: 'Vendas (R$)',
-                data: [1000, 2000, 1500, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 7000],
-                borderColor: '#4e54c8',
-                backgroundColor: 'rgba(78, 84, 200, 0.1)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return 'R$ ' + value;
+        // Dados fictícios do gráfico de vendas
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: 'Vendas (R$)',
+                    data: [1000, 2000, 1500, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 7000],
+                    borderColor: '#4e54c8',
+                    backgroundColor: 'rgba(78, 84, 200, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value;
+                            }
                         }
                     }
                 }
             }
-        }
-    });
+        });
     </script>
 </body>
 

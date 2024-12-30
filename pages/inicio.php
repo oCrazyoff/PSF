@@ -1,5 +1,5 @@
 <?php
-include("../database/utils/valida.php");
+include("../auth/valida.php");
 ?>
 
 <!DOCTYPE html>

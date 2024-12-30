@@ -1,5 +1,5 @@
 <?php
-include("../database/utils/valida.php");
+include("../auth/valida.php");
 include("../database/utils/conexao.php");
 ?>
 
@@ -35,30 +35,30 @@ include("../database/utils/conexao.php");
                     </tr>
                 </thead>
                 <tbody>
-                        <?php
-                        $sqlPessoas = "SELECT cnpj, razao_social, nome_fantasia, informacoes_fiscais, email, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 2)";
-                        $resultadoPessoas = $conn->query($sqlPessoas);
+                    <?php
+                    $sqlPessoas = "SELECT cnpj, razao_social, nome_fantasia, informacoes_fiscais, email, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 2)";
+                    $resultadoPessoas = $conn->query($sqlPessoas);
 
-                        while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
+                    while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
 
-                            $razao_social = $rowPessoas['razao_social'];
-                            $nome_fantasia = $rowPessoas['nome_fantasia'];
-                            $cnpj = $rowPessoas['cnpj'];
-                            $informacoes_fiscais = $rowPessoas['informacoes_fiscais'];
-                            $email = $rowPessoas['email'];
-                            $endereco = $rowPessoas['endereco'];
-                            $contato = $rowPessoas['contato'];
-                            $tipo_pessoa = $rowPessoas['tipo_pessoa'];
-                            $status = $rowPessoas['status'];
+                        $razao_social = $rowPessoas['razao_social'];
+                        $nome_fantasia = $rowPessoas['nome_fantasia'];
+                        $cnpj = $rowPessoas['cnpj'];
+                        $informacoes_fiscais = $rowPessoas['informacoes_fiscais'];
+                        $email = $rowPessoas['email'];
+                        $endereco = $rowPessoas['endereco'];
+                        $contato = $rowPessoas['contato'];
+                        $tipo_pessoa = $rowPessoas['tipo_pessoa'];
+                        $status = $rowPessoas['status'];
 
-                            $sqlTipo_pessoa = "SELECT tipo FROM tipo_pessoa WHERE id = '$tipo_pessoa'";
-                            $resultadoTipo_pessoa = $conn->query($sqlTipo_pessoa);
+                        $sqlTipo_pessoa = "SELECT tipo FROM tipo_pessoa WHERE id = '$tipo_pessoa'";
+                        $resultadoTipo_pessoa = $conn->query($sqlTipo_pessoa);
 
-                            while ($rowTipo_pessoa = $resultadoTipo_pessoa->fetch_assoc()) {
-                                $tipo = $rowTipo_pessoa['tipo'];
-                            }
+                        while ($rowTipo_pessoa = $resultadoTipo_pessoa->fetch_assoc()) {
+                            $tipo = $rowTipo_pessoa['tipo'];
+                        }
 
-                            echo "
+                        echo "
                             <tr>
                                 <td>" . $razao_social . "</td>
                                 <td>" . $nome_fantasia . "</td>
@@ -71,8 +71,8 @@ include("../database/utils/conexao.php");
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";
-                        }
-                        ?>    
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
