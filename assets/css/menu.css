@@ -99,7 +99,6 @@ body {
 
 /* Conteúdo principal */
 .content {
-    display: flex;
     margin-left: 10em;
     width: calc(100% - 10em);
     height: 100%;
