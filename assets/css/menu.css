@@ -103,6 +103,8 @@ body {
     width: calc(100% - 10em);
     height: 100%;
     overflow-y: auto;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 /* Responsividade */

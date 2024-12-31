@@ -14,7 +14,7 @@ include("auth/config.php");
 </head>
 
 <body>
-    <div class="form-container">
+    <div class="form-container" id="index">
         <form action="auth/logar.php" method="post">
             <h2 class="form-title">Login</h2>
             <div class="form-group">

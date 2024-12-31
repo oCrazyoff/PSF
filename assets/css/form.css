@@ -8,9 +8,11 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
-    color: #333;
+}
+
+#index {
+    height: 100vh;
 }
 
 form {
@@ -18,6 +20,8 @@ form {
     color: #ffffff;
     padding: 30px;
     border-radius: 12px;
+    display: grid;
+    gap: 20px;
 }
 
 /* Título */
@@ -26,11 +30,12 @@ form {
     font-weight: bold;
     margin-bottom: 20px;
     color: #4e54c8;
+    text-align: center;
 }
 
 /* Grupos do formulário */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
@@ -94,35 +99,13 @@ label {
     cursor: pointer;
 }
 
-/* Link para cadastro */
-.text-center {
-    margin-top: 15px;
-}
-
-.register-link {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #4e54c8;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.register-link:hover {
-    color: #8f94fb;
-    text-decoration: underline;
-}
-
-/* Efeitos de foco */
-.input-group:focus-within {
-    border-color: #4e54c8;
-    box-shadow: 0 0 5px rgba(78, 84, 200, 0.5);
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
-    .form-container {
+    form {
         padding: 20px;
+    }
+
+    .card {
+        padding: 15px;
     }
 }

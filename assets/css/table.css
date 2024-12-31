@@ -7,37 +7,97 @@ table h1 {
     color: #4e54c8;
 }
 
-/* Tabela */
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo a {
+    background-color: #4e54c8;
+    color: #f3f3f3;
+    padding: 1em;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+/* Estilo geral da tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra para destacar a tabela */
+    overflow: hidden;
+    /* Para respeitar o arredondamento */
 }
 
-table th,
-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+/* Cabeçalho da tabela */
+table thead {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    /* Gradiente moderno */
+}
+
+table thead th {
+    color: #ffffff;
+    /* Texto branco */
+    padding: .5rem;
     font-size: 1rem;
-}
-
-table th {
-    background-color: #4e54c8;
-    color: #fff;
     font-weight: bold;
+    text-transform: uppercase;
+    /* Letras maiúsculas */
+    letter-spacing: 0.05rem;
+    /* Pequeno espaçamento entre letras */
+    text-align: center;
+    /* Centraliza o texto */
+    border: none;
 }
 
-table td {
+/* Arredondamento no topo do cabeçalho */
+table thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* Corpo da tabela */
+table tbody td {
+    padding: .5rem;
+    text-align: left;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    /* Linha divisória suave */
     background-color: #f9f9f9;
+    /* Fundo claro */
 }
 
+/* Alternância de cores para as linhas */
+table tbody tr:nth-child(odd) td {
+    background-color: #f3f3f3;
+}
+
+table tbody tr:nth-child(even) td {
+    background-color: #ffffff;
+}
+
+/* Efeito hover nas linhas */
+table tbody tr:hover td {
+    background-color: #eaeaff;
+    /* Fundo levemente azul ao passar o mouse */
+}
+
+/* Coluna de ações ou links */
 table td a {
     color: #4e54c8;
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
     margin-top: 5px;
+    transition: color 0.3s ease;
 }
 
 table td a:hover {
@@ -45,26 +105,36 @@ table td a:hover {
     text-decoration: underline;
 }
 
-/* Estilo para as colunas de status */
-.status {
-    color: #4e54c8;
+/* Estilo para a coluna de status */
+table tbody .status {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px 10px;
+    display: inline-block;
+    color: #fff;
 }
 
-.status.inativo {
-    color: #ff6f61;
-    /* Vermelho para inativo */
+table tbody .status.ativo {
+    background-color: #4caf50;
+    /* Verde para status ativo */
+}
+
+table tbody .status.inativo {
+    background-color: #f44336;
+    /* Vermelho para status inativo */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .content {
-        padding: 15px;
+    table {
+        font-size: 0.9rem;
     }
 
-    table th,
-    table td {
-        padding: 8px;
-        font-size: 0.9rem;
+    table thead th,
+    table tbody td {
+        padding: 10px;
     }
 
     h1 {
