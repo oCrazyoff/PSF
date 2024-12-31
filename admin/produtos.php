@@ -10,9 +10,8 @@ include("../database/utils/conexao.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <link rel="stylesheet" href="../assets/css/header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../assets/css/menu.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../assets/css/table.css?v=<?php echo time(); ?>">
+    <?php include("../includes/link_head.php")?>
+    <link rel="stylesheet" href="../assets/css/table.css">
 </head>
 
 <body>
@@ -29,6 +28,7 @@ include("../database/utils/conexao.php");
                     <th>Fornecedor</th>
                     <th>Marca</th>
                     <th>Grupo</th>
+                    <th>Subgrupo</th>
                     <th>Preço de Custo</th>
                     <th>Preço de Venda</th>
                     <th>Quantidade</th>
@@ -48,6 +48,7 @@ include("../database/utils/conexao.php");
                     $fornecedor = $row['fornecedor'];
                     $marca = $row['marca'];
                     $grupo = $row['grupo'];
+                    $subgrupo = $row['subgrupo'];
                     $preco_custo = $row['preco_custo'];
                     $preco_venda = $row['preco_venda'];
                     $quantidade = $row['quantidade'];
@@ -56,13 +57,42 @@ include("../database/utils/conexao.php");
                     $status = $row['status'];
                     $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
 
+                    $sqlGrupo = "SELECT grupo FROM grupos WHERE id = '$grupo'";
+                    $resultadoGrupo = $conn->query($sqlGrupo);
+
+                    while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
+                        $nomeGrupo = $rowGrupo['grupo'];
+                    }
+
+                    $sqlSubgrupo = "SELECT nome FROM subgrupo WHERE id = '$subgrupo'";
+                    $resultadoSubgrupo = $conn->query($sqlSubgrupo);
+
+                    while ($rowSubgrupo = $resultadoSubgrupo->fetch_assoc()) {
+                        $nomeSubgrupo = $rowSubgrupo['nome'];
+                    }
+
+                    $sqlMarca = "SELECT nome FROM marcas WHERE id = '$marca'";
+                    $resultadoMarca = $conn->query($sqlMarca);
+
+                    while ($rowMarca = $resultadoMarca->fetch_assoc()) {
+                        $nomeMarca = $rowMarca['nome'];
+                    }
+
+                    $sqlFornecedor = "SELECT razao_social FROM pessoas WHERE cnpj = (SELECT cnpj FROM fornecedores WHERE id = '$fornecedor')";
+                    $resultadoFornecedor = $conn->query($sqlFornecedor);
+
+                    while ($rowFornecedor = $resultadoFornecedor->fetch_assoc()) {
+                        $nomeFornecedor = $rowFornecedor['razao_social'];
+                    }
+
                     echo "
                             <tr>
                                 <td>" . $nome . "</td>
                                 <td>" . $codigo_barra . "</td>
-                                <td>" . $fornecedor . "</td>
-                                <td>" . $marca . "</td>
-                                <td>" . $grupo . "</td>
+                                <td>" . $nomeFornecedor . "</td>
+                                <td>" . $nomeMarca . "</td>
+                                <td>" . $nomeGrupo . "</td>
+                                <td>" . $nomeSubgrupo . "</td>
                                 <td>R$ " . number_format($preco_custo, 2, ',', '.') . "</td>
                                 <td>R$ " . number_format($preco_venda, 2, ',', '.') . "</td>
                                 <td>" . $quantidade . "</td>
