@@ -19,6 +19,7 @@ if ($_SESSION['cargo'] == 1): ?>
     <ul class="sidebar-menu">
         <li><a href="../admin/dashboard.php"><i class="fa-solid fa-border-all"></i>Dashboard</a></li>
         <li><a href="../admin/funcionarios.php"><i class="fa-solid fa-briefcase"></i>Funcionarios</a></li>
+        <li><a href="../admin/transportadoras.php"><i class="fa-solid fa-truck"></i>Transportadoras</a></li>
         <li class="has-submenu">
             <a href="#" class="submenu-toggle"><i class="fa-solid fa-users"></i>Pessoas <span
                     class="caret">&#9662;</span></a>
@@ -40,6 +41,7 @@ if ($_SESSION['cargo'] == 1): ?>
     <ul class="sidebar-menu">
         <li><a href="../admin/dashboard.php"><i class="fa-solid fa-border-all"></i>Dashboard</a></li>
         <li><a href="../admin/funcionarios.php"><i class="fa-solid fa-briefcase"></i>Funcionarios</a></li>
+        <li><a href="../admin/transportadoras.php"><i class="fa-solid fa-truck"></i>Transportadoras</a></li>
         <li class="has-submenu">
             <a href="#" class="submenu-toggle"><i class="fa-solid fa-users"></i>Pessoas <span
                     class="caret">&#9662;</span></a>

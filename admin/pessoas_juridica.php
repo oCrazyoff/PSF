@@ -23,9 +23,7 @@ include("../database/utils/conexao.php");
             <thead>
                 <tr>
                     <th>Razão Social</th>
-                    <th>nome Fantasia</th>
                     <th>CNPJ</th>
-                    <th>Informações Fiscais</th>
                     <th>E-mail</th>
                     <th>Endereço</th>
                     <th>Contato</th>
@@ -35,15 +33,13 @@ include("../database/utils/conexao.php");
             </thead>
             <tbody>
                 <?php
-                $sqlPessoas = "SELECT cnpj, razao_social, nome_fantasia, informacoes_fiscais, email, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 2)";
+                $sqlPessoas = "SELECT cnpj, razao_social, email, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 2)";
                 $resultadoPessoas = $conn->query($sqlPessoas);
 
                 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
 
                     $razao_social = $rowPessoas['razao_social'];
-                    $nome_fantasia = $rowPessoas['nome_fantasia'];
                     $cnpj = $rowPessoas['cnpj'];
-                    $informacoes_fiscais = $rowPessoas['informacoes_fiscais'];
                     $email = $rowPessoas['email'];
                     $endereco = $rowPessoas['endereco'];
                     $contato = $rowPessoas['contato'];
@@ -60,9 +56,7 @@ include("../database/utils/conexao.php");
                     echo "
                             <tr>
                                 <td>" . (empty($razao_social) ? "Não cadastrada" : $razao_social) . "</td>
-                                <td>" . (empty($nome_fantasia) ? "Não cadastrada" : $nome_fantasia) . "</td>
                                 <td>" . (empty($cnpj) ? "Não cadastrada" : $cnpj) . "</td>
-                                <td>" . (empty($informacoes_fiscais) ? "Não cadastrada" : $informacoes_fiscais) . "</td>
                                 <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
                                 <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
                                 <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
