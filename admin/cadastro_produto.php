@@ -35,7 +35,7 @@ include("../auth/valida.php");
                 </div>
             </div>
             <div class="form-group">
-                <label for="fornecedor">Fornecedor</label>
+                <label for="fornecedor">Fornecedores</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-truck"></i></span>
                     <input type="text" class="form-control" name="fornecedor" id="fornecedor" placeholder="Digite nome do Fornecedor"
