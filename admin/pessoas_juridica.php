@@ -1,6 +1,7 @@
 <?php
 include("../auth/valida.php");
 include("../database/utils/conexao.php");
+include("../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +61,7 @@ include("../database/utils/conexao.php");
                                 <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
                                 <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
                                 <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
-                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo). "</td>
+                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";

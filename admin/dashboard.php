@@ -1,5 +1,6 @@
 <?php
 include("../auth/valida.php");
+include("../auth/config.php");
 ?>
 
 <!DOCTYPE html>

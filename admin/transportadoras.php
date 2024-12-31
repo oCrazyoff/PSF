@@ -1,6 +1,7 @@
 <?php
 include("../auth/valida.php");
 include("../database/utils/conexao.php");
+include("../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +11,7 @@ include("../database/utils/conexao.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <?php include("../includes/link_head.php")?>
+    <?php include("../includes/link_head.php") ?>
 </head>
 
 <body>

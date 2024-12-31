@@ -1,3 +1,7 @@
+<?php
+include("../auth/config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
