@@ -14,7 +14,7 @@ include("../auth/config.php");
 </head>
 
 <body>
-    <div class="form-container">
+    <div class="form-container" id="index">
         <form action="../database/cadastrar/cadastrar_cliente.php" method="post">
             <h2 class="form-title">Cadastro</h2>
             <div class="form-group">
