@@ -36,16 +36,16 @@ header {
     color: #fff;
 }
 
+.btn-menu {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
 /* Ajuste para dispositivos menores */
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .header-left h1 {
-        margin-bottom: 10px;
+    .btn-menu {
+        display: block;
     }
 }

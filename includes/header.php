@@ -1,4 +1,7 @@
 <header>
+    <button class="btn-menu" onclick="menu()">
+        <i class="fa-solid fa-bars"></i>
+    </button>
     <div class="header-left">
         <h1 class="system-name">PSF System</h1>
     </div>
@@ -11,3 +14,10 @@
         </div>
     </div>
 </header>
+
+<script>
+function menu() {
+    var menu = document.getElementById('menu');
+    menu.classList.toggle('active');
+}
+</script>

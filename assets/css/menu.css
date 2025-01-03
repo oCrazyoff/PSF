@@ -109,23 +109,33 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
     .content {
-        margin-left: 200px;
+        width: 100%;
+        margin: 0;
     }
 
-    .sidebar-header {
-        font-size: 1.2rem;
+    .sidebar {
+        visibility: hidden;
+        width: 0%;
+        transition: .3s ease all;
+        overflow-y: auto;
+        z-index: 1000;
     }
 
-    .sidebar-menu li a {
-        font-size: 0.9rem;
+    .sidebar.active {
+        visibility: visible;
+        width: 50vw;
+        z-index: 1001;
     }
 
-    .sidebar-menu li a i {
-        font-size: 1rem;
+    .sidebar::before {
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.425);
+        z-index: -1;
     }
 }

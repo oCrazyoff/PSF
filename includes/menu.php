@@ -3,7 +3,7 @@ include("../database/utils/conexao.php");
 
 if ($_SESSION['cargo'] == 1): ?>
 
-    <div class="sidebar">
+    <div class="sidebar" id="menu" onclick="menu()">
         <ul class="sidebar-menu">
             <li><a href="../pages/inicio.php"><i class="fa-solid fa-house"></i>Inicio</a></li>
             <li><a href="../admin/produtos.php"><i class="fa-solid fa-box"></i>Produtos</a></li>
@@ -15,7 +15,7 @@ if ($_SESSION['cargo'] == 1): ?>
 
 <?php if ($_SESSION['cargo'] == 2): ?>
 
-    <div class="sidebar">
+    <div class="sidebar" id="menu" onclick="menu()">
         <ul class="sidebar-menu">
             <li><a href="../admin/dashboard.php"><i class="fa-solid fa-border-all"></i>Dashboard</a></li>
             <li><a href="../admin/funcionarios.php"><i class="fa-solid fa-briefcase"></i>Funcionarios</a></li>
@@ -37,7 +37,7 @@ if ($_SESSION['cargo'] == 1): ?>
 
 <?php if ($_SESSION['cargo'] == 3): ?>
 
-    <div class="sidebar">
+    <div class="sidebar" id="menu" onclick="menu()">
         <ul class="sidebar-menu">
             <li><a href="../admin/dashboard.php"><i class="fa-solid fa-border-all"></i>Dashboard</a></li>
             <li><a href="../admin/funcionarios.php"><i class="fa-solid fa-briefcase"></i>Funcionarios</a></li>
@@ -59,7 +59,7 @@ if ($_SESSION['cargo'] == 1): ?>
 
 <?php if ($_SESSION['cargo'] == 4): ?>
 
-    <div class="sidebar">
+    <div class="sidebar" id="menu" onclick="menu()">
         <ul class="sidebar-menu">
             <li><a href="../pages/inicio.php"><i class="fa-solid fa-house"></i>Inicio</a></li>
             <li><a href="../pages/produtos.php"><i class="fa-solid fa-basket-shopping"></i>Produtos</a></li>
