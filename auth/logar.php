@@ -4,17 +4,17 @@ include("../database/utils/conexao.php");
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
-$sql = "SELECT nome, cargo FROM pessoas WHERE email = ? AND senha = ?";
+$sql = "SELECT nome, cargo, senha FROM pessoas WHERE email = ?";
 
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
-    $stmt->bind_param("ss", $email, $senha);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
-    $stmt->bind_result($nome, $cargo);
+    $stmt->bind_result($nome, $cargo, $senha_bd);
     $stmt->fetch();
 
-    if ($nome != '') {
+    if ($nome != '' && password_verify($senha, $senha_bd)) {
         session_start();
         $_SESSION["nome"] = $nome;
         $_SESSION['cargo'] = $cargo;
