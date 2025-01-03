@@ -20,7 +20,10 @@ include("../auth/config.php");
     <?php include("../includes/menu.php") ?>
     <div class="content">
         <table>
+            <div class="titulo">
             <h1>Lista de Pessoas Jurídicas</h1>
+                <a href="cadastro_produto.php">Nova Pessoa <i class="fa-solid fa-circle-plus"></i></a>
+            </div>
             <thead>
                 <tr>
                     <th>Razão Social</th>

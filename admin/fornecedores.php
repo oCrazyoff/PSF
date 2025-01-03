@@ -20,7 +20,10 @@ include("../auth/config.php");
     <?php include("../includes/menu.php") ?>
     <div class="content">
         <table>
-            <h1>Lista de Fornecedores</h1>
+            <div class="titulo">
+                <h1>Lista de Fornecedores</h1>
+                <a href="cadastro_fornecedor.php">Novo Fornecedor <i class="fa-solid fa-circle-plus"></i></a>
+            </div>
             <thead>
                 <tr>
                     <th>Nome Fantasia</th>
