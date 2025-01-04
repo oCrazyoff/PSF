@@ -18,7 +18,7 @@ include("../auth/config.php");
     <?php include("../includes/menu.php") ?>
     <div class="content">
         <div class="form-container">
-            <form id="large-form" action="auth/logar.php" method="post">
+            <form id="large-form" action="../database/produtos/cadastrar_produto.php" method="post">
                 <h2 class="form-title">Cadastrar Produto</h2>
                 <div class="form-group">
                     <label for="nome">Nome</label>
@@ -58,6 +58,14 @@ include("../auth/config.php");
                         <span class="input-group-text"><i class="fa-solid fa-boxes-stacked"></i></span>
                         <input type="text" class="form-control" name="grupo" id="grupo"
                             placeholder="Digite nome do Grupo" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="grupo">Sub Grupo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-dolly"></i></span>
+                        <input type="text" class="form-control" name="sub_grupo" id="sub_grupo"
+                            placeholder="Digite nome do Sub Grupo" required>
                     </div>
                 </div>
                 <div class="form-group">

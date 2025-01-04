@@ -1,5 +1,5 @@
 <?php
-include("../../database/utils/conexao.php");
+include("../utils/conexao.php");
 
 $nome = $_POST["nome"];
 $email = $_POST["email"];
