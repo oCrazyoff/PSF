@@ -72,7 +72,7 @@ include("../../auth/config.php");
                     <label for="preco_custo">Preço de Custo</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                        <input type="text" class="form-control" name="preco_custo" id="preco_custo"
+                        <input type="number" step="0.01" class="form-control" name="preco_custo" id="preco_custo"
                             placeholder="Digite o Preço de Custo" required>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ include("../../auth/config.php");
                     <label for="preco_venda">Preço de Venda</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-hand-holding-dollar"></i></span>
-                        <input type="text" class="form-control" name="preco_venda" id="preco_venda"
+                        <input type="number" step="0.01" class="form-control" name="preco_venda" id="preco_venda"
                             placeholder="Digite o Preço de Venda" required>
                     </div>
                 </div>

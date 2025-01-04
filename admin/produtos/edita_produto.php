@@ -79,7 +79,7 @@ $row = $resultado->fetch_assoc();
                     <label for="preco_custo">Preço de Custo</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                        <input type="number" class="form-control" value="<?php echo $row['preco_custo'] ?>"
+                        <input type="number" step="0.01" class="form-control" value="<?php echo $row['preco_custo'] ?>"
                             name="preco_custo" id="preco_custo" placeholder="Digite o Preço de Custo" required>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ $row = $resultado->fetch_assoc();
                     <label for="preco_venda">Preço de Venda</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-hand-holding-dollar"></i></span>
-                        <input type="number" class="form-control" value="<?php echo $row['preco_venda'] ?>"
+                        <input type="number" step="0.01" class="form-control" value="<?php echo $row['preco_venda'] ?>"
                             name="preco_venda" id="preco_venda" placeholder="Digite o Preço de Venda" required>
                     </div>
                 </div>
