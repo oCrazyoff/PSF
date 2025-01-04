@@ -14,7 +14,7 @@ $sub_grupo = $_POST['sub_grupo'];
 
 $sql = "INSERT INTO produtos (nome,codigo_barras,fornecedor,preco_custo,preco_venda,quantidade,subgrupo,grupo,marca) VALUES (?,?,?,?,?,?,?,?,?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca);
+$stmt->bind_param("sssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca);
 $stmt->execute();
 
 header("Location: ../../admin/produtos.php");
