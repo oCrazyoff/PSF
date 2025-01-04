@@ -97,7 +97,7 @@ include("../auth/config.php");
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
                         <input type="date" class="form-control" name="validade" id="validade"
-                            placeholder="Digite a Validade" required>
+                            placeholder="Digite a Validade">
                     </div>
                 </div>
 
