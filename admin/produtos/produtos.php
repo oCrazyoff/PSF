@@ -1,7 +1,7 @@
 <?php
-include("../auth/valida.php");
-include("../database/utils/conexao.php");
-include("../auth/config.php");
+include("../../auth/valida.php");
+include("../../database/utils/conexao.php");
+include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,13 +11,13 @@ include("../auth/config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <?php include("../includes/link_head.php") ?>
-    <link rel="stylesheet" href="../assets/css/table.css">
+    <?php include("../../includes/link_head.php"); ?>
+    <link rel="stylesheet" href="../../assets/css/table.css">
 </head>
 
 <body>
-    <?php include("../includes/header.php") ?>
-    <?php include("../includes/menu.php") ?>
+    <?php include("../../includes/header.php") ?>
+    <?php include("../../includes/menu.php") ?>
     <div class="content">
         <table>
             <div class="titulo">
@@ -38,6 +38,7 @@ include("../auth/config.php");
                     <th>Lucro</th>
                     <th>Validade</th>
                     <th>Status</th>
+                    <th colspan="2">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +47,7 @@ include("../auth/config.php");
                 $resultado = $conn->query($sql);
 
                 while ($row = $resultado->fetch_assoc()) {
+                    $id = $row['id'];
                     $nome = $row['nome'];
                     $codigo_barra = $row['codigo_barra'];
                     $fornecedor = $row['fornecedor'];
@@ -102,13 +104,34 @@ include("../auth/config.php");
                                 <td>R$ " . number_format($lucro, 2, ',', '.') . "</td>
                                 <td>" . $validadeFormatada . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                                <td>
+                                    <form class='action' action='edita_produto.php' method='post'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class='action' action='../../database/produtos/deletar_produto.php' method='post'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <button type='submit'><i class='fa-solid fa-trash-can'></i></button>
+                                    </form>
+                                </td>
                             </tr>
-                                ";
+                            ";
                 }
                 ?>
             </tbody>
         </table>
     </div>
+
+    <script>
+        <?php
+        if (isset($_SESSION['resposta'])) {
+            echo "alert('" . $_SESSION['resposta'] . "')";
+            unset($_SESSION['resposta']);
+        }
+        ?>
+    </script>
 </body>
 
 </html>

@@ -16,7 +16,7 @@ table h1 {
 .titulo a {
     background-color: #4e54c8;
     color: #f3f3f3;
-    padding: 1em;
+    padding: .5em;
     border-radius: 12px;
     text-decoration: none;
 }
@@ -124,6 +124,13 @@ table tbody .status.ativo {
 table tbody .status.inativo {
     background-color: #f44336;
     /* Vermelho para status inativo */
+}
+
+table .action button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 /* Responsividade */

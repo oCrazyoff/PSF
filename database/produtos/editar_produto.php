@@ -2,6 +2,7 @@
 include("../utils/conexao.php");
 include("../../auth/valida.php");
 
+$id = $_POST['id'];
 $nome = $_POST['nome'];
 $codigo = $_POST['codigo'];
 $fornecedor = $_POST['fornecedor'];
@@ -19,14 +20,14 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     exit;
 }
 
-$sql = "INSERT INTO produtos (nome, codigo_barra, fornecedor, preco_custo, preco_venda, quantidade, subgrupo, grupo, marca, validade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca, $validade);
+$stmt->bind_param("ssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca, $validade, $id);
 
 if ($stmt->execute()) {
-    $_SESSION['resposta'] = "Produto cadastrado com sucessso!";
+    $_SESSION['resposta'] = "Produto editado com sucessso!";
 } else {
-    $_SESSION['resposta'] = "Erro ao cadastrar produto: " . $stmt->error;
+    $_SESSION['resposta'] = "Erro ao editar produto: " . $stmt->error;
 }
 
 header("Location: ../../admin/produtos/produtos.php");
