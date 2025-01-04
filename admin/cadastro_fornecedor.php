@@ -20,8 +20,8 @@ include("../auth/config.php");
     <?php include("../includes/menu.php") ?>
     <div class="content">
         <div class="form-container" id="index">
-            <form action="auth/logar.php" method="post">
-                <h2 class="form-title">Login</h2>
+            <form action="../database/cadastrar/cadastrar_fornecedor.php" method="post">
+                <h2 class="form-title">Cadastrar Fornecedor</h2>
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
@@ -50,11 +50,21 @@ include("../auth/config.php");
                         <input type="text" class="form-control" name="nome_fantasia" id="nome_fantasia" placeholder="Digite seu Nome Fantásia" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mt-3">Entrar</button>
-                <div class="text-center mt-3">
-                    <span>Não tem uma conta?</span>
-                    <a href="pages/cadastrese.php" class="register-link">Cadastre-se</a>
+                <div class="form-group">
+                    <label for="endereco">Endereço</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Digite seu Endereço" required>
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label for="contato">Contato</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="text" class="form-control" name="contato" id="contato" placeholder="Digite seu Contato" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Entrar</button>
             </form>
         </div>
     </div>
