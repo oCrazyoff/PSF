@@ -47,7 +47,7 @@ include("../../database/utils/conexao.php");
                             $sqlForn = "SELECT * FROM fornecedores WHERE status = 1";
                             $resultadoForn = $conn->query($sqlForn);
                             while ($rowForn = $resultadoForn->fetch_assoc()) {
-                                $sqlPess = "SELECT nome_fantasia FROM PESSOAS where cnpj = '" . $rowForn['cnpj'] . "'";
+                                $sqlPess = "SELECT nome_fantasia FROM pessoas where cnpj = '" . $rowForn['cnpj'] . "'";
                                 $resultadoPess = $conn->query($sqlPess);
                                 $nomeForn =  $resultadoPess->fetch_assoc();
                                 echo "
