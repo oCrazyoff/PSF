@@ -62,11 +62,11 @@ include("../../auth/config.php");
                     $status = $row['status'];
                     $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
 
-                    $sqlGrupo = "SELECT grupo FROM grupos WHERE id = '$grupo'";
+                    $sqlGrupo = "SELECT nome FROM grupos WHERE id = '$grupo'";
                     $resultadoGrupo = $conn->query($sqlGrupo);
 
                     while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
-                        $nomeGrupo = $rowGrupo['grupo'];
+                        $nomeGrupo = $rowGrupo['nome'];
                     }
 
                     $sqlSubgrupo = "SELECT nome FROM subgrupo WHERE id = '$subgrupo'";

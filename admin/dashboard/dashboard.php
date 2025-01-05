@@ -1,6 +1,6 @@
 <?php
-include("../auth/valida.php");
-include("../auth/config.php");
+include("../../auth/valida.php");
+include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ include("../auth/config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início</title>
-    <?php include("../includes/link_head.php") ?>
+    <?php include("../../includes/link_head.php") ?>
     <!-- Link para Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -45,8 +45,8 @@ include("../auth/config.php");
 </head>
 
 <body>
-    <?php include("../includes/header.php") ?>
-    <?php include("../includes/menu.php") ?>
+    <?php include("../../includes/header.php") ?>
+    <?php include("../../includes/menu.php") ?>
     <div class="content">
 
         <!-- Dashboard de Vendas -->

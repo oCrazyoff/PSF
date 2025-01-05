@@ -1,7 +1,7 @@
 <?php
-include("../auth/valida.php");
-include("../database/utils/conexao.php");
-include("../auth/config.php");
+include("../../auth/valida.php");
+include("../../database/utils/conexao.php");
+include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,16 +11,16 @@ include("../auth/config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Fornecedores</title>
-    <?php include("../includes/link_head.php") ?>
-    <link rel="stylesheet" href="../assets/css/form.css">
+    <?php include("../../includes/link_head.php") ?>
+    <link rel="stylesheet" href="../../assets/css/form.css">
 </head>
 
 <body>
-    <?php include("../includes/header.php") ?>
-    <?php include("../includes/menu.php") ?>
+    <?php include("../../includes/header.php") ?>
+    <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container">
-            <form action="../database/cadastrar/cadastrar_fornecedor.php" method="post">
+            <form action="../../database/cadastrar/cadastrar_fornecedor.php" method="post">
                 <h2 class="form-title">Cadastrar Fornecedor</h2>
                 <div class="form-group">
                     <label for="cnpj">CNPJ</label>

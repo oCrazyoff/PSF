@@ -1,6 +1,7 @@
 <?php
 include("../../auth/valida.php");
 include("../../auth/config.php");
+include("../../database/utils/conexao.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,9 +18,9 @@ include("../../auth/config.php");
     <?php include("../../includes/header.php") ?>
     <?php include("../../includes/menu.php") ?>
     <div class="content">
-        <div class="form-container">
-            <form id="large-form" action="../../database/produtos/cadastrar_produto.php" method="post">
-                <h2 class="form-title">Cadastrar Produto</h2>
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Cadastrar Produto</h2>
+            <form action="../../database/produtos/cadastrar_produto.php" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
@@ -40,32 +41,75 @@ include("../../auth/config.php");
                     <label for="fornecedor">Fornecedores</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-truck"></i></span>
-                        <input type="text" class="form-control" name="fornecedor" id="fornecedor"
-                            placeholder="Digite nome do Fornecedor" required>
+                        <select name="fornecedor" id="fornecedor" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <?php
+                            $sqlForn = "SELECT * FROM fornecedores WHERE status = 1";
+                            $resultadoForn = $conn->query($sqlForn);
+                            while ($rowForn = $resultadoForn->fetch_assoc()) {
+                                $sqlPess = "SELECT nome_fantasia FROM PESSOAS where cnpj = '" . $rowForn['cnpj'] . "'";
+                                $resultadoPess = $conn->query($sqlPess);
+                                $nomeForn =  $resultadoPess->fetch_assoc();
+                                echo "
+                                <option value='" . $rowForn['id'] . "'>" . $nomeForn['nome_fantasia'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="marca">Marca</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
-                        <input type="text" class="form-control" name="marca" id="marca"
-                            placeholder="Digite o nome da Marca" required>
+                        <select name="marca" id="marca" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <?php
+                            $sqlMarca = "SELECT * FROM marcas WHERE status = 1";
+                            $resultadoMarca = $conn->query($sqlMarca);
+                            while ($rowMarca = $resultadoMarca->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowMarca['id'] . "'>" . $rowMarca['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="grupo">Grupo</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-boxes-stacked"></i></span>
-                        <input type="text" class="form-control" name="grupo" id="grupo"
-                            placeholder="Digite nome do Grupo" required>
+                        <select name="grupo" id="grupo" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <?php
+                            $sqlGrupo = "SELECT * from grupos WHERE status = 1";
+                            $resultadoGrupo = $conn->query($sqlGrupo);
+                            while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowGrupo['id'] . "'>" . $rowGrupo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="grupo">Sub Grupo</label>
+                    <label for="subgrupo">Sub Grupo</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-dolly"></i></span>
-                        <input type="text" class="form-control" name="sub_grupo" id="sub_grupo"
-                            placeholder="Digite nome do Sub Grupo" required>
+                        <select name="subgrupo" id="subgrupo" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <?php
+                            $sqlSubgrupo = "SELECT * FROM subgrupo WHERE status = 1";
+                            $resultadoSubgrupo = $conn->query($sqlSubgrupo);
+                            while ($rowSubgrupo = $resultadoSubgrupo->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowSubgrupo['id'] . "'>" . $rowSubgrupo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

@@ -11,7 +11,7 @@ $preco_custo = floatval($_POST['preco_custo']);
 $preco_venda = floatval($_POST['preco_venda']);
 $quantidade = intval($_POST['quantidade']);
 $validade = $_POST['validade'];
-$sub_grupo = $_POST['sub_grupo'];
+$subgrupo = $_POST['subgrupo'];
 
 if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     $_SESSION['resposta'] = "Data de validade inválida!";
@@ -21,7 +21,7 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
 
 $sql = "INSERT INTO produtos (nome, codigo_barra, fornecedor, preco_custo, preco_venda, quantidade, subgrupo, grupo, marca, validade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca, $validade);
+$stmt->bind_param("ssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto cadastrado com sucessso!";

@@ -1,7 +1,7 @@
 <?php
-include("../auth/valida.php");
-include("../database/utils/conexao.php");
-include("../auth/config.php");
+include("../../auth/valida.php");
+include("../../database/utils/conexao.php");
+include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,13 +11,13 @@ include("../auth/config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários</title>
-    <?php include("../includes/link_head.php") ?>
-    <link rel="stylesheet" href="../assets/css/table.css?v=<?php echo time(); ?>">
+    <?php include("../../includes/link_head.php") ?>
+    <link rel="stylesheet" href="../../assets/css/table.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
-    <?php include("../includes/header.php") ?>
-    <?php include("../includes/menu.php") ?>
+    <?php include("../../includes/header.php") ?>
+    <?php include("../../includes/menu.php") ?>
     <div class="content">
         <table>
             <div class="titulo">

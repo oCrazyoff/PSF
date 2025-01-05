@@ -15,6 +15,26 @@ h2 {
     height: 100vh;
 }
 
+#large-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#large-form form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#large-form .input-group {
+    width: 25vw;
+}
+
+#large-form .form-title {
+    text-align: left;
+}
+
 form {
     background-color: #2c2f33;
     color: #ffffff;
@@ -56,6 +76,12 @@ label {
     border-radius: 8px;
     overflow: hidden;
     background-color: #f9f9f9;
+}
+
+.input-group select {
+    width: 100%;
+    padding: 1em;
+    border: none;
 }
 
 .input-group-text {
