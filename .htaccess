@@ -10,8 +10,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [NC,L]
 
-# Remove a extensão .html ou .php das URLs, mas verifica se a URL já não está sem a extensão
+# Remove a extensão .html ou .php das URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} \.(html|php)$
-RewriteCond %{REQUEST_URI} !^/([^/]+)$  # Garante que a URL não está sem a extensão
 RewriteRule ^(.*)\.(html|php)$ /$1 [R=301,L]
