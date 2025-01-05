@@ -4,7 +4,7 @@ include("../../auth/valida.php");
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM produtos WHERE id = ?";
+$sql = "UPDATE produtos SET status = 0 WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 

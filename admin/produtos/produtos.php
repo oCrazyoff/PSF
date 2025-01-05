@@ -97,7 +97,7 @@ include("../../auth/config.php");
                                 <td>" . $nomeFornecedor . "</td>
                                 <td>" . $nomeMarca . "</td>
                                 <td>" . $nomeGrupo . "</td>
-                                <td>" . $nomeSubgrupo . "</td>
+                                <td>" . (empty($nomeSubgrupo) ? "Subgrupo não cadastrado" : $nomeSubgrupo) . "</td>
                                 <td>R$ " . number_format($preco_custo, 2, ',', '.') . "</td>
                                 <td>R$ " . number_format($preco_venda, 2, ',', '.') . "</td>
                                 <td>" . $quantidade . "</td>
