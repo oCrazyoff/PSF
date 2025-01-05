@@ -1,8 +1,16 @@
 RewriteEngine on
+
+# Reescreve URLs sem extensão para arquivos .html, se existirem
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [NC,L]
 
+# Reescreve URLs sem extensão para arquivos .php, se existirem
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [NC,L]
+
+# Remove a extensão .html ou .php das URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} \.(html|php)$
+RewriteRule ^(.*)\.(html|php)$ /$1 [R=301,L]
