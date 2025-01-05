@@ -27,10 +27,8 @@ table {
     border-collapse: collapse;
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Sombra para destacar a tabela */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
-    /* Para respeitar o arredondamento */
 }
 
 /* Cabeçalho da tabela */
