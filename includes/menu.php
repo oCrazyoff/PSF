@@ -6,6 +6,8 @@ if ($_SESSION['cargo'] == 1): ?>
             <li><a href="<?php echo BASE_URL; ?>pages/inicio.php"><i class="fa-solid fa-house"></i>Inicio</a></li>
             <li><a href="<?php echo BASE_URL; ?>admin/produtos/produtos.php"><i class="fa-solid fa-box"></i>Produtos</a>
             </li>
+            <li><a href="<?php echo BASE_URL; ?>admin/cargos/cargos.php"><i class="fa-solid fa-id-card-clip"></i>Cargos</a>
+            </li>
             <li><a href="<?php echo BASE_URL; ?>auth/sair.php"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
         </ul>
     </div>
@@ -35,6 +37,8 @@ if ($_SESSION['cargo'] == 1): ?>
                 </ul>
             </li>
             <li><a href="<?php echo BASE_URL; ?>admin/produtos/produtos.php"></i>Produtos</a></li>
+            <li><a href="<?php echo BASE_URL; ?>admin/cargos/cargos.php"><i class="fa-solid fa-id-card-clip"></i>Cargos</a>
+            </li>
             <li><a href="<?php echo BASE_URL; ?>auth/sair.php"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
         </ul>
     </div>
@@ -64,6 +68,8 @@ if ($_SESSION['cargo'] == 1): ?>
                 </ul>
             </li>
             <li><a href="<?php echo BASE_URL; ?>admin/produtos/produtos.php"><i class="fa-solid fa-box"></i>Produtos</a>
+            </li>
+            <li><a href="<?php echo BASE_URL; ?>admin/cargos/cargos.php"><i class="fa-solid fa-id-card-clip"></i>Cargos</a>
             </li>
             <li><a href="<?php echo BASE_URL; ?>auth/sair.php"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
         </ul>

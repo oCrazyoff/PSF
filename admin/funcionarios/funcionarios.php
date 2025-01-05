@@ -57,11 +57,11 @@ include("../../auth/config.php");
                         $cargoPessoa = $rowPessoas['cargo'];
                     }
 
-                    $sqlCargo = "SELECT cargo FROM cargos WHERE id = '$cargoPessoa' AND status = 1";
+                    $sqlCargo = "SELECT nome FROM cargos WHERE id = '$cargoPessoa' AND status = 1";
                     $resultadoCargo = $conn->query($sqlCargo);
 
                     while ($rowCargo = $resultadoCargo->fetch_assoc()) {
-                        $cargo = $rowCargo['cargo'];
+                        $cargo = $rowCargo['nome'];
                     }
 
                     echo "

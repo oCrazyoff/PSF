@@ -20,7 +20,7 @@ include("../../auth/config.php");
     <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container">
-            <form action="../../database/cadastrar/cadastrar_fornecedor.php" method="post">
+            <form action="../../database/fornecedores/cadastrar_fornecedor.php" method="post">
                 <h2 class="form-title">Cadastrar Fornecedor</h2>
                 <div class="form-group">
                     <label for="cnpj">CNPJ</label>
