@@ -22,7 +22,7 @@ include("../../auth/config.php");
         <table>
             <div class="titulo">
                 <h1>Lista de Funcionários</h1>
-                <a href="cadastro_produto.php">Novo Funcionário <i class="fa-solid fa-circle-plus"></i></a>
+                <a href="cadastro_funcionario.php">Novo Funcionário <i class="fa-solid fa-circle-plus"></i></a>
             </div>
             <thead>
                 <tr>
@@ -33,11 +33,12 @@ include("../../auth/config.php");
                     <th>Data de Demissão</th>
                     <th>Cargo</th>
                     <th>Status</th>
+                    <th colspan="2">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sqlFuncionarios = "SELECT * FROM funcionarios WHERE status = 1";
+                $sqlFuncionarios = "SELECT * FROM funcionarios ORDER BY status DESC";
                 $resultadoFuncionarios = $conn->query($sqlFuncionarios);
 
                 while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
@@ -73,6 +74,19 @@ include("../../auth/config.php");
                                 <td>" . (empty($data_demicao) ? "Funcionário Ativo" : (DateTime::createFromFormat('Y-m-d', $data_demicao)->format('d/m/Y'))) . "</td>
                                 <td>" . $cargo . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                                                                <td>
+                                    <form class='action' action='edita_funcionario.php' method='post'>
+                                        <input type='hidden' name='cpf' value='$cpf'>
+                                        <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class='action' action='../../database/funcionarios/deletar_funcionario.php' method='post'>
+                                        <input type='hidden' name='cpf' value='$cpf'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'>" . ($status == 1 ? "<i class='fa-solid fa-trash-can'>" : "<i class='fa-solid fa-plus'>") . "</i></i></button>
+                                    </form>
+                                </td>
                             </tr>
                             ";
                 }
@@ -80,6 +94,14 @@ include("../../auth/config.php");
             </tbody>
         </table>
     </div>
+    <script>
+        <?php
+        if (isset($_SESSION['resposta'])) {
+            echo "alert('" . $_SESSION['resposta'] . "')";
+            unset($_SESSION['resposta']);
+        }
+        ?>
+    </script>
 </body>
 
 </html>
