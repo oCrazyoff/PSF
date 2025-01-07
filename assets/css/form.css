@@ -23,7 +23,7 @@ h2 {
 #large-form form {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -32,7 +32,7 @@ h2 {
 }
 
 #large-form .form-title {
-    text-align: left;
+    align-self: flex-start;
 }
 
 form {

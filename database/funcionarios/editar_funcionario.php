@@ -2,33 +2,31 @@
 include("../utils/conexao.php");
 include("../../auth/valida.php");
 
-$id = $_POST['id'];
-$nome = $_POST['nome'];
-$codigo = $_POST['codigo'];
-$fornecedor = $_POST['fornecedor'];
-$marca = $_POST['marca'];
-$grupo = $_POST['grupo'];
-$preco_custo = floatval($_POST['preco_custo']);
-$preco_venda = floatval($_POST['preco_venda']);
-$quantidade = intval($_POST['quantidade']);
-$validade = $_POST['validade'];
-$sub_grupo = $_POST['sub_grupo'];
+$idFuncionario = $_POST['id'];
+$idPessoa = $_POST['idPessoa'];
+$nome = $_POST["nome"];
+$cpf = $_POST["cpf"];
+$email = $_POST["email"];
+$data_nascimento = $_POST["data_nascimento"];
+$endereco = $_POST["endereco"];
+$contato = $_POST["contato"];
+$salario = floatval($_POST["salario"]);
+$data_admissao = $_POST["data_admissao"];
+$cargo = $_POST["cargo"];
 
-if (!DateTime::createFromFormat('Y-m-d', $validade)) {
-    $_SESSION['resposta'] = "Data de validade inválida!";
-    header("Location: ../../admin/produtos/cadastro_produto.php");
-    exit;
-}
+$sqlFuncionarios = "UPDATE funcionarios SET cpf = ?, salario = ?, data_admissao = ? WHERE id = ?";
+$stmtFuncionarios = $conn->prepare($sqlFuncionarios);
+$stmtFuncionarios->bind_param("sssi", $cpf, $salario, $data_admissao, $idFuncionario);
 
-$sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ? WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca, $validade, $id);
+$sqlPessoas = "UPDATE pessoas SET nome = ?, cpf = ?, email = ?, data_nascimento = ?, endereco = ?, contato = ?, cargo = ? WHERE id = ?";
+$stmtPessoas = $conn->prepare($sqlPessoas);
+$stmtPessoas->bind_param("ssssssss", $nome, $cpf, $email, $data_nascimento, $endereco, $contato, $cargo, $idPessoa);
 
-if ($stmt->execute()) {
-    $_SESSION['resposta'] = "Produto editado com sucessso!";
+if ($stmtFuncionarios->execute() && $stmtPessoas->execute()) {
+    $_SESSION['resposta'] = "Funcionario editado com sucesso!";
 } else {
-    $_SESSION['resposta'] = "Erro ao editar produto: " . $stmt->error;
+    $_SESSION['resposta'] = "Erro ao editar funcionario! Erro 1: " . $stmtFuncionarios->error . " Erro 2: " . $stmtPessoas->error;
 }
 
-header("Location: ../../admin/produtos/produtos.php");
+header("Location: ../../admin/funcionarios/funcionarios.php");
 exit;

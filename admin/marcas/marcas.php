@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ include("../../auth/config.php");
         </table>
     </div>
     <script>
-    <?php
+        <?php
         if (isset($_SESSION['resposta'])) {
             echo "alert('" . $_SESSION['resposta'] . "')";
             unset($_SESSION['resposta']);

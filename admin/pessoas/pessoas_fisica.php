@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -62,13 +62,13 @@ include("../../auth/config.php");
 
                     echo "
                             <tr>
-                                <td>" . (empty($nome) ? "Não cadastrada" : $nome) . "</td>
-                                <td>" . (empty($cpf) ? "Não cadastrada" : $cpf) . "</td>
-                                <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
-                                <td>" . (empty($data_nascimento) ? "Não Cadastrada" : (DateTime::createFromFormat('Y-m-d', $data_nascimento)->format('d/m/Y'))) . "</td>
-                                <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
-                                <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
-                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo) . "</td>
+                                <td>" . (empty($nome) ? "N/A" : $nome) . "</td>
+                                <td>" . (empty($cpf) ? "N/A" : $cpf) . "</td>
+                                <td>" . (empty($email) ? "N/A" : $email) . "</td>
+                                <td>" . (empty($data_nascimento) ? "N/A" : (DateTime::createFromFormat('Y-m-d', $data_nascimento)->format('d/m/Y'))) . "</td>
+                                <td>" . (empty($endereco) ? "N/A" : $endereco) . "</td>
+                                <td>" . (empty($contato) ? "N/A" : $contato) . "</td>
+                                <td>" . (empty($tipo) ? "N/A" : $tipo) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";

@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 
 $id = $_POST['id'];
 $sqlProduto = "SELECT * FROM produtos WHERE id = '$id'";
@@ -52,7 +52,7 @@ while ($rowProduto = $resultadoProduto->fetch_assoc()) {
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
                         <input type="text" class="form-control" value="<?php echo $codigo_barra ?>" name="codigo"
-                            id="codigo" placeholder="Digite o Código de Barras" required>
+                            id="codigo" placeholder="Digite o Código de Barras">
                     </div>
                 </div>
                 <div class="form-group">
