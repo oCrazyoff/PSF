@@ -102,7 +102,7 @@ include("../../database/utils/conexao.php");
                     echo "
                             <tr>
                                 <td>" . $nome . "</td>
-                                <td>" . $codigo_barra . "</td>
+                                <td>" . ((empty($codigo_barra) ? "N/A" : $codigo_barra)) . "</td>
                                 <td>" . (($nomeFornecedor == null) ? "N/A" : $nomeFornecedor) . "</td>
                                 <td>" . (($nomeMarca == null) ? "N/A" : $nomeMarca) . "</td>
                                 <td>" . (($nomeGrupo == null) ? "N/A" : $nomeGrupo)  . "</td>
@@ -134,7 +134,7 @@ include("../../database/utils/conexao.php");
     </div>
 
     <script>
-    <?php
+        <?php
         if (isset($_SESSION['resposta'])) {
             echo "alert('" . $_SESSION['resposta'] . "')";
             unset($_SESSION['resposta']);

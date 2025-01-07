@@ -31,13 +31,13 @@ include("../../database/utils/conexao.php");
                     <th>E-mail</th>
                     <th>Endereço</th>
                     <th>Contato</th>
-                    <th>Tipo</th>
+                    <th>Cargo</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sqlPessoas = "SELECT cnpj, razao_social, email, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 2)";
+                $sqlPessoas = "SELECT * FROM pessoas WHERE tipo_pessoa = 2";
                 $resultadoPessoas = $conn->query($sqlPessoas);
 
                 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
@@ -47,24 +47,24 @@ include("../../database/utils/conexao.php");
                     $email = $rowPessoas['email'];
                     $endereco = $rowPessoas['endereco'];
                     $contato = $rowPessoas['contato'];
-                    $tipo_pessoa = $rowPessoas['tipo_pessoa'];
+                    $cargo = $rowPessoas['cargo'];
                     $status = $rowPessoas['status'];
 
-                    $sqlTipo_pessoa = "SELECT tipo FROM tipo_pessoa WHERE id = '$tipo_pessoa'";
-                    $resultadoTipo_pessoa = $conn->query($sqlTipo_pessoa);
+                    $sqlCargo = "SELECT nome FROM cargos WHERE id = '$cargo'";
+                    $resultadoCargo = $conn->query($sqlCargo);
 
-                    while ($rowTipo_pessoa = $resultadoTipo_pessoa->fetch_assoc()) {
-                        $tipo = $rowTipo_pessoa['tipo'];
+                    while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                        $cargo = $rowCargo['nome'];
                     }
 
                     echo "
                             <tr>
-                                <td>" . (empty($razao_social) ? "Não cadastrada" : $razao_social) . "</td>
-                                <td>" . (empty($cnpj) ? "Não cadastrada" : $cnpj) . "</td>
-                                <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
-                                <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
-                                <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
-                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo) . "</td>
+                                <td>" . (empty($razao_social) ? "N/A" : $razao_social) . "</td>
+                                <td>" . (empty($cnpj) ? "N/A" : $cnpj) . "</td>
+                                <td>" . (empty($email) ? "N/A" : $email) . "</td>
+                                <td>" . (empty($endereco) ? "N/A" : $endereco) . "</td>
+                                <td>" . (empty($contato) ? "N/A" : $contato) . "</td>
+                                <td>" . (empty($cargo) ? "N/A" : $cargo) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";
