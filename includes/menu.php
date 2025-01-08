@@ -23,9 +23,9 @@ $resultadoMenu = $stmtMenu->get_result();
                     </a>
                     <ul class="submenu">
                         <?php
-                        $sqlSubmenu = "SELECT * FROM permissoes WHERE submenu = ? AND pasta != ?";
+                        $sqlSubmenu = "SELECT * FROM permissoes WHERE submenu = ? AND pasta != ? AND cargo_id = ?";
                         $stmtSubmenu = $conn->prepare($sqlSubmenu);
-                        $stmtSubmenu->bind_param("ss", $rowMenu['submenu'], $rowMenu['submenu']);
+                        $stmtSubmenu->bind_param("ssi", $rowMenu['submenu'], $rowMenu['submenu'], $cargo);
                         $stmtSubmenu->execute();
                         $resultadoSubmenu = $stmtSubmenu->get_result();
                         ?>
@@ -45,7 +45,11 @@ $resultadoMenu = $stmtMenu->get_result();
                 <li>
                     <a href="<?php echo BASE_URL . $rowMenu['pasta'] . '/' . $rowMenu['pagina'] . '.php' ?>">
                         <i class="<?php echo $rowMenu['icone'] ?>"></i>
-                        <?php echo ucfirst(str_replace('_', ' ', $rowMenu['pagina'])); ?>
+                        <?php
+                        $pagina = str_replace('_', ' ', $rowMenu['pagina']);
+                        $pagina = ucwords(strtolower($pagina));
+                        echo $pagina;
+                        ?>
                     </a>
                 </li>
             <?php endif ?>

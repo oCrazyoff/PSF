@@ -41,21 +41,41 @@ include("../../database/utils/conexao.php");
                             <input type="hidden" name="dashboard_submenu" value="0">
                         </label>
                         <label>
-                            <input type="checkbox" name="paginas[]" value="produtos" data-pasta="admin/produtos"
+                            <input type="checkbox" name="paginas[]" value="produtos_adm" data-pasta="admin/produtos"
                                 data-icone="fa-solid fa-box">
                             Produtos ADM
-                            <input type="hidden" name="produtos_pasta" value="admin/produtos">
-                            <input type="hidden" name="produtos_icone" value="fa-solid fa-box">
-                            <input type="hidden" name="produtos_submenu" value="0">
+                            <input type="hidden" name="produtos_adm_pasta" value="admin/produtos">
+                            <input type="hidden" name="produtos_adm_icone" value="fa-solid fa-box">
+                            <input type="hidden" name="produtos_adm_submenu" value="0">
                         </label>
-
                         <label>
-                            <input type="checkbox" name="paginas[]" value="produtos_cliente" data-pasta="pages"
+                            <input type="checkbox" name="paginas[]" value="pessoas" data-pasta="1"
+                                data-icone="fa-solid fa-users">
+                            Pessoas
+                            <input type="hidden" name="pessoas_pasta" value="1">
+                            <input type="hidden" name="pessoas_icone" value="fa-solid fa-users">
+                            <input type="hidden" name="pessoas_submenu" value="1">
+
+                            <!-- Pagina pessoas físicas -->
+                            <input type="hidden" name="paginas[]" value="pessoas_fisica" data-pasta="admin/pessoas"
+                                data-icone="fa-solid fa-user">
+                            <input type="hidden" name="pessoas_fisica_pasta" value="admin/pessoas">
+                            <input type="hidden" name="pessoas_fisica_icone" value="fa-solid fa-user">
+                            <input type="hidden" name="pessoas_fisica_submenu" value="1">
+                            <!-- Pagina pessoas juridicas -->
+                            <input type="hidden" name="paginas[]" value="pessoas_juridica" data-pasta="admin/pessoas"
+                                data-icone="fa-solid fa-building">
+                            <input type="hidden" name="pessoas_juridica_pasta" value="admin/pessoas">
+                            <input type="hidden" name="pessoas_juridica_icone" value="fa-solid fa-building">
+                            <input type="hidden" name="pessoas_juridica_submenu" value="1">
+                        </label>
+                        <label>
+                            <input type="checkbox" name="paginas[]" value="produtos" data-pasta="pages"
                                 data-icone="fa-solid fa-box">
                             Produtos Clientes
-                            <input type="hidden" name="produtos_cliente_pasta" value="pages">
-                            <input type="hidden" name="produtos_cliente_icone" value="fa-solid fa-box">
-                            <input type="hidden" name="produtos_cliente_submenu" value="0">
+                            <input type="hidden" name="produtos_pasta" value="pages">
+                            <input type="hidden" name="produtos_icone" value="fa-solid fa-box">
+                            <input type="hidden" name="produtos_submenu" value="0">
                         </label>
                         <label>
                             <input type="checkbox" name="paginas[]" value="funcionarios" data-pasta="admin/funcionarios"
