@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,9 +19,9 @@ include("../../auth/config.php");
     <?php include("../../includes/header.php") ?>
     <?php include("../../includes/menu.php") ?>
     <div class="content">
-        <div class="form-container">
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Cadastrar Fornecedor</h2>
             <form action="../../database/fornecedores/cadastrar_fornecedor.php" method="post">
-                <h2 class="form-title">Cadastrar Fornecedor</h2>
                 <div class="form-group">
                     <label for="cnpj">CNPJ</label>
                     <div class="input-group">

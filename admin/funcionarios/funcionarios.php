@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +43,11 @@ include("../../auth/config.php");
 
                 while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
 
+                    $id = $rowFuncionarios['id'];
                     $cpf = $rowFuncionarios['cpf'];
                     $salario = $rowFuncionarios['salario'];
-                    $data_admicao = $rowFuncionarios['data_admicao'];
-                    $data_demicao = $rowFuncionarios['data_demicao'];
+                    $data_admicao = $rowFuncionarios['data_admissao'];
+                    $data_demicao = $rowFuncionarios['data_demissao'];
                     $status = $rowFuncionarios['status'];
                     $dataAdmicaoFormatada = DateTime::createFromFormat('Y-m-d', $data_admicao)->format('d/m/Y');
 
@@ -76,13 +77,13 @@ include("../../auth/config.php");
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                                                                 <td>
                                     <form class='action' action='edita_funcionario.php' method='post'>
-                                        <input type='hidden' name='cpf' value='$cpf'>
+                                        <input type='hidden' name='id' value='$id'>
                                         <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
                                     </form>
                                 </td>
                                 <td>
                                     <form class='action' action='../../database/funcionarios/deletar_funcionario.php' method='post'>
-                                        <input type='hidden' name='cpf' value='$cpf'>
+                                        <input type='hidden' name='id' value='$id'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'>" . ($status == 1 ? "<i class='fa-solid fa-trash-can'>" : "<i class='fa-solid fa-plus'>") . "</i></i></button>
                                     </form>
@@ -95,7 +96,7 @@ include("../../auth/config.php");
         </table>
     </div>
     <script>
-        <?php
+    <?php
         if (isset($_SESSION['resposta'])) {
             echo "alert('" . $_SESSION['resposta'] . "')";
             unset($_SESSION['resposta']);

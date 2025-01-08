@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +32,13 @@ include("../../auth/config.php");
                     <th>Data de Nascimento</th>
                     <th>Endereço</th>
                     <th>Contato</th>
-                    <th>Tipo</th>
+                    <th>Cargo</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, tipo_pessoa, status FROM pessoas WHERE status = 1 AND tipo_pessoa = (SELECT id FROM tipo_pessoa WHERE id = 1)";
+                $sqlPessoas = "SELECT * FROM pessoas WHERE tipo_pessoa = 1";
                 $resultadoPessoas = $conn->query($sqlPessoas);
 
                 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
@@ -49,26 +49,26 @@ include("../../auth/config.php");
                     $data_nascimento = $rowPessoas['data_nascimento'];
                     $endereco = $rowPessoas['endereco'];
                     $contato = $rowPessoas['contato'];
-                    $tipo_pessoa = $rowPessoas['tipo_pessoa'];
+                    $cargo = $rowPessoas['cargo'];
                     $status = $rowPessoas['status'];
 
 
-                    $sqlTipo_pessoa = "SELECT tipo FROM tipo_pessoa WHERE id = '$tipo_pessoa'";
-                    $resultadoTipo_pessoa = $conn->query($sqlTipo_pessoa);
+                    $sqlCargo = "SELECT nome FROM cargos WHERE id = '$cargo'";
+                    $resultadoCargo = $conn->query($sqlCargo);
 
-                    while ($rowTipo_pessoa = $resultadoTipo_pessoa->fetch_assoc()) {
-                        $tipo = $rowTipo_pessoa['tipo'];
+                    while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                        $cargo = $rowCargo['nome'];
                     }
 
                     echo "
                             <tr>
-                                <td>" . (empty($nome) ? "Não cadastrada" : $nome) . "</td>
-                                <td>" . (empty($cpf) ? "Não cadastrada" : $cpf) . "</td>
-                                <td>" . (empty($email) ? "Não cadastrada" : $email) . "</td>
-                                <td>" . (empty($data_nascimento) ? "Não Cadastrada" : (DateTime::createFromFormat('Y-m-d', $data_nascimento)->format('d/m/Y'))) . "</td>
-                                <td>" . (empty($endereco) ? "Não cadastrada" : $endereco) . "</td>
-                                <td>" . (empty($contato) ? "Não cadastrada" : $contato) . "</td>
-                                <td>" . (empty($tipo) ? "Não cadastrada" : $tipo) . "</td>
+                                <td>" . (empty($nome) ? "N/A" : $nome) . "</td>
+                                <td>" . (empty($cpf) ? "N/A" : $cpf) . "</td>
+                                <td>" . (empty($email) ? "N/A" : $email) . "</td>
+                                <td>" . (empty($data_nascimento) ? "N/A" : (DateTime::createFromFormat('Y-m-d', $data_nascimento)->format('d/m/Y'))) . "</td>
+                                <td>" . (empty($endereco) ? "N/A" : $endereco) . "</td>
+                                <td>" . (empty($contato) ? "N/A" : $contato) . "</td>
+                                <td>" . (empty($cargo) ? "N/A" : $cargo) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                              </tr>
                                 ";

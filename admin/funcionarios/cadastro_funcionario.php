@@ -1,6 +1,6 @@
 <?php
-include("../../auth/valida.php");
 include("../../auth/config.php");
+include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 ?>
 <!DOCTYPE html>
@@ -25,24 +25,23 @@ include("../../database/utils/conexao.php");
                     <label for="nome">Nome</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" name="nome" id="nome"
-                            placeholder="Digite o Nome" required>
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o Nome"
+                            required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                        <input type="text" class="form-control" name="cpf" id="cpf"
-                            placeholder="Digite o CPF" required>
+                        <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Digite o CPF" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" class="form-control" name="email" id="email"
-                            placeholder="Digite o Email" required>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Digite o Email"
+                            required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,7 +62,7 @@ include("../../database/utils/conexao.php");
                 <div class="form-group">
                     <label for="contato">Contato</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                         <input type="text" class="form-control" name="contato" id="contato"
                             placeholder="Digite o Contato" required>
                     </div>
@@ -72,7 +71,7 @@ include("../../database/utils/conexao.php");
                     <label for="salario">Salário</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                        <input type="number" class="form-control" name="salario" id="salario"
+                        <input type="number" step="0.01" class="form-control" name="salario" id="salario"
                             placeholder="Digite o Salário" required>
                     </div>
                 </div>
@@ -87,7 +86,7 @@ include("../../database/utils/conexao.php");
                 <div class="form-group">
                     <label for="cargo">Cargo</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-truck"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
                         <select name="cargo" id="cargo" required>
                             <option value="" disabled selected>Selecione uma opção</option>
                             <?php
@@ -109,7 +108,7 @@ include("../../database/utils/conexao.php");
 </body>
 
 <script>
-    document.getElementById('data_admissao').value = "<?php echo date('Y-m-d'); ?>";
+document.getElementById('data_admissao').value = "<?php echo date('Y-m-d'); ?>";
 </script>
 
 </html>

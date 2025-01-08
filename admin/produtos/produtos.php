@@ -1,7 +1,7 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ include("../../auth/config.php");
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM produtos WHERE status = 1";
+                $sql = "SELECT * FROM produtos ORDER BY status DESC";
                 $resultado = $conn->query($sql);
 
                 while ($row = $resultado->fetch_assoc()) {
@@ -58,51 +58,60 @@ include("../../auth/config.php");
                     $preco_venda = $row['preco_venda'];
                     $quantidade = $row['quantidade'];
                     $lucro = $preco_venda - $preco_custo;
-                    $validade = $row['validade'];
                     $status = $row['status'];
-                    $validadeFormatada = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
+
+                    if ($row['validade'] != "0000-00-00") {
+                        $validade = $row['validade'];
+                        $validade = DateTime::createFromFormat('Y-m-d', $validade)->format('d/m/Y');
+                    } else {
+                        $validade = null;
+                    }
 
                     $sqlGrupo = "SELECT nome FROM grupos WHERE id = '$grupo'";
                     $resultadoGrupo = $conn->query($sqlGrupo);
-
-                    while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
+                    if ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
                         $nomeGrupo = $rowGrupo['nome'];
+                    } else {
+                        $nomeGrupo = null;
                     }
 
                     $sqlSubgrupo = "SELECT nome FROM subgrupo WHERE id = '$subgrupo'";
                     $resultadoSubgrupo = $conn->query($sqlSubgrupo);
-
-                    while ($rowSubgrupo = $resultadoSubgrupo->fetch_assoc()) {
+                    if ($rowSubgrupo = $resultadoSubgrupo->fetch_assoc()) {
                         $nomeSubgrupo = $rowSubgrupo['nome'];
+                    } else {
+                        $nomeSubgrupo = null;
                     }
 
                     $sqlMarca = "SELECT nome FROM marcas WHERE id = '$marca'";
                     $resultadoMarca = $conn->query($sqlMarca);
-
-                    while ($rowMarca = $resultadoMarca->fetch_assoc()) {
+                    if ($rowMarca = $resultadoMarca->fetch_assoc()) {
                         $nomeMarca = $rowMarca['nome'];
+                    } else {
+                        $nomeMarca = null;
                     }
 
                     $sqlFornecedor = "SELECT razao_social FROM pessoas WHERE cnpj = (SELECT cnpj FROM fornecedores WHERE id = '$fornecedor')";
                     $resultadoFornecedor = $conn->query($sqlFornecedor);
-
-                    while ($rowFornecedor = $resultadoFornecedor->fetch_assoc()) {
+                    if ($rowFornecedor = $resultadoFornecedor->fetch_assoc()) {
                         $nomeFornecedor = $rowFornecedor['razao_social'];
+                    } else {
+                        $nomeFornecedor = null;
                     }
 
                     echo "
                             <tr>
                                 <td>" . $nome . "</td>
-                                <td>" . $codigo_barra . "</td>
-                                <td>" . (empty($nomeFornecedor) ? "N/A" : $nomeFornecedor) . "</td>
-                                <td>" . (empty($nomeMarca) ? "N/A" : $nomeMarca) . "</td>
-                                <td>" . $nomeGrupo . "</td>
-                                <td>" . (empty($nomeSubgrupo) ? "Subgrupo não cadastrado" : $nomeSubgrupo) . "</td>
+                                <td>" . ((empty($codigo_barra) ? "N/A" : $codigo_barra)) . "</td>
+                                <td>" . (($nomeFornecedor == null) ? "N/A" : $nomeFornecedor) . "</td>
+                                <td>" . (($nomeMarca == null) ? "N/A" : $nomeMarca) . "</td>
+                                <td>" . (($nomeGrupo == null) ? "N/A" : $nomeGrupo)  . "</td>
+                                <td>" . (($nomeSubgrupo == null) ? "N/A" : $nomeSubgrupo) . "</td>
                                 <td>R$ " . number_format($preco_custo, 2, ',', '.') . "</td>
                                 <td>R$ " . number_format($preco_venda, 2, ',', '.') . "</td>
                                 <td>" . $quantidade . "</td>
                                 <td>R$ " . number_format($lucro, 2, ',', '.') . "</td>
-                                <td>" . $validadeFormatada . "</td>
+                                <td>" . (($validade == null) ? "N/A" : $validade) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                                 <td>
                                     <form class='action' action='edita_produto.php' method='post'>
@@ -113,7 +122,7 @@ include("../../auth/config.php");
                                 <td>
                                     <form class='action' action='../../database/produtos/deletar_produto.php' method='post'>
                                         <input type='hidden' name='id' value='$id'>
-                                        <button type='submit'><i class='fa-solid fa-trash-can'></i></button>
+                                        <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
                                     </form>
                                 </td>
                             </tr>

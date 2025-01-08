@@ -12,7 +12,7 @@ $preco_custo = floatval($_POST['preco_custo']);
 $preco_venda = floatval($_POST['preco_venda']);
 $quantidade = intval($_POST['quantidade']);
 $validade = $_POST['validade'];
-$sub_grupo = $_POST['sub_grupo'];
+$subgrupo = $_POST['subgrupo'];
 
 if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     $_SESSION['resposta'] = "Data de validade inválida!";
@@ -22,7 +22,7 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
 
 $sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $sub_grupo, $grupo, $marca, $validade, $id);
+$stmt->bind_param("ssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $id);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto editado com sucessso!";

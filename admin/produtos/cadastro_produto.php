@@ -1,6 +1,6 @@
 <?php
-include("../../auth/valida.php");
 include("../../auth/config.php");
+include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include("../../database/utils/conexao.php");
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
                         <input type="text" class="form-control" name="codigo" id="codigo"
-                            placeholder="Digite o Código de Barras" required>
+                            placeholder="Digite o Código de Barras">
                     </div>
                 </div>
                 <div class="form-group">
@@ -151,4 +151,5 @@ include("../../database/utils/conexao.php");
     </div>
 
 </body>
+
 </html>

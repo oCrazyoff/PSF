@@ -1,7 +1,7 @@
 <?php
+include("../auth/config.php");
 include("../database/utils/conexao.php");
 include("../auth/valida.php");
-include("../auth/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +28,14 @@ include("../auth/config.php");
 
                 while ($row = $resultado->fetch_assoc()) {
                 ?>
-                <div class="product-item">
-                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-                        alt="Imagem do <?php echo htmlspecialchars($row['nome']); ?>" class="product-image">
-                    <h2 class="product-name"><?php echo htmlspecialchars($row['nome']); ?></h2>
-                    <p class="product-price">
-                        R$<?php echo htmlspecialchars(number_format($row['preco_venda'], 2, ',', '.')); ?></p>
-                    <button class="btn-add-cart">Comprar</button>
-                </div>
+                    <div class="product-item">
+                        <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                            alt="Imagem do <?php echo htmlspecialchars($row['nome']); ?>" class="product-image">
+                        <h2 class="product-name"><?php echo htmlspecialchars($row['nome']); ?></h2>
+                        <p class="product-price">
+                            R$<?php echo htmlspecialchars(number_format($row['preco_venda'], 2, ',', '.')); ?></p>
+                        <button class="btn-add-cart">Comprar</button>
+                    </div>
                 <?php
                 }
                 ?>

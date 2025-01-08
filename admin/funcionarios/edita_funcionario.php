@@ -1,21 +1,38 @@
 <?php
+include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-include("../../auth/config.php");
 
-$cpf = $_POST['cpf'];
-$sqlFuncionarios = "SELECT * FROM pessoas WHERE cpf = '$cpf'";
-$resultadoFuncionarios = $conn->query($sqlFuncionarios);
+$id = $_POST['id'];
 
-while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
-    $nome = $rowFuncionarios['nome'];
-    $cpf = $rowFuncionarios['cpf'];
-    $email = $rowFuncionarios['email'];
-    $nome = $rowFuncionarios['nome'];
-    $nome = $rowFuncionarios['nome'];
-    $nome = $rowFuncionarios['nome'];
-}
+$sql = "SELECT * FROM funcionarios WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$rowFuncionarios = $resultado->fetch_assoc();
+$stmt->close();
 
+$cpf = $rowFuncionarios['cpf'];
+
+$sqlPessoas = "SELECT * FROM pessoas WHERE cpf = ?";
+$stmt = $conn->prepare($sqlPessoas);
+$stmt->bind_param("s", $cpf);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$rowPessoas = $resultado->fetch_assoc();
+$stmt->close();
+
+$idPessoa = $rowPessoas['id'];
+
+$nome = $rowPessoas['nome'];
+$email = $rowPessoas['email'];
+$data_nascimento = $rowPessoas['data_nascimento'];
+$endereco = $rowPessoas['endereco'];
+$contato = $rowPessoas['contato'];
+$salario = $rowFuncionarios['salario'];
+$data_admissao = $rowFuncionarios['data_admissao'];
+$cargo = $rowPessoas['cargo'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,132 +51,98 @@ while ($rowFuncionarios = $resultadoFuncionarios->fetch_assoc()) {
     <div class="content">
         <div class="form-container" id="large-form">
             <h2 class="form-title">Editar <?php echo $nome ?></h2>
-            <form action="../../database/produtos/editar_produto.php" method="post">
+            <form action="../../database/funcionarios/editar_funcionario.php" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-pen"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                         <input type="text" class="form-control" value="<?php echo $nome ?>" name="nome" id="nome"
-                            placeholder="Digite nome do produto" required>
+                            placeholder="Digite o Nome" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="codigo">Código de Barras</label>
+                    <label for="cpf">CPF</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $codigo_barra ?>" name="codigo"
-                            id="codigo" placeholder="Digite o Código de Barras" required>
+                        <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $cpf ?>" name="cpf" id="cpf"
+                            placeholder="Digite o CPF" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="fornecedor">Fornecedores</label>
+                    <label for="email">Email</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-truck"></i></span>
-                        <select name="fornecedor" id="fornecedor">
-                            <?php
-                            $sqlFornecedores = "SELECT * FROM fornecedores WHERE status = 1";
-                            $resultadoFornecedores = $conn->query($sqlFornecedores);
-                            while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
-                                $sqlPessoas = "SELECT nome_fantasia FROM pessoas WHERE cnpj = '" . $rowFornecedores['cnpj'] . "'";
-                                $resultadoPessoas = $conn->query($sqlPessoas);
-                                $nomeFornecedor = $resultadoPessoas->fetch_assoc();
-                                echo "
-                                <option value='" . $rowFornecedores['id'] . "' " . (($fornecedor == $rowFornecedores['id']) ? 'selected' : '') . ">" . $nomeFornecedor['nome_fantasia'] . "</option>
-                                ";
-                            }
-                            ?>
-                        </select>
+                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $email ?>" name="email" id="email"
+                            placeholder="Digite o Email" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="marca">Marca</label>
+                    <label for="data_nascimento">Data de Nascimento</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
-                        <select name="marca" id="marca">
-                            <?php
-                            $sqlMarca = "SELECT * FROM marcas WHERE status = 1";
-                            $resultadoMarca = $conn->query($sqlMarca);
-                            while ($rowMarca = $resultadoMarca->fetch_assoc()) {
-                                echo "
-                                <option value='" . $rowMarca['id'] . "' " . (($marca == $rowMarca['id']) ? 'selected' : '') . ">" . $rowMarca['nome'] . "</option>
-                                ";
-                            }
-                            ?>
-                        </select>
+                        <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                        <input type="date" class="form-control" value="<?php echo $data_nascimento ?>"
+                            name="data_nascimento" id="data_nascimento" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="grupo">Grupo</label>
+                    <label for="endereco">Endereço</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-boxes-stacked"></i></span>
-                        <select name="grupo" id="grupo">
-                            <?php
-                            $sqlGrupo = "SELECT * FROM grupos WHERE status = 1";
-                            $resultadoGrupo = $conn->query($sqlGrupo);
-                            while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
-                                echo "
-                                <option value='" . $rowGrupo['id'] . "' " . (($grupo == $rowGrupo['id']) ? 'selected' : '') . ">" . $rowGrupo['nome'] . "</option>
-                                ";
-                            }
-                            ?>
-                        </select>
+                        <span class="input-group-text"><i class="fa-solid fa-map-location"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $endereco ?>" name="endereco"
+                            id="endereco" placeholder="Digite o Endereço" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="subgrupo">Sub Grupo</label>
+                    <label for="contato">Contato</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-dolly"></i></span>
-                        <select name="subgrupo" id="subgrupo">
-                            <?php
-                            $sqlSubgrupo = "SELECT * FROM subgrupo WHERE status = 1";
-                            $resultadoSubgrupo = $conn->query($sqlSubgrupo);
-                            while ($rowSubgrupo = $resultadoSubgrupo->fetch_assoc()) {
-                                echo "
-                                <option value='" . $rowSubgrupo['id'] . "' " . (($subgrupo == $rowSubgrupo['id']) ? 'selected' : '') . ">" . $rowSubgrupo['nome'] . "</option>
-                                ";
-                            }
-                            ?>
-                        </select>
+                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $contato ?>" name="contato"
+                            id="contato" placeholder="Digite o Contato" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="preco_custo">Preço de Custo</label>
+                    <label for="salario">Salário</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                        <input type="number" step="0.01" class="form-control" value="<?php echo $preco_custo ?>"
-                            name="preco_custo" id="preco_custo" placeholder="Digite o Preço de Custo" required>
+                        <input type="number" step="0.01" class="form-control" value="<?php echo $salario ?>"
+                            name="salario" id="salario" placeholder="Digite o Salário" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="preco_venda">Preço de Venda</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-hand-holding-dollar"></i></span>
-                        <input type="number" step="0.01" class="form-control" value="<?php echo $preco_venda ?>"
-                            name="preco_venda" id="preco_venda" placeholder="Digite o Preço de Venda" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="quantidade">Quantidade</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-list-ol"></i></span>
-                        <input type="number" class="form-control" value="<?php echo $quantidade ?>" name="quantidade"
-                            id="quantidade" placeholder="Digite a Quantidade" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="validade">Validade</label>
+                    <label for="data_admissao">Data de Admissão</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
-                        <input type="date" class="form-control" value="<?php echo $validade ?>" name="validade"
-                            id="validade" placeholder="Digite a Validade">
+                        <input type="date" class="form-control" value="<?php echo $data_admissao ?>"
+                            name="data_admissao" id="data_admissao" placeholder="Digite a Data de Admissão" required>
                     </div>
                 </div>
-                <input type="hidden" value="<?php echo $id ?>" name="id">
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
+                        <select name="cargo" id="cargo" required>
+                            <?php
+                            $sqlCargo = "SELECT id, nome FROM cargos WHERE status = 1";
+                            $resultadoCargo = $conn->query($sqlCargo);
+                            while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowCargo['id'] . "' " . (($rowCargo['id'] == $cargo) ? "selected" : "") . " >" . $rowCargo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" name="idFuncionario" value="<?php echo $id ?>">
+                <input type="hidden" name="idPessoa" value="<?php echo $idPessoa ?>">
                 <button type="submit" class="btn btn-primary btn-block mt-3">Editar</button>
             </form>
         </div>
     </div>
-
 </body>
+
+<script>
+document.getElementById('data_admissao').value = "<?php echo date('Y-m-d'); ?>";
+</script>
 
 </html>

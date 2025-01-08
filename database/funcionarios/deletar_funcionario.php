@@ -2,21 +2,21 @@
 include("../utils/conexao.php");
 include("../../auth/valida.php");
 
-$cpf = $_POST["cpf"];
+$id = $_POST["id"];
 $status = $_POST["status"];
 $hoje = date('Y-m-d');
 
-if($status == 1){
-    $sql = "UPDATE funcionarios SET status = 0, data_demicao = ? WHERE cpf = ?";
+if ($status == 1) {
+    $sql = "UPDATE funcionarios SET status = 0, data_demissao = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $hoje, $cpf);
+    $stmt->bind_param("ss", $hoje, $id);
 } else {
-    $sql = "UPDATE funcionarios SET status = 1, data_demicao = null WHERE cpf = ?";
+    $sql = "UPDATE funcionarios SET status = 1, data_demissao = null WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $cpf);
+    $stmt->bind_param("s", $id);
 }
 
-if($status == 1){
+if ($status == 1) {
     if ($stmt->execute()) {
         $_SESSION['resposta'] = "Funcionário deletado com sucesso!";
     } else {
