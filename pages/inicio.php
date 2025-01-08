@@ -1,6 +1,7 @@
 <?php
-include("../auth/valida.php");
 include("../auth/config.php");
+include("../database/utils/conexao.php");
+include("../auth/valida.php");
 ?>
 
 <!DOCTYPE html>
