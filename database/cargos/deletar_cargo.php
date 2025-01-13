@@ -4,7 +4,7 @@ include("../../auth/valida.php");
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM cargos WHERE id = ?";
+$sql = "UPDATE cargos SET status = NULL WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $id);
 

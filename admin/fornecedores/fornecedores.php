@@ -30,7 +30,7 @@ include("../../database/utils/conexao.php");
                     <th>CNPJ</th>
                     <th>Razão Social</th>
                     <th>Contato</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                 </tr>
             </thead>
             <tbody>

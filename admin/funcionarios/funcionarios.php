@@ -32,7 +32,7 @@ include("../../database/utils/conexao.php");
                     <th>Data de Admissão</th>
                     <th>Data de Demissão</th>
                     <th>Cargo</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                     <th colspan="2">Ações</th>
                 </tr>
             </thead>

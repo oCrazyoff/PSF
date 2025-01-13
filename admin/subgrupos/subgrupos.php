@@ -27,7 +27,7 @@ include("../../database/utils/conexao.php");
             <thead>
                 <tr>
                     <th>Sub Grupo</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                     <th colspan="2">Ações</th>
                 </tr>
             </thead>

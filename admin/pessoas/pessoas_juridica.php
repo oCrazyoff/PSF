@@ -32,7 +32,7 @@ include("../../database/utils/conexao.php");
                     <th>Endereço</th>
                     <th>Contato</th>
                     <th>Cargo</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                 </tr>
             </thead>
             <tbody>

@@ -4,7 +4,7 @@ include("../../auth/valida.php");
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM grupos WHERE id = ?";
+$sql = "UPDATE grupos SET status = NULL WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $id);
 

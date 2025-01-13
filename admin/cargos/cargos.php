@@ -29,7 +29,7 @@ include("../../database/utils/conexao.php");
             <thead>
                 <tr>
                     <th>Cargo</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                     <th colspan="2">Ações</th>
                 </tr>
             </thead>

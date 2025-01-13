@@ -37,7 +37,7 @@ include("../../database/utils/conexao.php");
                     <th>Quantidade</th>
                     <th>Lucro</th>
                     <th>Validade</th>
-                    <th>Status</th>
+                    <th>Situação</th>
                     <th colspan="2">Ações</th>
                 </tr>
             </thead>

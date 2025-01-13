@@ -4,7 +4,7 @@ include("../../auth/valida.php");
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM subgrupo WHERE id = ?";
+$sql = "UPDATE subgrupo SET status = NULL WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $id);
 
