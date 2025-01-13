@@ -29,13 +29,15 @@ include("../../database/utils/conexao.php");
                     <th>Nome Fantasia</th>
                     <th>CNPJ</th>
                     <th>Razão Social</th>
+                    <th>Endereço</th>
                     <th>Contato</th>
                     <th>Situação</th>
+                    <th colspan="2">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM fornecedores WHERE status = 1";
+                $sql = "SELECT * FROM fornecedores ORDER BY status DESC";
                 $resultado = $conn->query($sql);
 
                 while ($row = $resultado->fetch_assoc()) {
@@ -49,15 +51,30 @@ include("../../database/utils/conexao.php");
                         $nome_fantasia = $rowPessoas['nome_fantasia'];
                         $razao_social = $rowPessoas['razao_social'];
                         $contato = $rowPessoas['contato'];
+                        $endereco = $rowPessoas['endereco'];
                     }
 
                     echo "
                             <tr>
-                                <td>" . $nome_fantasia . "</td>
-                                <td>" . $cnpj . "</td>
-                                <td>" . $razao_social . "</td>
-                                <td>" . $contato . "</td>
+                                <td>" . ($nome_fantasia != null ? $nome_fantasia : "N/A") . "</td>
+                                <td>" . ($cnpj != null ? $cnpj : "N/A") . "</td>
+                                <td>" . ($razao_social != null ? $razao_social : "N/A") . "</td>
+                                <td>" . ($endereco != null ? $endereco : "N/A") . "</td>
+                                <td>" . ($contato != null ? $contato : "N/A"). "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                                <td>
+                                    <form class='action' action='edita_fornecedor.php' method='post'>
+                                        <input type='hidden' name='cnpj' value='$cnpj'>
+                                        <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class='action' action='../../database/fornecedores/deletar_fornecedor.php' method='post'>
+                                        <input type='hidden' name='cnpj' value='$cnpj'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
+                                    </form>
+                                </td>
                             </tr>
                                 ";
                 }
@@ -66,5 +83,14 @@ include("../../database/utils/conexao.php");
         </table>
     </div>
 </body>
+
+<script>
+    <?php
+    if (isset($_SESSION['resposta'])) {
+        echo "alert('" . $_SESSION['resposta'] . "')";
+        unset($_SESSION['resposta']);
+    }
+    ?>
+</script>
 
 </html>
