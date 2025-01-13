@@ -36,5 +36,5 @@ if ($status == 1) {
     $stmt->close();
 }
 
-header("Location: ../../admin/produtos/produtos.php");
+header("Location: ../../admin/produtos/produtos_adm.php");
 exit;
