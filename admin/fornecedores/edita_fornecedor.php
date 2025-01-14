@@ -37,7 +37,7 @@ while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
                 <div class="form-group">
                     <label for="cnpj">CNPJ</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-pen"></i></span>
+                        <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
                         <input type="text" class="form-control" value="<?php echo $cnpj ?>" name="cnpj" id="cnpj"
                             placeholder="Digite o CNPJ" required>
                     </div>
@@ -45,7 +45,7 @@ while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
                 <div class="form-group">
                     <label for="razao_social">Razão Social</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-signature"></i></span>
                         <input type="text" class="form-control" value="<?php echo $razao_social ?>" name="razao_social"
                             id="razao_social" placeholder="Digite a Razão Social">
                     </div>
@@ -53,7 +53,7 @@ while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
                 <div class="form-group">
                     <label for="nome_fantasia">Nome Fantásia</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                         <input type="text" class="form-control" value="<?php echo $nome_fantasia ?>" name="nome_fantasia"
                             id="nome_fantasia" placeholder="Digite o Nome Fantásia">
                     </div>
@@ -61,7 +61,7 @@ while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
                 <div class="form-group">
                     <label for="endereco">Endereço</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
                         <input type="text" step="0.01" class="form-control" value="<?php echo $endereco ?>"
                             name="endereco" id="endereco" placeholder="Digite o Endereço" required>
                     </div>
@@ -69,7 +69,7 @@ while ($rowFornecedores = $resultadoFornecedores->fetch_assoc()) {
                 <div class="form-group">
                     <label for="contato">Contato</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                         <input type="text" class="form-control" value="<?php echo $contato ?>" name="contato"
                             id="contato" placeholder="Digite o Contato">
                     </div>
