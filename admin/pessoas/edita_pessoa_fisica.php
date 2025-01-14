@@ -2,24 +2,19 @@
 include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-$cpfAtual = $_POST['cpfAtual'];
-if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
-    $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE cpf = '$cpfAtual'";
-    $resultadoPessoas = $conn->query($sqlPessoas);
-    
-    while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-        $nome = $rowPessoas["nome"];
-        $cpf = $rowPessoas["cpf"];
-        $email = $rowPessoas["email"];
-        $data_nascimento = $rowPessoas["data_nascimento"];
-        $endereco = $rowPessoas["endereco"];
-        $contato = $rowPessoas["contato"];
-        $cargo = $rowPessoas["cargo"];
-    }
-} else {
-    $_SESSION['resposta'] = "Essa pessoa não tem cpf!";
-    header("Location: pessoas_fisica.php");
-    exit();
+
+$emailAtual = $_POST['emailAtual'];
+$sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
+$resultadoPessoas = $conn->query($sqlPessoas);
+
+while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
+    $nome = $rowPessoas["nome"];
+    $cpf = $rowPessoas["cpf"];
+    $email = $rowPessoas["email"];
+    $data_nascimento = $rowPessoas["data_nascimento"];
+    $endereco = $rowPessoas["endereco"];
+    $contato = $rowPessoas["contato"];
+    $cargo = $rowPessoas["cargo"];
 }
 
 ?>
@@ -87,7 +82,7 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
                         <input type="text" class="form-control" value="<?php echo $contato ?>" name="contato"
                             id="contato" placeholder="Digite o Contato">
                     </div>
-                    </div>
+                </div>
                 <div class="form-group">
                     <label for="cargo">Cargo</label>
                     <div class="input-group">

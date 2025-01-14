@@ -3,27 +3,19 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-$cnpjAtual = $_POST['cnpjAtual'];
-if(isset($_POST["cnpjAtual"]) and $cnpjAtual != null){
-    $sqlPessoas = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE cnpj = '$cnpjAtual'";
-    $resultadoPessoas = $conn->query($sqlPessoas);
-    
-    while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-        $razao_social = $rowPessoas["razao_social"];
-        $nome_fantasia = $rowPessoas["nome_fantasia"];
-        $cnpj = $rowPessoas["cnpj"];
-        $email = $rowPessoas["email"];
-        $endereco = $rowPessoas["endereco"];
-        $contato = $rowPessoas["contato"];
-        $cargo = $rowPessoas["cargo"];
-    }
-} else {
-    $_SESSION['resposta'] = "Essa pessoa não tem cnpj!";
-    header("Location: pessoas_juridica.php");
-    exit();
+$emailAtual = $_POST['emailAtual'];
+$sqlPessoas = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
+$resultadoPessoas = $conn->query($sqlPessoas);
+
+while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
+    $razao_social = $rowPessoas["razao_social"];
+    $nome_fantasia = $rowPessoas["nome_fantasia"];
+    $cnpj = $rowPessoas["cnpj"];
+    $email = $rowPessoas["email"];
+    $endereco = $rowPessoas["endereco"];
+    $contato = $rowPessoas["contato"];
+    $cargo = $rowPessoas["cargo"];
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,7 +35,7 @@ if(isset($_POST["cnpjAtual"]) and $cnpjAtual != null){
         <div class="form-container" id="large-form">
             <h2 class="form-title">Editar <?php echo $nome_fantasia ?></h2>
             <form action="../../database/pessoas/editar_pessoa_juridica.php" method="post">
-            <div class="form-group">
+                <div class="form-group">
                     <label for="razao_social">Razão Social</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
