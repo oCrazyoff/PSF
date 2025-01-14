@@ -73,6 +73,7 @@ include("../../database/utils/conexao.php");
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                                 <td>
                                     <form class='action' action='edita_pessoa_fisica.php' method='post'>
+                                        <input type='hidden' name='cpfAtual' value='$cpf'>
                                         <input type='hidden' name='emailAtual' value='$email'>
                                         <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
                                     </form>

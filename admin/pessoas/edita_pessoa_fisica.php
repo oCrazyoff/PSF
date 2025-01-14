@@ -3,8 +3,26 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-$emailAtual = $_POST['emailAtual'];
-$sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    $emailAtual = $_POST['emailAtual'];
+    $cpfAtual = $_POST["cpfAtual"];
+
+    if ($cpfAtual != null){
+        $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE cpf = '$cpfAtual'";
+    } else if($emailAtual != null){
+        $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
+    } else {
+        $_SESSION['resposta'] = "Usuário não possui nem email e nem cpf!";
+        header("Location: ../../admin/pessoas/pessoas_fisica.php");
+        exit();
+    }
+} else {
+    $_SESSION['resposta'] = "Método de solicitação ínvalido!";
+    header("Location: ../../admin/pessoas/pessoas_fisica.php");
+    exit();
+}
+
+
 $resultadoPessoas = $conn->query($sqlPessoas);
 
 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
@@ -100,6 +118,7 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
                         </select>
                     </div>
                 </div>
+                <input type="hidden" value="<?php echo $email ?>" name="emailAtual">
                 <input type="hidden" value="<?php echo $cpf ?>" name="cpfAtual">
                 <button type="submit" class="btn btn-primary btn-block mt-3">Editar</button>
             </form>
