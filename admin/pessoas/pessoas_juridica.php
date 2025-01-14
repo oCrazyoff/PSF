@@ -22,7 +22,7 @@ include("../../database/utils/conexao.php");
         <table>
             <div class="titulo">
                 <h1>Lista de Pessoas Jurídicas</h1>
-                <a href="cadastro_produto.php">Nova Pessoa <i class="fa-solid fa-circle-plus"></i></a>
+                <a href="cadastro_pessoa_juridica.php">Nova Pessoa <i class="fa-solid fa-circle-plus"></i></a>
             </div>
             <thead>
                 <tr>
@@ -33,11 +33,12 @@ include("../../database/utils/conexao.php");
                     <th>Contato</th>
                     <th>Cargo</th>
                     <th>Situação</th>
+                    <th colspan="2">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sqlPessoas = "SELECT * FROM pessoas WHERE tipo_pessoa = 2";
+                $sqlPessoas = "SELECT * FROM pessoas WHERE tipo_pessoa = 2 ORDER BY status DESC";
                 $resultadoPessoas = $conn->query($sqlPessoas);
 
                 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
@@ -66,6 +67,19 @@ include("../../database/utils/conexao.php");
                                 <td>" . (empty($contato) ? "N/A" : $contato) . "</td>
                                 <td>" . (empty($cargo) ? "N/A" : $cargo) . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
+                                <td>
+                                    <form class='action' action='edita_pessoa_juridica.php' method='post'>
+                                        <input type='hidden' name='cnpjAtual' value='$cnpj'>
+                                        <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class='action' action='../../database/pessoas/deletar_pessoa_juridica.php' method='post'>
+                                        <input type='hidden' name='cnpjAtual' value='$cnpj'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
+                                    </form>
+                                </td>
                              </tr>
                                 ";
                 }
@@ -74,5 +88,14 @@ include("../../database/utils/conexao.php");
         </table>
     </div>
 </body>
+
+<script>
+    <?php
+    if (isset($_SESSION['resposta'])) {
+        echo "alert('" . $_SESSION['resposta'] . "')";
+        unset($_SESSION['resposta']);
+    }
+    ?>
+</script>
 
 </html>

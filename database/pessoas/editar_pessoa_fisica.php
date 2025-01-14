@@ -1,7 +1,6 @@
 <?php
 include("../utils/conexao.php");
 include("../../auth/valida.php");
-
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $cpfAtual = $_POST["cpfAtual"];
     if((isset($_POST["cpfAtual"])) and (!empty($_POST))){
@@ -11,6 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data_nascimento = $_POST["data_nascimento"];
         $endereco = $_POST["endereco"];
         $contato = $_POST["contato"];
+        $cargo = $_POST["cargo"];
 
         if (!DateTime::createFromFormat('Y-m-d', $data_nascimento)) {
             $_SESSION['resposta'] = "Data de validade inválida!";
@@ -18,9 +18,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             exit;
         }
 
-        $sql = "UPDATE pessoas SET nome = ?, cpf = ?, email = ?, data_nascimento = ?, endereco = ?, contato = ? WHERE cpf = ?";
+        $sql = "UPDATE pessoas SET nome = ?, cpf = ?, email = ?, data_nascimento = ?, endereco = ?, contato = ?, cargo = ? WHERE cpf = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssss",$nome, $cpf, $email, $data_nascimento, $endereco, $contato, $cpfAtual);
+        $stmt->bind_param("ssssssss",$nome, $cpf, $email, $data_nascimento, $endereco, $contato, $cargo, $cpfAtual);
 
         if($stmt->execute()){
             $_SESSION['resposta'] = "Pessoa editada com sucessso!";

@@ -35,13 +35,15 @@ include("../../database/utils/conexao.php");
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM cargos";
+                $sql = "SELECT id, nome, status FROM cargos";
                 $resultado = $conn->query($sql);
                 while ($row = $resultado->fetch_assoc()) {
                     $id = $row['id'];
+                    $nome = $row["nome"];
+                    $status = $row["status"];
                     echo "
                     <tr>
-                        <td>" . $row['nome'] . "</td>
+                        <td>" . (($row['nome'] == null) ? "N/A" : $nome) . "</td>
                         <td>" . (($row['status'] == 1) ? 'Ativo' : 'Desativo') . "</td>
                         <td>
                             <form class='action' action='edita_cargo.php' method='post'>

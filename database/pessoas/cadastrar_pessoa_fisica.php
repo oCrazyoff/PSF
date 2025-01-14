@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $endereco = $_POST["endereco"];
     $contato = $_POST["contato"];
     $tipo_pessoa = 1;
-    $cargo = 4;
+    $cargo = $_POST["cargo"];
 
     if (!DateTime::createFromFormat('Y-m-d', $data_nascimento)) {
         $_SESSION['resposta'] = "Data de nascimento inválida!";

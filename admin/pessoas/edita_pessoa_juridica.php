@@ -2,25 +2,27 @@
 include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
-$cpfAtual = $_POST['cpfAtual'];
-if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
-    $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE cpf = '$cpfAtual'";
+
+$cnpjAtual = $_POST['cnpjAtual'];
+if(isset($_POST["cnpjAtual"]) and $cnpjAtual != null){
+    $sqlPessoas = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE cnpj = '$cnpjAtual'";
     $resultadoPessoas = $conn->query($sqlPessoas);
     
     while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-        $nome = $rowPessoas["nome"];
-        $cpf = $rowPessoas["cpf"];
+        $razao_social = $rowPessoas["razao_social"];
+        $nome_fantasia = $rowPessoas["nome_fantasia"];
+        $cnpj = $rowPessoas["cnpj"];
         $email = $rowPessoas["email"];
-        $data_nascimento = $rowPessoas["data_nascimento"];
         $endereco = $rowPessoas["endereco"];
         $contato = $rowPessoas["contato"];
         $cargo = $rowPessoas["cargo"];
     }
 } else {
-    $_SESSION['resposta'] = "Essa pessoa não tem cpf!";
-    header("Location: pessoas_fisica.php");
+    $_SESSION['resposta'] = "Essa pessoa não tem cnpj!";
+    header("Location: pessoas_juridica.php");
     exit();
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar <?php echo $nome ?></title>
+    <title>Editar <?php echo $nome_fantasia ?></title>
     <?php include("../../includes/link_head.php") ?>
     <link rel="stylesheet" href="../../assets/css/form.css?v=<?php echo time(); ?>">
 </head>
@@ -39,22 +41,28 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
     <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container" id="large-form">
-            <h2 class="form-title">Editar <?php echo $nome ?></h2>
-            <form action="../../database/pessoas/editar_pessoa_fisica.php" method="post">
-                <div class="form-group">
-                    <label for="nome">Nome</label>
+            <h2 class="form-title">Editar <?php echo $nome_fantasia ?></h2>
+            <form action="../../database/pessoas/editar_pessoa_juridica.php" method="post">
+            <div class="form-group">
+                    <label for="razao_social">Razão Social</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $nome ?>" name="nome" id="nome"
-                            placeholder="Digite o nome" required>
+                        <input type="text" class="form-control" value="<?php echo $razao_social ?>" name="razao_social" id="razao_social" placeholder="Digite a razão social" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cpf">CPF</label>
+                    <label for="nome_fantasia">Nome Fantásia</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $nome_fantasia ?>" name="nome_fantasia" id="nome_fantasia" placeholder="Digite o nome fantásia" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cnpj">CNPJ</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $cpf ?>" name="cpf"
-                            id="cpf" placeholder="Digite o CPF">
+                        <input type="text" class="form-control" value="<?php echo $cnpj ?>" name="cnpj"
+                            id="cnpj" placeholder="Digite o CNPJ">
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,13 +71,6 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                         <input type="text" class="form-control" value="<?php echo $email ?>" name="email"
                             id="email" placeholder="Digite o Nome Fantásia">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="data_nascimento">Data de nascimento</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input type="date" class="form-control" name="data_nascimento" id="data_nascimento" value="<?php echo $data_nascimento ?>" placeholder="Digite a Data de nascimento" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -87,7 +88,7 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
                         <input type="text" class="form-control" value="<?php echo $contato ?>" name="contato"
                             id="contato" placeholder="Digite o Contato">
                     </div>
-                    </div>
+                </div>
                 <div class="form-group">
                     <label for="cargo">Cargo</label>
                     <div class="input-group">
@@ -105,7 +106,7 @@ if(isset($_POST["cpfAtual"]) and $cpfAtual != null){
                         </select>
                     </div>
                 </div>
-                <input type="hidden" value="<?php echo $cpf ?>" name="cpfAtual">
+                <input type="hidden" value="<?php echo $cnpj ?>" name="cnpjAtual">
                 <button type="submit" class="btn btn-primary btn-block mt-3">Editar</button>
             </form>
         </div>
