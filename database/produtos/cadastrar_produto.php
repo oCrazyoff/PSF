@@ -12,6 +12,7 @@ $preco_venda = floatval($_POST['preco_venda']);
 $quantidade = intval($_POST['quantidade']);
 $validade = $_POST['validade'];
 $subgrupo = $_POST['subgrupo'];
+$imagem = $_POST["imagem"];
 
 if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     $_SESSION['resposta'] = "Data de validade inválida!";
@@ -19,9 +20,9 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     exit;
 }
 
-$sql = "INSERT INTO produtos (nome, codigo_barra, fornecedor, preco_custo, preco_venda, quantidade, subgrupo, grupo, marca, validade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO produtos (nome, codigo_barra, fornecedor, preco_custo, preco_venda, quantidade, subgrupo, grupo, marca, validade, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade);
+$stmt->bind_param("sssssssssss", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $imagem);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto cadastrado com sucessso!";
@@ -29,5 +30,5 @@ if ($stmt->execute()) {
     $_SESSION['resposta'] = "Erro ao cadastrar produto: " . $stmt->error;
 }
 
-header("Location: ../../admin/produtos/produtos.php");
+header("Location: ../../admin/produtos/produtos_adm.php");
 exit;

@@ -23,14 +23,14 @@ include("../auth/valida.php");
             <h1 class="catalog-title">Catálogo de Produtos</h1>
             <div class="product-list">
                 <?php
-                $sql = "SELECT * FROM produtos WHERE status = 1";
+                $sql = "SELECT nome, preco_venda, imagem FROM produtos WHERE status = 1";
                 $resultado = $conn->query($sql);
 
                 while ($row = $resultado->fetch_assoc()) {
                 ?>
                     <div class="product-item">
-                        <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-                            alt="Imagem do <?php echo htmlspecialchars($row['nome']); ?>" class="product-image">
+                        <img src="<?= ($row['imagem'] == null ? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" : htmlspecialchars($row['imagem'])) ?>"
+                        alt="Imagem do <?php echo htmlspecialchars($row['nome']); ?>" class="product-image">
                         <h2 class="product-name"><?php echo htmlspecialchars($row['nome']); ?></h2>
                         <p class="product-price">
                             R$<?php echo htmlspecialchars(number_format($row['preco_venda'], 2, ',', '.')); ?></p>

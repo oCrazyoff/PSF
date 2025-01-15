@@ -13,6 +13,7 @@ $preco_venda = floatval($_POST['preco_venda']);
 $quantidade = intval($_POST['quantidade']);
 $validade = $_POST['validade'];
 $subgrupo = $_POST['subgrupo'];
+$imagem = $_POST["imagem"];
 
 if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     $_SESSION['resposta'] = "Data de validade inválida!";
@@ -20,9 +21,9 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     exit;
 }
 
-$sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ? WHERE id = ?";
+$sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ?, imagem = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $id);
+$stmt->bind_param("sssssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $imagem, $id);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto editado com sucessso!";
@@ -30,5 +31,5 @@ if ($stmt->execute()) {
     $_SESSION['resposta'] = "Erro ao editar produto: " . $stmt->error;
 }
 
-header("Location: ../../admin/produtos/produtos.php");
+header("Location: ../../admin/produtos/produtos_adm.php");
 exit;

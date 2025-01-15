@@ -18,6 +18,7 @@ while ($rowProduto = $resultadoProduto->fetch_assoc()) {
     $preco_venda = $rowProduto['preco_venda'];
     $quantidade = $rowProduto['quantidade'];
     $validade = $rowProduto['validade'];
+    $imagem = $rowProduto["imagem"];
 }
 
 ?>
@@ -156,6 +157,14 @@ while ($rowProduto = $resultadoProduto->fetch_assoc()) {
                         <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
                         <input type="date" class="form-control" value="<?php echo $validade ?>" name="validade"
                             id="validade" placeholder="Digite a Validade">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="imagem">Link da imagem</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
+                        <input type="text" class="form-control" value="<?php echo $imagem ?>" name="imagem"
+                            id="imagem" placeholder="Cole o link da imagem">
                     </div>
                 </div>
                 <input type="hidden" value="<?php echo $id ?>" name="id">

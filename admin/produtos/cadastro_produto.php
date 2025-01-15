@@ -144,6 +144,14 @@ include("../../database/utils/conexao.php");
                             placeholder="Digite a Validade" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="imagem">Link da imagem</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
+                        <input type="text" class="form-control" name="imagem"
+                            id="imagem" placeholder="Cole o link da imagem">
+                    </div>
+                </div>
 
                 <button type="submit" class="btn btn-primary btn-block mt-3">Cadastrar</button>
             </form>
