@@ -7,11 +7,17 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $cpf = $_POST["cpf"];
     $email = $_POST["email"];
     $data_nascimento = $_POST["data_nascimento"];
-    $endereco = $_POST["endereco"];
+    $cep = $_POST['cep'];
+    $logradouro = $_POST['rua'];
+    $numero = $_POST['numero'];
+    $bairro = $_POST["bairro"];
+    $complemento = $_POST['complemento'];
+    $estado = $_POST['estado'];
+    $cidade = $_POST['cidade'];
     $contato = $_POST["contato"];
     $tipo_pessoa = 1;
     $cargo = $_POST["cargo"];
-
+    $endereco = "$cep, $logradouro, $numero, $bairro " .($complemento == null ? "" : $complemento.",") . " $estado, $cidade";
     if (!DateTime::createFromFormat('Y-m-d', $data_nascimento)) {
         $_SESSION['resposta'] = "Data de nascimento inválida!";
         header("Location: ../../admin/pessoas/pessoas_fisica.php");
