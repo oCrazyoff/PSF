@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             exit;
         }
 
-        // O comando try 
+        // O comando try-catch é usado para pegar erros de SQL, tem que colocar o código que pode dar erro no try e se der erro ele manda para o catch onde o erro é capturado para a verificação
         try {
             $sql = "INSERT INTO pessoas (nome, email, senha) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
