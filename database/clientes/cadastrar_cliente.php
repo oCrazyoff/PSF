@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             exit;
         }
 
+        // O comando try 
         try {
             $sql = "INSERT INTO pessoas (nome, email, senha) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);

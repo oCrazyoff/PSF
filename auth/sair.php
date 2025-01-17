@@ -1,8 +1,12 @@
 <?php
+
+//Inicia ou recupera a sessão anterior
 session_start();
 
+//Limpa a variavel $_SESSION
 $_SESSION = []; 
 
+//Limpa os cookies do usuário logado
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(
@@ -16,7 +20,10 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
+//Destroi a sessão
 session_destroy();
+
+//Reincaminha para a tela de login
 header("Location: ../index.php");
 exit;
 ?>
