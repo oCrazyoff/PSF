@@ -3,36 +3,31 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    $emailAtual = $_POST['emailAtual'];
-    $cpfAtual = $_POST["cpfAtual"];
+$cpf = $_POST['cpfAtual'];
+$email = $_POST['emailAtual'];
 
-    if ($cpfAtual != null){
-        $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE cpf = '$cpfAtual'";
-    } else if($emailAtual != null){
-        $sqlPessoas = "SELECT nome, cpf, email, data_nascimento, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
+$sqlPessoasFisica = "SELECT nome, cpf, email, data_nascimento, contato, endereco FROM pessoas WHERE cpf = ? OR email = ?";
+$stmtPessoasFisica = $conn->prepare($sqlPessoasFisica);
+$stmtPessoasFisica->bind_param("ss", $cpf, $email);
+
+if ($stmtPessoasFisica->execute()) {
+    $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco);
+    if ($stmtPessoasFisica->fetch()) {
+        $partes = explode(", ", $endereco);
+
+        $cep = $partes[0];
+        $logradouro = $partes[1];
+        $numero = $partes[2];
+        $bairro = $partes[3];
+        $complemento = count($partes) == 7 ? $partes[4] : "";
+        $cidade = count($partes) == 7 ? $partes[5] : $partes[4];
+        $estado = count($partes) == 7 ? $partes[6] : $partes[5];
     } else {
-        $_SESSION['resposta'] = "Usuário não possui nem email e nem cpf!";
-        header("Location: ../../admin/pessoas/pessoas_fisica.php");
-        exit();
+        $_SESSION['resposta'] = "Erro ao editar usuario";
+        header("Location: pessoas_fisica.php");
+        exit;
     }
-} else {
-    $_SESSION['resposta'] = "Método de solicitação ínvalido!";
-    header("Location: ../../admin/pessoas/pessoas_fisica.php");
-    exit();
-}
-
-
-$resultadoPessoas = $conn->query($sqlPessoas);
-
-while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-    $nome = $rowPessoas["nome"];
-    $cpf = $rowPessoas["cpf"];
-    $email = $rowPessoas["email"];
-    $data_nascimento = $rowPessoas["data_nascimento"];
-    $endereco = $rowPessoas["endereco"];
-    $contato = $rowPessoas["contato"];
-    $cargo = $rowPessoas["cargo"];
+    $stmtPessoasFisica->free_result();
 }
 
 ?>
@@ -42,7 +37,7 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar <?php echo $nome ?></title>
+    <title>Editar <?= $nome ?></title>
     <?php include("../../includes/link_head.php") ?>
     <link rel="stylesheet" href="../../assets/css/form.css?v=<?php echo time(); ?>">
 </head>
@@ -52,13 +47,13 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
     <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container" id="large-form">
-            <h2 class="form-title">Editar <?php echo $nome ?></h2>
-            <form action="../../database/pessoas/editar_pessoa_fisica.php" method="post">
+            <h2 class="form-title">Informações Pessoais</h2>
+            <form action="../../database/pessoas/cadastrar_pessoa_fisica.php" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $nome ?>" name="nome" id="nome"
+                        <input type="text" class="form-control" value="<?= $nome ?>" name="nome" id="nome"
                             placeholder="Digite o nome" required>
                     </div>
                 </div>
@@ -66,65 +61,103 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
                     <label for="cpf">CPF</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $cpf ?>" name="cpf"
-                            id="cpf" placeholder="Digite o CPF">
+                        <input type="text" class="form-control" value="<?= $cpf ?>" name="cpf" id="cpf" maxlength="14"
+                            placeholder="000.000.000-00">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $email ?>" name="email"
-                            id="email" placeholder="Digite o Nome Fantásia">
+                        <input type="text" class="form-control" value="<?= $email ?>" name="email" id="email"
+                            placeholder="Digite o email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="data_nascimento">Data de nascimento</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input type="date" class="form-control" name="data_nascimento" id="data_nascimento" value="<?php echo $data_nascimento ?>" placeholder="Digite a Data de nascimento" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="endereco">Endereço</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-                        <input type="text" step="0.01" class="form-control" value="<?php echo $endereco ?>"
-                            name="endereco" id="endereco" placeholder="Digite o Endereço" required>
+                        <input type="date" class="form-control" value="<?= $data_nascimento ?>" name="data_nascimento"
+                            id="data_nascimento" placeholder="Digite a Data de nascimento" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="contato">Contato</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
-                        <input type="text" class="form-control" value="<?php echo $contato ?>" name="contato"
-                            id="contato" placeholder="Digite o Contato">
+                        <input type="text" class="form-control" value="<?= $contato ?>" name="contato" id="contato"
+                            placeholder="Digite o contato">
+                    </div>
+                </div>
+        </div>
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Endereço</h2>
+            <div class="card-form">
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $cep ?>" name="cep" id="cep" maxlength="9"
+                            placeholder="00000-000" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cargo">Cargo</label>
+                    <label for="rua">Logradouro</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
-                        <select name="cargo" id="cargo" required>
-                            <?php
-                            $sqlCargo = "SELECT id, nome FROM cargos WHERE status = 1";
-                            $resultadoCargo = $conn->query($sqlCargo);
-                            while ($rowCargo = $resultadoCargo->fetch_assoc()) {
-                                echo "
-                                <option value='" . $rowCargo['id'] . "' " . (($rowCargo['id'] == $cargo) ? "selected" : "") . " >" . $rowCargo['nome'] . "</option>
-                                ";
-                            }
-                            ?>
-                        </select>
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $logradouro ?>" name="rua" id="rua"
+                            placeholder="Digite o Logradouro" required>
                     </div>
                 </div>
-                <input type="hidden" value="<?php echo $email ?>" name="emailAtual">
-                <input type="hidden" value="<?php echo $cpf ?>" name="cpfAtual">
-                <button type="submit" class="btn btn-primary btn-block mt-3">Editar</button>
-            </form>
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="number" class="form-control" value="<?= $numero ?>" name="numero" id="numero"
+                            placeholder="Digite o número" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $bairro ?>" name="bairro" id="bairro"
+                            placeholder="Digite o bairro" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complemento">Complemento(opcional)</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $complemento ?>" name="complemento"
+                            id="complemento" placeholder="Digite o completo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $estado ?>" name="estado" id="estado"
+                            placeholder="Digite o estado" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= $cidade ?>" name="cidade" id="cidade"
+                            placeholder="Digite o cidade" required>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
+        <div class="btn-submit-container">
+            <button type="submit" class="btn-block-large">Editar</button>
+        </div>
+        </form>
 </body>
+<?php
+include("../../auth/validacoesFrontEnd.php");
+?>
 
 </html>

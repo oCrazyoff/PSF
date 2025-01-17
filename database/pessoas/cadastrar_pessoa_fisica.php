@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $cidade = $_POST['cidade'];
     $contato = $_POST["contato"];
     $tipo_pessoa = 1;
-    $cargo = $_POST["cargo"];
-    $endereco = "$cep, $logradouro, $numero, $bairro " .($complemento == null ? "" : $complemento.",") . " $estado, $cidade";
+    $endereco = "$cep, $logradouro, $numero, $bairro, " . ($complemento == null ? "" : $complemento . ", ") . "$estado, $cidade";
     if (!DateTime::createFromFormat('Y-m-d', $data_nascimento)) {
         $_SESSION['resposta'] = "Data de nascimento inválida!";
         header("Location: ../../admin/pessoas/pessoas_fisica.php");
@@ -26,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
     if ((isset($_POST["cpf"])) and (!empty($_POST))) {
 
-        $sql = "INSERT INTO pessoas (nome, cpf, email,data_nascimento, endereco, contato, tipo_pessoa, cargo) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO pessoas (nome, cpf, email,data_nascimento, endereco, contato, tipo_pessoa) VALUES (?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $nome, $cpf, $email, $data_nascimento, $endereco, $contato, $tipo_pessoa, $cargo);
+        $stmt->bind_param("sssssss", $nome, $cpf, $email, $data_nascimento, $endereco, $contato, $tipo_pessoa);
 
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             $_SESSION['resposta'] = "Pessoa cadastrada com sucessso!";
         } else {
             $_SESSION['resposta'] = "Erro ao cadastrar pessoa: " . $stmt->error;
