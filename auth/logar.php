@@ -41,5 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $_SESSION['resposta'] = "Método de solicitação ínvalido!";
 }
 
+$conn->close();
+
 header("Location: ../index.php?resposta=$resposta");
 exit;
