@@ -34,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         } catch (Exception $erro_email) {
             if ($erro_email->getCode() == 1062) {
                 $resposta = "Email já cadastrado!";
-                header("Location: ../../index.php?resposta=$resposta");
+                header("Location: ../../pages/cadastrese.php?resposta=$resposta");
                 exit;
             } else {
                 $resposta = "Erro ao cadastrar usuário!";
-                header("Location: ../../index.php?resposta=$resposta");
+                header("Location: ../../pages/cadastrese.php?resposta=$resposta");
                 exit;
             }
         }
@@ -49,5 +49,5 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $_SESSION['resposta'] = "Método de solicitação ínvalido!";
 }
 
-header("Location: ../index.php?resposta=$resposta");
+header("Location: ../../pages/cadastrese.php?resposta=$resposta");
 exit;
