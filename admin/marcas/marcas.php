@@ -56,7 +56,6 @@ include("../../database/utils/conexao.php");
                                 <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
                             </form>
                         </td>
-
                         <td>
                             <form class='action' action='../../database/marcas/deletar_marca.php' method='post' style='display:".(($status == 1) ? "none" : "block")."'>
                                 <input type='hidden' name='deletar' value='1'>
