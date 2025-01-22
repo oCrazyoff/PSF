@@ -47,6 +47,7 @@ h2 {
 
 #large-form .form-title {
     align-self: flex-start;
+    margin-bottom: 0.5em;
 }
 
 form {
@@ -61,7 +62,7 @@ form {
 
 /* Título */
 .form-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #4e54c8;
     text-align: center;

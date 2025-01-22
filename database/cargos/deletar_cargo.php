@@ -33,8 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $sql = "DELETE FROM cargos WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $id);
+
+            $sqlPermissoes = "DELETE FROM permissoes WHERE cargo_id = ?";
+            $stmtPermissoes = $conn->prepare($sqlPermissoes);
+            $stmtPermissoes->bind_param("s", $id);
     
-            if ($stmt->execute()) {
+            if ($stmt->execute() AND $stmtPermissoes->execute()) {
                 $_SESSION['resposta'] = "Cargo deletado com sucesso!";
             } else {
                 $_SESSION['resposta'] = "Erro ao deletar cargo: " . $stmt->error;

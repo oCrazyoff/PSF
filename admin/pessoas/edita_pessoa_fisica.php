@@ -13,15 +13,26 @@ $stmtPessoasFisica->bind_param("ss", $cpf, $email);
 if ($stmtPessoasFisica->execute()) {
     $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco);
     if ($stmtPessoasFisica->fetch()) {
-        $partes = explode(", ", $endereco);
+        if($endereco != null){
+            $partes = explode(", ", $endereco);
 
-        $cep = $partes[0];
-        $logradouro = $partes[1];
-        $numero = $partes[2];
-        $bairro = $partes[3];
-        $complemento = count($partes) == 7 ? $partes[4] : "";
-        $cidade = count($partes) == 7 ? $partes[5] : $partes[4];
-        $estado = count($partes) == 7 ? $partes[6] : $partes[5];
+            $cep = $partes[0];
+            $logradouro = $partes[1];
+            $numero = $partes[2];
+            $bairro = $partes[3];
+            $complemento = count($partes) == 7 ? $partes[4] : "";
+            $cidade = count($partes) == 7 ? $partes[5] : $partes[4];
+            $estado = count($partes) == 7 ? $partes[6] : $partes[5];
+        } else {
+            $cep = "";
+            $logradouro = "";
+            $numero = "";
+            $bairro = "";
+            $complemento = "";
+            $cidade = "";
+            $estado = "";
+        }
+
     } else {
         $_SESSION['resposta'] = "Erro ao editar usuario";
         header("Location: pessoas_fisica.php");
@@ -48,7 +59,7 @@ if ($stmtPessoasFisica->execute()) {
     <div class="content">
         <div class="form-container" id="large-form">
             <h2 class="form-title">Informações Pessoais</h2>
-            <form action="../../database/pessoas/cadastrar_pessoa_fisica.php" method="post">
+            <form action="../../database/pessoas/editar_pessoa_fisica.php" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
@@ -63,6 +74,7 @@ if ($stmtPessoasFisica->execute()) {
                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
                         <input type="text" class="form-control" value="<?= $cpf ?>" name="cpf" id="cpf" maxlength="14"
                             placeholder="000.000.000-00">
+                            <input type="hidden" class="form-control" value="<?= $cpf ?>" name="cpfAtual" id="cpfAtual">
                     </div>
                 </div>
                 <div class="form-group">
@@ -97,7 +109,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="cep">CEP</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $cep ?>" name="cep" id="cep" maxlength="9"
+                        <input type="text" class="form-control" value="<?= ($cep ? $cep : "") ?>" name="cep" id="cep" maxlength="9"
                             placeholder="00000-000" required>
                     </div>
                 </div>
@@ -105,7 +117,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="rua">Logradouro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $logradouro ?>" name="rua" id="rua"
+                        <input type="text" class="form-control" value="<?= ($logradouro ? $logradouro : "") ?>" name="rua" id="rua"
                             placeholder="Digite o Logradouro" required>
                     </div>
                 </div>
@@ -113,7 +125,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="numero">Número</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="number" class="form-control" value="<?= $numero ?>" name="numero" id="numero"
+                        <input type="number" class="form-control" value="<?= ($numero ? $numero : "") ?>" name="numero" id="numero"
                             placeholder="Digite o número" required>
                     </div>
                 </div>
@@ -121,7 +133,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="bairro">Bairro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $bairro ?>" name="bairro" id="bairro"
+                        <input type="text" class="form-control" value="<?= ($bairro ? $bairro : "") ?>" name="bairro" id="bairro"
                             placeholder="Digite o bairro" required>
                     </div>
                 </div>
@@ -129,7 +141,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="complemento">Complemento(opcional)</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $complemento ?>" name="complemento"
+                        <input type="text" class="form-control" value="<?= ($complemento ? $complemento : "") ?>" name="complemento"
                             id="complemento" placeholder="Digite o completo">
                     </div>
                 </div>
@@ -137,7 +149,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="estado">Estado</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $estado ?>" name="estado" id="estado"
+                        <input type="text" class="form-control" value="<?= ($estado ? $estado : "") ?>" name="estado" id="estado"
                             placeholder="Digite o estado" required>
                     </div>
                 </div>
@@ -145,7 +157,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="cidade">Cidade</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= $cidade ?>" name="cidade" id="cidade"
+                        <input type="text" class="form-control" value="<?= ($cidade ? $cidade : "") ?>" name="cidade" id="cidade"
                             placeholder="Digite o cidade" required>
                     </div>
                 </div>

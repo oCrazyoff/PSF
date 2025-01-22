@@ -122,7 +122,16 @@ include("../../database/utils/conexao.php");
                                 <td>
                                     <form class='action' action='../../database/produtos/deletar_produto.php' method='post'>
                                         <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='status' value='$status'>
                                         <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form class='action' action='../../database/produtos/deletar_produto.php' method='post' style='display:" . (($status == 1) ? "none" : "block") . "'>
+                                        <input type='hidden' name='deletar' value='1'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'><i style='color:red'class='fa-solid fa-trash-can'></i></button>
                                     </form>
                                 </td>
                             </tr>
