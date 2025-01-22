@@ -80,6 +80,14 @@ include("../../database/utils/conexao.php");
                                         <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
                                     </form>
                                 </td>
+                                <td>
+                                    <form class='action' action='../../database/pessoas/deletar_pessoa_juridica' method='post' style='display:".(($status == 1) ? "none" : "block")."'>
+                                        <input type='hidden' name='deletar' value='1'>
+                                        <input type='hidden' name='cnpjAtual' value='$cnpj'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'><i style='color:red'class='fa-solid fa-trash-can'></i></button>
+                                    </form>
+                                </td>                                
                              </tr>
                                 ";
                 }

@@ -3,11 +3,11 @@ include("../utils/conexao.php");
 include("../../auth/valida.php");
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    $id = $_POST['id'];
-    $status = $_POST["status"];
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_NUMBER_INT);
+    $deletar = filter_input(INPUT_POST, 'deletar', FILTER_SANITIZE_NUMBER_INT);
 
     if (isset($_POST["id"]) and !empty($_POST)) {
-        $deletar = $_POST["deletar"];
         if ($deletar != 1) {
             if ($status == 1) {
                 $sql = "UPDATE grupos SET status = 0 WHERE id = ?";

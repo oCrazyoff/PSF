@@ -33,7 +33,7 @@ include("../../database/utils/conexao.php");
                     <th>Data de Demissão</th>
                     <th>Cargo</th>
                     <th>Situação</th>
-                    <th colspan="2">Ações</th>
+                    <th colspan="3">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,6 +88,14 @@ include("../../database/utils/conexao.php");
                                         <button type='submit'>" . ($status == 1 ? "<i class='fa-solid fa-trash-can'>" : "<i class='fa-solid fa-plus'>") . "</i></i></button>
                                     </form>
                                 </td>
+                                <td>
+                                    <form class='action' action='../../database/funcionarios/deletar_funcionario.php' method='post' style='display:" . (($status == 1) ? "none" : "block") . "'>
+                                        <input type='hidden' name='deletar' value='1'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='status' value='$status'>
+                                        <button type='submit'><i style='color:red'class='fa-solid fa-trash-can'></i></button>
+                                    </form>
+                                </td>
                             </tr>
                             ";
                 }
@@ -96,7 +104,7 @@ include("../../database/utils/conexao.php");
         </table>
     </div>
     <script>
-    <?php
+        <?php
         if (isset($_SESSION['resposta'])) {
             echo "alert('" . $_SESSION['resposta'] . "')";
             unset($_SESSION['resposta']);
