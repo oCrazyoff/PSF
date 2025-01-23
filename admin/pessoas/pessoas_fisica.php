@@ -34,7 +34,7 @@ include("../../database/utils/conexao.php");
                     <th>Contato</th>
                     <th>Cargo</th>
                     <th>Situação</th>
-                    <th colspan="2">Ações</th>
+                    <th colspan="3">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@ include("../../database/utils/conexao.php");
                 $resultadoPessoas = $conn->query($sqlPessoas);
 
                 while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-
+                    $id = $rowPessoas['id'];
                     $nome = $rowPessoas['nome'];
                     $cpf = $rowPessoas['cpf'];
                     $email = $rowPessoas['email'];
@@ -80,7 +80,8 @@ include("../../database/utils/conexao.php");
                                 </td>
                                 <td>
                                     <form class='action' action='../../database/pessoas/deletar_pessoa_fisica.php' method='post'>
-                                        <input type='hidden' name='cpfAtual' value='$cpf'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='emailAtual' value='$email'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>
                                     </form>
@@ -88,7 +89,7 @@ include("../../database/utils/conexao.php");
                                 <td>
                                     <form class='action' action='../../database/pessoas/deletar_pessoa_fisica.php' method='post' style='display:".(($status == 1) ? "none" : "block")."'>
                                         <input type='hidden' name='deletar' value='1'>
-                                        <input type='hidden' name='cpfAtual' value='$cpf'>
+                                        <input type='hidden' name='id' value='$id'>
                                         <input type='hidden' name='emailAtual' value='$email'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'><i style='color:red'class='fa-solid fa-trash-can'></i></button>

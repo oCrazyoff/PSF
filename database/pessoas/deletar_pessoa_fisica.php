@@ -3,33 +3,31 @@ include("../utils/conexao.php");
 include("../../auth/valida.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $cpfAtual = filter_input(INPUT_POST, 'cpfAtual', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $email = filter_input(INPUT_POST, 'emailAtual', FILTER_SANITIZE_EMAIL);
     $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_NUMBER_INT);
     $deletar = filter_input(INPUT_POST, 'deletar', FILTER_SANITIZE_NUMBER_INT);
-    if ((isset($_POST["cpfAtual"])) and (!empty($_POST))) {
+    if ((isset($_POST["id"])) and (!empty($_POST))) {
         if ($deletar != 1) {
             if ($status == 1) {
-
-                if($cpfAtual == ""){
-                    $sql = "UPDATE pessoas SET status = 0 WHERE email = ?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("s", $email);
-                } else {
-                    $sql = "UPDATE pessoas SET status = 0 WHERE cpf = ?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("s", $cpfAtual);
+                if ($_SESSION['email'] == $email) {
+                    $_SESSION['resposta'] = "Você não pode desativar sua própria conta!";
+                    header("Location: ../../admin/pessoas/pessoas_fisica.php");
+                    exit();
                 }
-                
+                $sql = "UPDATE pessoas SET status = 0 WHERE id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $id);
+
                 if ($stmt->execute()) {
-                    $_SESSION['resposta'] = "Pessoa deletada com sucesso!";
+                    $_SESSION['resposta'] = "Pessoa foi desativa com sucesso!";
                 } else {
-                    $_SESSION['resposta'] = "Erro ao deletar Pessoa: " . $stmt->error;
+                    $_SESSION['resposta'] = "Erro ao desativar Pessoa: " . $stmt->error;
                 }
             } else {
-                $sql = "UPDATE pessoas SET status = 1 WHERE cpf = ?";
+                $sql = "UPDATE pessoas SET status = 1 WHERE id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $cpfAtual);
+                $stmt->bind_param("i", $id);
 
                 if ($stmt->execute()) {
                     $_SESSION['resposta'] = "Pessoa reintegrado com sucesso!";
@@ -38,19 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         } else {
-
-            if($cpfAtual == ""){
-                $sql = "DELETE FROM pessoas WHERE email = ?";   
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $email);
-            } else {
-                $sql = "DELETE FROM pessoas WHERE cpf = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $cpfAtual);
+            if ($_SESSION['email'] == $email) {
+                $_SESSION['resposta'] = "Você não pode deletar sua própria conta!";
+                header("Location: ../../admin/pessoas/pessoas_fisica.php");
+                exit();
             }
-            
+            $sql = "DELETE FROM pessoas WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $cpfAtual);
+            $stmt->bind_param("i", $id);
 
             if ($stmt->execute()) {
                 $_SESSION['resposta'] = "Pessoa deletada com sucesso!";
@@ -69,4 +62,3 @@ $conn->close();
 
 header("Location: ../../admin/pessoas/pessoas_fisica.php");
 exit();
-?>

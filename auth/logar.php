@@ -12,19 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     }
 
     if (isset($_POST["email"]) and isset($_POST["senha"])) {
-        $sql = "SELECT nome, cargo, senha FROM pessoas WHERE email = ?";
+        $sql = "SELECT nome, id, cargo, email, senha FROM pessoas WHERE email = ?";
 
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
             $stmt->bind_param("s", $email);
             $stmt->execute();
-            $stmt->bind_result($nome, $cargo, $senha_bd);
+            $stmt->bind_result($nome, $id, $cargo, $email, $senha_bd);
             $stmt->fetch();
 
             if ($nome != '' && password_verify($senha, $senha_bd)) {
                 session_start();
+                $_SESSION["id"] = $id;
                 $_SESSION["nome"] = $nome;
+                $_SESSION["email"] = $email;
                 $_SESSION['cargo'] = $cargo;
                 header("Location: ../pages/inicio.php");
                 exit;
