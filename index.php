@@ -43,7 +43,7 @@ include("auth/config.php");
 </body>
 
 <script>
-<?php
+    <?php
     if (isset($_GET['resposta'])) {
         echo "alert('" . $_GET['resposta'] . "')";
     }
