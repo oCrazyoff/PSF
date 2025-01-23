@@ -29,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssssss", $nome, $cpf, $email, $data_nascimento, $endereco, $contato, $cargo, $emailAtual);
 
     if ($stmt->execute()) {
-        $_SESSION['cargo'] = $cargo;
+        if($_SESSION['email'] == $emailAtual) {
+            $_SESSION['cargo'] = $cargo;
+        }
         $_SESSION['resposta'] = "Pessoa foi editada com sucessso!";
     } else {
         $_SESSION['resposta'] = "Erro ao editar pessoa: " . $stmt->error;
