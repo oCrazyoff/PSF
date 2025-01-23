@@ -3,17 +3,16 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-$cpf = $_POST['cpfAtual'];
 $email = $_POST['emailAtual'];
 
-$sqlPessoasFisica = "SELECT nome, cpf, email, data_nascimento, contato, endereco FROM pessoas WHERE cpf = ? OR email = ?";
+$sqlPessoasFisica = "SELECT nome, cpf, email, data_nascimento, contato, endereco, cargo FROM pessoas WHERE cpf = ? OR email = ?";
 $stmtPessoasFisica = $conn->prepare($sqlPessoasFisica);
 $stmtPessoasFisica->bind_param("ss", $cpf, $email);
 
 if ($stmtPessoasFisica->execute()) {
-    $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco);
+    $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco, $cargo);
     if ($stmtPessoasFisica->fetch()) {
-        if($endereco != null){
+        if ($endereco != null) {
             $partes = explode(", ", $endereco);
 
             $cep = $partes[0];
@@ -32,7 +31,6 @@ if ($stmtPessoasFisica->execute()) {
             $cidade = "";
             $estado = "";
         }
-
     } else {
         $_SESSION['resposta'] = "Erro ao editar usuario";
         header("Location: pessoas_fisica.php");
@@ -74,7 +72,7 @@ if ($stmtPessoasFisica->execute()) {
                         <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
                         <input type="text" class="form-control" value="<?= $cpf ?>" name="cpf" id="cpf" maxlength="14"
                             placeholder="000.000.000-00">
-                            <input type="hidden" class="form-control" value="<?= $cpf ?>" name="cpfAtual" id="cpfAtual">
+                        <input type="hidden" class="form-control" value="<?= $cpf ?>" name="cpfAtual" id="cpfAtual">
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,6 +81,7 @@ if ($stmtPessoasFisica->execute()) {
                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                         <input type="text" class="form-control" value="<?= $email ?>" name="email" id="email"
                             placeholder="Digite o email">
+                        <input type='hidden' name='emailAtual' value='<?= $email ?>'>
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,6 +100,23 @@ if ($stmtPessoasFisica->execute()) {
                             placeholder="Digite o contato">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
+                        <select name="cargo" id="cargo" required>
+                            <?php
+                            $sqlCargo = "SELECT id, nome FROM cargos WHERE status = 1";
+                            $resultadoCargo = $conn->query($sqlCargo);
+                            while ($rowCargo = $resultadoCargo->fetch_assoc()) {
+                                echo "
+                                <option " . ($rowCargo['nome'] == $cargo ? 'selected' : "") . " value='" . $rowCargo['id'] . "'>" . $rowCargo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
         </div>
         <div class="form-container" id="large-form">
             <h2 class="form-title">Endereço</h2>
@@ -117,7 +133,7 @@ if ($stmtPessoasFisica->execute()) {
                     <label for="rua">Logradouro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($logradouro ? $logradouro : "") ?>" name="rua" id="rua"
+                        <input type="text" class="form-control" value="<?= ($logradouro ? $logradouro : "") ?>" name="logradouro" id="logradouro"
                             placeholder="Digite o Logradouro" required>
                     </div>
                 </div>

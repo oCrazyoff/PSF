@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 $stmt->bind_param("s", $id);
     
                 if ($stmt->execute()) {
-                    $_SESSION['resposta'] = "Cargo deletado com sucesso!";
+                    $_SESSION['resposta'] = "Cargo foi desativado com sucesso!";
                 } else {
-                    $_SESSION['resposta'] = "Erro ao deletar cargo: " . $stmt->error;
+                    $_SESSION['resposta'] = "Erro ao desativado cargo: " . $stmt->error;
                 }
             } else {
                 $sql = "UPDATE cargos SET status = 1 WHERE id = ?";
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 $stmt->bind_param("s", $id);
     
                 if ($stmt->execute()) {
-                    $_SESSION['resposta'] = "Cargo reintegrado com sucesso!";
+                    $_SESSION['resposta'] = "Cargo foi reintegrado com sucesso!";
                 } else {
                     $_SESSION['resposta'] = "Erro ao reintegrar cargo: " . $stmt->error;
                 }
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $stmtPermissoes->bind_param("s", $id);
     
             if ($stmt->execute() AND $stmtPermissoes->execute()) {
-                $_SESSION['resposta'] = "Cargo deletado com sucesso!";
+                $_SESSION['resposta'] = "Cargo foi deletado com sucesso!";
             } else {
                 $_SESSION['resposta'] = "Erro ao deletar cargo: " . $stmt->error;
             }
