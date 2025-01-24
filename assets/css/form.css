@@ -9,7 +9,7 @@ h2 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 20px 0;    
+    margin: 20px 0;
 }
 
 #index {
@@ -21,7 +21,7 @@ h2 {
     flex-direction: column;
 }
 
-.card-form{
+.card-form {
     background-color: #8f94fb;
     color: #ffffff;
     padding: 30px;
@@ -155,14 +155,14 @@ label {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.btn-submit-container{
+.btn-submit-container {
     display: flex;
     width: 100%;
     justify-content: end;
     align-items: end;
 }
 
-.btn-block-large{
+.btn-block-large {
     padding: 12px;
     font-size: 1rem;
     font-weight: bold;
@@ -174,7 +174,7 @@ label {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.btn-block-large:hover{
+.btn-block-large:hover {
     background: linear-gradient(135deg, #3e44b1, #7679e2);
     cursor: pointer;
 }
@@ -182,6 +182,20 @@ label {
 .btn-block:hover {
     background: linear-gradient(135deg, #3e44b1, #7679e2);
     cursor: pointer;
+}
+
+.input-file {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.input-file img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Responsividade */

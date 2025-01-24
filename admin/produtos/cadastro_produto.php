@@ -19,8 +19,27 @@ include("../../database/utils/conexao.php");
     <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container" id="large-form">
-            <h2 class="form-title">Cadastrar Produto</h2>
+            <h2 class="form-title">Imagem do Produto</h2>
             <form action="../../database/produtos/cadastrar_produto.php" method="post">
+                <div class="input-file">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <img id="preview" src="../../assets/img/placeholder.png" alt="Pré-visualização da Imagem">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">Arquivo da imagem</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
+                            <input type="file" class="form-control" name="imagem" id="imagem"
+                                accept="image/png, image/jpeg" required>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Informações Gerais</h2>
+            <div class="card-form">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <div class="input-group">
@@ -112,6 +131,11 @@ include("../../database/utils/conexao.php");
                         </select>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Preço e Estoque</h2>
+            <div class="card-form">
                 <div class="form-group">
                     <label for="preco_custo">Preço de Custo</label>
                     <div class="input-group">
@@ -144,20 +168,24 @@ include("../../database/utils/conexao.php");
                             placeholder="Digite a Validade" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="imagem">Link da imagem</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
-                        <input type="text" class="form-control" name="imagem"
-                            id="imagem" placeholder="Cole o link da imagem">
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block mt-3">Cadastrar</button>
-            </form>
+            </div>
         </div>
+        <div class="btn-submit-container">
+            <button type="submit" class="btn-block-large">Cadastrar</button>
+        </div>
+        </form>
     </div>
-
+    </div>
+    <script>
+        document.getElementById('imagem').addEventListener('change', function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = 'block';
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+    </script>
 </body>
 
 </html>
