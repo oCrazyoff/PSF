@@ -3,18 +3,39 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-$emailAtual = $_POST['emailAtual'];
-$sqlPessoas = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE email = '$emailAtual'";
-$resultadoPessoas = $conn->query($sqlPessoas);
+$emailAtual = $_POST['emailAtual']; 
+$sqlPessoasJuridica = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE email = ?";
+$stmtPessoasJuridica = $conn->prepare($sqlPessoasJuridica);
+$stmtPessoasJuridica->bind_param("s", $emailAtual);
 
-while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
-    $razao_social = $rowPessoas["razao_social"];
-    $nome_fantasia = $rowPessoas["nome_fantasia"];
-    $cnpj = $rowPessoas["cnpj"];
-    $email = $rowPessoas["email"];
-    $endereco = $rowPessoas["endereco"];
-    $contato = $rowPessoas["contato"];
-    $cargo = $rowPessoas["cargo"];
+if ($stmtPessoasJuridica->execute()) {
+    $stmtPessoasJuridica->bind_result($razao_social, $nome_fantasia, $cnpj, $email, $endereco, $contato, $cargo);
+    if ($stmtPessoasJuridica->fetch()) {
+        if ($endereco != null or $endereco != "") {
+            $partes = explode(", ", $endereco);
+
+            $cep = $partes[0];
+            $logradouro = $partes[1];
+            $numero = $partes[2];
+            $bairro = $partes[3];
+            $complemento = count($partes) == 7 ? $partes[4] : "";
+            $cidade = count($partes) == 7 ? $partes[5] : $partes[4];
+            $estado = count($partes) == 7 ? $partes[6] : $partes[5];
+        } else {
+            $cep = "";
+            $logradouro = "";
+            $numero = "";
+            $bairro = "";
+            $complemento = "";
+            $cidade = "";
+            $estado = "";
+        }
+    } else {
+        $_SESSION['resposta'] = "Erro ao editar usuario";
+        header("Location: pessoas_juridica.php");
+        exit;
+    }
+    $stmtPessoasJuridica->free_result();
 }
 ?>
 <!DOCTYPE html>
@@ -66,14 +87,6 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="endereco">Endereço</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-                        <input type="text" step="0.01" class="form-control" value="<?php echo $endereco ?>"
-                            name="endereco" id="endereco" placeholder="Digite o Endereço" required>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="contato">Contato</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
@@ -99,11 +112,76 @@ while ($rowPessoas = $resultadoPessoas->fetch_assoc()) {
                     </div>
                 </div>
                 <input type="hidden" value="<?php echo $cnpj ?>" name="cnpjAtual">
-                <button type="submit" class="btn btn-primary btn-block mt-3">Editar</button>
-            </form>
         </div>
+        <div class="form-container" id="large-form">
+            <h2 class="form-title">Endereço</h2>
+            <div class="card-form">
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($cep ? $cep : "") ?>" name="cep" id="cep" maxlength="9"
+                            placeholder="00000-000" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rua">Logradouro</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($logradouro ? $logradouro : "") ?>" name="logradouro" id="logradouro"
+                            placeholder="Digite o Logradouro" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="number" class="form-control" value="<?= ($numero ? $numero : "") ?>" name="numero" id="numero"
+                            placeholder="Digite o número" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($bairro ? $bairro : "") ?>" name="bairro" id="bairro"
+                            placeholder="Digite o bairro" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complemento">Complemento(opcional)</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($complemento ? $complemento : "") ?>" name="complemento"
+                            id="complemento" placeholder="Digite o completo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($estado ? $estado : "") ?>" name="estado" id="estado"
+                            placeholder="Digite o estado" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" value="<?= ($cidade ? $cidade : "") ?>" name="cidade" id="cidade"
+                            placeholder="Digite o cidade" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-submit-container">
+            <button type="submit" class="btn-block-large">Editar</button>
+        </div>
+        </form>
     </div>
-
 </body>
+<?php
+include("../../auth/validacoesFrontEnd.php");
+?>
 
 </html>
