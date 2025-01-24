@@ -20,7 +20,7 @@ include("../../database/utils/conexao.php");
     <div class="content">
         <div class="form-container" id="large-form">
             <h2 class="form-title">Imagem do Produto</h2>
-            <form action="../../database/produtos/cadastrar_produto.php" method="post">
+            <form action="../../database/produtos/cadastrar_produto.php" method="post" enctype="multipart/form-data">
                 <div class="input-file">
                     <div class="form-group">
                         <div class="input-group">
@@ -177,14 +177,22 @@ include("../../database/utils/conexao.php");
     </div>
     </div>
     <script>
-        document.getElementById('imagem').addEventListener('change', function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('preview').src = e.target.result;
-                document.getElementById('preview').style.display = 'block';
-            };
-            reader.readAsDataURL(this.files[0]);
-        });
+    document.getElementById('imagem').addEventListener('change', function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            document.getElementById('preview').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
+    </script>
+    <script>
+    <?php
+        if (isset($_SESSION['resposta'])) {
+            echo "alert('" . $_SESSION['resposta'] . "')";
+            unset($_SESSION['resposta']);
+        }
+        ?>
     </script>
 </body>
 
