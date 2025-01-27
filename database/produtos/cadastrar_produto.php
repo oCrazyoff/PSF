@@ -23,15 +23,13 @@ $imagem_type = $imagem_info[2];
 
 if($imagem_type === IMAGETYPE_JPEG || $imagem_type === IMAGETYPE_PNG) {
     if((($extencao === 'jpg' || $extencao === 'jpeg') && ($file_type === 'image/jpeg'))) {
-        $imagem_original = imagecreatefromjpeg($imagem);
+        if($imagem_type === IMAGETYPE_PNG) {
+            $imagem_original = imagecreatefrompng($imagem); 
+        } else {
+            $imagem_original = imagecreatefromjpeg($imagem);  
+        }
         ob_start();
         imagejpeg($imagem_original, null, 20);
-        $imagem_data = ob_get_clean();
-        imagedestroy($imagem_original);
-    } else if((($extencao === 'png') && ($file_type === 'image/png'))) {
-        ob_start();
-        $imagem_original = imagecreatefrompng($imagem);
-        imagepng($imagem_original, null, 20);
         $imagem_data = ob_get_clean();
         imagedestroy($imagem_original);
     } else {
@@ -54,7 +52,7 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
 $sql = "INSERT INTO produtos (nome, codigo_barra, fornecedor, preco_custo, preco_venda, quantidade, subgrupo, grupo, marca, validade, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssssssssb", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $imagem_data);
-$stmt->send_long_data(0, $imagem_data);
+$stmt->send_long_data(10, $imagem_data);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto cadastrado com sucessso!";

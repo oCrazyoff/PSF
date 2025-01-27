@@ -40,7 +40,8 @@ include("../auth/valida.php");
                     <div class="group-products">
                         <?php foreach ($produtos as $produto) { ?>
                         <div class="product-item">
-                            <img src="<?= ($produto['imagem'] == null ? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" : htmlspecialchars($produto['imagem'])) ?>"
+                            <?php $imagem = 'data:image/jpeg;base64,'. base64_encode($produto['imagem']);?>
+                            <img src="<?= ($produto['imagem'] == null ? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" : $imagem) ?>"
                                 alt="Imagem do <?php echo htmlspecialchars($produto['produto_nome']); ?>"
                                 class="product-image">
                             <h3 class="product-name"><?php echo htmlspecialchars($produto['produto_nome']); ?></h3>
