@@ -10,7 +10,7 @@ $stmtPessoasFisica = $conn->prepare($sqlPessoasFisica);
 $stmtPessoasFisica->bind_param("ss", $cpf, $email);
 
 if ($stmtPessoasFisica->execute()) {
-    $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco, $cargo);
+    $stmtPessoasFisica->bind_result($nome, $cpf, $email, $data_nascimento, $contato, $endereco, $cargoPessoa);
     if ($stmtPessoasFisica->fetch()) {
         if ($endereco != null) {
             $partes = explode(", ", $endereco);
@@ -110,7 +110,7 @@ if ($stmtPessoasFisica->execute()) {
                             $resultadoCargo = $conn->query($sqlCargo);
                             while ($rowCargo = $resultadoCargo->fetch_assoc()) {
                                 echo "
-                                <option " . ($rowCargo['nome'] == $cargo ? 'selected' : "") . " value='" . $rowCargo['id'] . "'>" . $rowCargo['nome'] . "</option>
+                                <option value='" . $rowCargo['id'] . "'" . (($rowCargo['id'] == $cargoPessoa) ? "selected" : "") . ">" . $rowCargo['nome'] . "</option>
                                 ";
                             }
                             ?>

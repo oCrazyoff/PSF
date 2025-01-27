@@ -3,17 +3,16 @@ include("../../auth/config.php");
 include("../../auth/valida.php");
 include("../../database/utils/conexao.php");
 
-$emailAtual = $_POST['emailAtual']; 
+$emailAtual = $_POST['emailAtual'];
 $sqlPessoasJuridica = "SELECT razao_social, nome_fantasia, cnpj, email, endereco, contato, cargo FROM pessoas WHERE email = ?";
 $stmtPessoasJuridica = $conn->prepare($sqlPessoasJuridica);
 $stmtPessoasJuridica->bind_param("s", $emailAtual);
 
 if ($stmtPessoasJuridica->execute()) {
-    $stmtPessoasJuridica->bind_result($razao_social, $nome_fantasia, $cnpj, $email, $endereco, $contato, $cargo);
+    $stmtPessoasJuridica->bind_result($razao_social, $nome_fantasia, $cnpj, $email, $endereco, $contato, $cargoPessoa);
     if ($stmtPessoasJuridica->fetch()) {
         if ($endereco != null or $endereco != "") {
             $partes = explode(", ", $endereco);
-
             $cep = $partes[0];
             $logradouro = $partes[1];
             $numero = $partes[2];
@@ -104,7 +103,7 @@ if ($stmtPessoasJuridica->execute()) {
                             $resultadoCargo = $conn->query($sqlCargo);
                             while ($rowCargo = $resultadoCargo->fetch_assoc()) {
                                 echo "
-                                <option value='" . $rowCargo['id'] . "' " . (($rowCargo['id'] == $cargo) ? "selected" : "") . " >" . $rowCargo['nome'] . "</option>
+                                <option value='" . $rowCargo['id'] . "'" . (($rowCargo['id'] == $cargoPessoa) ? "selected" : "") . ">" . $rowCargo['nome'] . "</option>
                                 ";
                             }
                             ?>

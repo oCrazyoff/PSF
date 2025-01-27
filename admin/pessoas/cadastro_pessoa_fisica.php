@@ -73,10 +73,10 @@ include("../../database/utils/conexao.php");
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="rua">Logradouro</label>
+                    <label for="logradouro">Logradouro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" name="rua" id="rua" placeholder="Digite o Logradouro"
+                        <input type="text" class="form-control" name="logradouro" id="logradouro" placeholder="Digite o Logradouro"
                             required>
                     </div>
                 </div>
