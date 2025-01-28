@@ -59,11 +59,12 @@ include("../auth/config.php");
 </body>
 
 <script>
-    <?php
-    if (isset($_GET['resposta'])) {
-        echo "alert('" . $_GET['resposta'] . "')";
-    }
-    ?>
-</script>
+        <?php
+        if (isset($_SESSION['resposta'])) {
+            echo "alert('" . $_SESSION['resposta'] . "')";
+            unset($_SESSION['resposta']);
+        }
+        ?>
+    </script>
 
 </html>

@@ -48,7 +48,7 @@ include("../../database/utils/conexao.php");
 
                 while ($row = $resultado->fetch_assoc()) {
                     $id = $row['id'];
-                    $nome = $row['nome'];
+                    $nome = htmlentities($row['nome']);
                     $codigo_barra = $row['codigo_barra'];
                     $fornecedor = $row['fornecedor'];
                     $marca = $row['marca'];

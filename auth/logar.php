@@ -1,13 +1,22 @@
 <?php
-include("../database/utils/conexao.php");
+require_once '../database/utils/conexao.php';
+
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $senha = htmlspecialchars($_POST["senha"]);
 
+    if(isset($_POST['_csrf']) && $_POST['_csrf'] !== $_SESSION['_csrf']){
+        $_SESSION['resposta'] = "CSRF Token ínvalido!";
+        $_SESSION['_csrf'] = hash('sha256', random_bytes(32));
+        header("Location: ../index.php");
+        exit;
+    }
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $resposta = "Usuário ou senha incorreto!";
-        header("Location: ../index.php?resposta=$resposta");
+        $_SESSION['resposta'] = "Usuário ou senha incorreto!";
+        header("Location: ../index.php");
         exit;
     }
 
@@ -31,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 header("Location: ../pages/inicio.php");
                 exit;
             } else {
-                $resposta = "Usuário ou senha incorreto!";
-                header("Location: ../index.php?resposta=$resposta");
+                $_SESSION['resposta'] = "Usuário ou senha incorreto!";
+                header("Location: ../index.php");
                 exit;
             }
         }
@@ -44,6 +53,5 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 }
 
 $conn->close();
-
-header("Location: ../index.php?resposta=$resposta");
+header("Location: ../index.php");
 exit;

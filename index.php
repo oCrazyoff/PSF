@@ -1,5 +1,7 @@
 <?php
 include("auth/config.php");
+session_start();
+$_SESSION['_csrf'] = !$_SESSION['_csrf'] ? hash('sha256', random_bytes(32)) : $_SESSION['_csrf'];
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@ include("auth/config.php");
 <body>
     <div class="form-container" id="index">
         <form action="auth/logar.php" method="post">
+            <input type="hidden" name="_csrf" value="<?php echo htmlentities($_SESSION['_csrf']) ?>">
             <h2 class="form-title">Login</h2>
             <div class="form-group">
                 <label for="email">E-mail</label>
@@ -43,11 +46,12 @@ include("auth/config.php");
 </body>
 
 <script>
-    <?php
-    if (isset($_GET['resposta'])) {
-        echo "alert('" . $_GET['resposta'] . "')";
-    }
-    ?>
-</script>
+        <?php
+        if (isset($_SESSION['resposta'])) {
+            echo "alert('" . $_SESSION['resposta'] . "')";
+            unset($_SESSION['resposta']);
+        }
+        ?>
+    </script>
 
 </html>

@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         if ($senha == $confirma_senha) {
             $senha_hash = password_hash($senha, PASSWORD_BCRYPT);
         } else {
-            $resposta = "As senhas não estão iguais!";
-            header("Location: ../../pages/cadastrese.php?resposta=$resposta");
+            $_SESSION['resposta'] = "As senhas não estão iguais!";
+            header("Location: ../../pages/cadastrese.php");
             exit;
         }
 
@@ -23,22 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $stmt->bind_param("sss", $nome, $email, $senha_hash);
 
             if ($stmt->execute()) {
-                $resposta = "Usuário cadastrado com sucesso!";
-                header("Location: ../../index.php?resposta=$resposta");
+                $_SESSION['resposta'] = "Usuário cadastrado com sucesso!";
+                header("Location: ../../index.php");
                 exit;
             } else {
-                $resposta = "Usuário deu erro!";
-                header("Location: ../../index.php?resposta=$resposta");
+                $_SESSION['resposta'] = "Usuário deu erro!";
+                header("Location: ../../index.php");
                 exit;
             }
         } catch (Exception $erro_email) {
             if ($erro_email->getCode() == 1062) {
-                $resposta = "Email já cadastrado!";
-                header("Location: ../../pages/cadastrese.php?resposta=$resposta");
+                $_SESSION['resposta'] = "Email já cadastrado!";
+                header("Location: ../../pages/cadastrese.php");
                 exit;
             } else {
-                $resposta = "Erro ao cadastrar usuário!";
-                header("Location: ../../pages/cadastrese.php?resposta=$resposta");
+                $_SESSION['resposta'] = "Erro ao cadastrar usuário!";
+                header("Location: ../../pages/cadastrese.php");
                 exit;
             }
         }
@@ -49,5 +49,5 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $_SESSION['resposta'] = "Método de solicitação ínvalido!";
 }
 
-header("Location: ../../pages/cadastrese.php?resposta=$resposta");
+header("Location: ../../pages/cadastrese.php");
 exit;
