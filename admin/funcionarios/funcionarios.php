@@ -46,10 +46,9 @@ include("../../database/utils/conexao.php");
                     $id = $rowFuncionarios['id'];
                     $cpf = $rowFuncionarios['cpf'];
                     $salario = $rowFuncionarios['salario'];
-                    $data_admicao = $rowFuncionarios['data_admissao'];
-                    $data_demicao = $rowFuncionarios['data_demissao'];
+                    $data_admissao = $rowFuncionarios['data_admissao'];
+                    $data_demissao = $rowFuncionarios['data_demissao'];
                     $status = $rowFuncionarios['status'];
-                    $dataAdmicaoFormatada = DateTime::createFromFormat('Y-m-d', $data_admicao)->format('d/m/Y');
 
                     $sqlPessoas = "SELECT nome, cargo FROM pessoas WHERE cpf = '$cpf' AND status = 1";
                     $resultadoPessoas = $conn->query($sqlPessoas);
@@ -71,19 +70,19 @@ include("../../database/utils/conexao.php");
                                 <td>" . $cpf . "</td>
                                 <td>" . $nome . "</td>
                                 <td>R$ " . number_format($salario, 2, ',', '.') . "</td>
-                                <td>" . $dataAdmicaoFormatada . "</td>
-                                <td>" . (empty($data_demicao) ? "Funcionário Ativo" : (DateTime::createFromFormat('Y-m-d', $data_demicao)->format('d/m/Y'))) . "</td>
+                                <td>" . $data_admissao . "</td>
+                                <td>" . (empty($data_demissao) ? "Funcionário Ativo" : $data_demissao) . "</td>
                                 <td>" . $cargo . "</td>
                                 <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                                                                 <td>
                                     <form class='action' action='edita_funcionario.php' method='post'>
-                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='cpf' value='$cpf'>
                                         <button type='submit'><i class='fa-solid fa-pen-to-square'></i></button>
                                     </form>
                                 </td>
                                 <td>
                                     <form class='action' action='../../database/funcionarios/deletar_funcionario.php' method='post'>
-                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='cpf' value='$cpf'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'>" . ($status == 1 ? "<i class='fa-solid fa-trash-can'>" : "<i class='fa-solid fa-plus'>") . "</i></i></button>
                                     </form>
@@ -91,7 +90,7 @@ include("../../database/utils/conexao.php");
                                 <td>
                                     <form class='action' action='../../database/funcionarios/deletar_funcionario.php' method='post' style='display:" . (($status == 1) ? "none" : "block") . "'>
                                         <input type='hidden' name='deletar' value='1'>
-                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='cpf' value='$cpf'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'><i style='color:red'class='fa-solid fa-trash-can'></i></button>
                                     </form>

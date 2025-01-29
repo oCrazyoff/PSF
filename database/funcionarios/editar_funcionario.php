@@ -2,17 +2,35 @@
 include("../utils/conexao.php");
 include("../../auth/valida.php");
 
-$idFuncionario = $_POST['id'];
-$idPessoa = $_POST['idPessoa'];
-$nome = $_POST["nome"];
-$cpf = $_POST["cpf"];
-$email = $_POST["email"];
+$idFuncionario = filter_input(INPUT_POST, 'idFuncionario', FILTER_SANITIZE_NUMBER_INT);
+$idPessoa = filter_input(INPUT_POST, 'idPessoa', FILTER_SANITIZE_NUMBER_INT);
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+$cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_SPECIAL_CHARS);
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
 $data_nascimento = $_POST["data_nascimento"];
-$endereco = $_POST["endereco"];
-$contato = $_POST["contato"];
-$salario = floatval($_POST["salario"]);
+$cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$contato = filter_input(INPUT_POST, 'contato', FILTER_SANITIZE_SPECIAL_CHARS);
+$salario = filter_input(INPUT_POST, 'salario', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 $data_admissao = $_POST["data_admissao"];
-$cargo = $_POST["cargo"];
+$cargo = filter_input(INPUT_POST, 'cargo', FILTER_SANITIZE_NUMBER_INT);
+$endereco = "$cep, $logradouro, $numero, $bairro, " . ($complemento == null ? "" : $complemento . ", ") . "$estado, $cidade";
+
+if (!DateTime::createFromFormat('Y-m-d', $data_nascimento)) {
+    $_SESSION['resposta'] = "Data de nascimento inválida!";
+    header("Location: ../../admin/produtos/cadastro_produto.php");
+    exit;
+}
+if (!DateTime::createFromFormat('Y-m-d', $data_admissao)) {
+    $_SESSION['resposta'] = "Data de admissão inválida!";
+    header("Location: ../../admin/produtos/cadastro_produto.php");
+    exit;
+}
 
 $sqlFuncionarios = "UPDATE funcionarios SET cpf = ?, salario = ?, data_admissao = ? WHERE id = ?";
 $stmtFuncionarios = $conn->prepare($sqlFuncionarios);

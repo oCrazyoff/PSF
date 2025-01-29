@@ -183,6 +183,7 @@ if ($stmtPessoasFisica->execute()) {
             <button type="submit" class="btn-block-large">Editar</button>
         </div>
         </form>
+    </div>
 </body>
 <?php
 include("../../auth/validacoesFrontEnd.php");

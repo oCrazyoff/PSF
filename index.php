@@ -1,7 +1,8 @@
 <?php
 include("auth/config.php");
 session_start();
-$_SESSION['_csrf'] = !$_SESSION['_csrf'] ? hash('sha256', random_bytes(32)) : $_SESSION['_csrf'];
+
+$_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sha256', random_bytes(32));
 ?>
 
 <!DOCTYPE html>
