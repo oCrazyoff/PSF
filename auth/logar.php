@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     }
 
     if (isset($_POST["email"]) and isset($_POST["senha"])) {
-        $sql = "SELECT nome, id, cargo, email, senha FROM pessoas WHERE email = ?";
+        $sql = "SELECT nome, id, cargo, email, senha FROM pessoas WHERE email = ? and status = 1";
 
         $stmt = $conn->prepare($sql);
 
