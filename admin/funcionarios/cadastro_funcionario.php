@@ -101,7 +101,7 @@ include("../../database/utils/conexao.php");
                     <label for="cep">CEP</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($cep ? $cep : "") ?>" name="cep" id="cep" maxlength="9"
+                        <input type="text" class="form-control" name="cep" id="cep" maxlength="9"
                             placeholder="00000-000" required>
                     </div>
                 </div>
@@ -109,7 +109,7 @@ include("../../database/utils/conexao.php");
                     <label for="rua">Logradouro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($logradouro ? $logradouro : "") ?>" name="logradouro" id="logradouro"
+                        <input type="text" class="form-control" name="logradouro" id="logradouro"
                             placeholder="Digite o Logradouro" required>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ include("../../database/utils/conexao.php");
                     <label for="numero">Número</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="number" class="form-control" value="<?= ($numero ? $numero : "") ?>" name="numero" id="numero"
+                        <input type="number" class="form-control" name="numero" id="numero"
                             placeholder="Digite o número" required>
                     </div>
                 </div>
@@ -125,7 +125,7 @@ include("../../database/utils/conexao.php");
                     <label for="bairro">Bairro</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($bairro ? $bairro : "") ?>" name="bairro" id="bairro"
+                        <input type="text" class="form-control" name="bairro" id="bairro"
                             placeholder="Digite o bairro" required>
                     </div>
                 </div>
@@ -133,7 +133,7 @@ include("../../database/utils/conexao.php");
                     <label for="complemento">Complemento(opcional)</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($complemento ? $complemento : "") ?>" name="complemento"
+                        <input type="text" class="form-control" name="complemento"
                             id="complemento" placeholder="Digite o completo">
                     </div>
                 </div>
@@ -141,7 +141,7 @@ include("../../database/utils/conexao.php");
                     <label for="estado">Estado</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($estado ? $estado : "") ?>" name="estado" id="estado"
+                        <input type="text" class="form-control" name="estado" id="estado"
                             placeholder="Digite o estado" required>
                     </div>
                 </div>
@@ -149,7 +149,7 @@ include("../../database/utils/conexao.php");
                     <label for="cidade">Cidade</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" value="<?= ($cidade ? $cidade : "") ?>" name="cidade" id="cidade"
+                        <input type="text" class="form-control" name="cidade" id="cidade"
                             placeholder="Digite o cidade" required>
                     </div>
                 </div>
