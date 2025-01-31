@@ -49,6 +49,14 @@ include("../../database/utils/conexao.php");
                             <input type="hidden" name="produtos_adm_submenu" value="0">
                         </label>
                         <label>
+                            <input type="checkbox" name="paginas[]" value="transações" data-pasta="admin/transações"
+                                data-icone="fas fa-exchange-alt">
+                            Transações
+                            <input type="hidden" name="transações_pasta" value="admin/transações">
+                            <input type="hidden" name="transações_icone" value="fas fa-exchange-alt">
+                            <input type="hidden" name="transações_submenu" value="0">
+                        </label>
+                        <label>
                             <input type="checkbox" name="paginas[]" value="pessoas" data-pasta="1"
                                 data-icone="fa-solid fa-users">
                             Pessoas

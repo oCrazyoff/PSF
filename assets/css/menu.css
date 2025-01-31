@@ -19,6 +19,7 @@ body {
     height: 100%;
     flex-direction: column;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
 }
 
 .sidebar-menu {
@@ -26,6 +27,8 @@ body {
     padding: 0;
     margin: 0;
     flex-grow: 1;
+    overflow-y: auto; /* Adicionado para garantir que a lista seja rolável */
+    max-height: 100%; /* Adicionado para garantir que a lista ocupe toda a altura disponível */
 }
 
 .sidebar-menu li {

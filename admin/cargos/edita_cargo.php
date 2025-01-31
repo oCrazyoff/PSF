@@ -71,7 +71,15 @@ while ($rowPermissao = $resultadoPermissao->fetch_assoc()) {
                             <input type="hidden" name="produtos_adm_icone" value="fa-solid fa-box">
                             <input type="hidden" name="produtos_adm_submenu" value="0">
                         </label>
-
+                        <label>
+                            <input type="checkbox" name="paginas[]" value="transações" data-pasta="admin/transações"
+                                data-icone="fas fa-exchange-alt"
+                                <?php echo in_array('transações', $permissoes) ? 'checked' : ''; ?>>
+                            Transações
+                            <input type="hidden" name="transações_pasta" value="admin/transações">
+                            <input type="hidden" name="transações_icone" value="fas fa-exchange-alt">
+                            <input type="hidden" name="transações_submenu" value="0">
+                        </label>
                         <label>
                             <input type="checkbox" name="paginas[]" value="produtos" data-pasta="pages"
                                 data-icone="fa-solid fa-box"
