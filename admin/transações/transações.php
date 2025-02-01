@@ -27,7 +27,6 @@ $result = $conn->query($sql);
     <div class="content">
         <div class="titulo">
             <h1>Transações</h1>
-            <a href="#">Nova transação <i class="fa-solid fa-circle-plus"></i></a>
         </div>
         <table>
             <thead>
