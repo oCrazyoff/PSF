@@ -2,3 +2,4 @@
 <link rel="shortcut icon" href="<?php echo BASE_URL; ?>assets/img/icone.png" type="image/x-icon">
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/header.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/menu.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/div_erro.css?v=<?php echo time(); ?>">

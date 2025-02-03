@@ -1,0 +1,19 @@
+.error-container {
+    display: fixed;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #25285c;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+.error-container p {
+    font: bold Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    padding: 1em 1.5em;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}

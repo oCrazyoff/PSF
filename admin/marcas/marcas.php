@@ -18,6 +18,7 @@ include("../../database/utils/conexao.php");
 <body>
     <?php include("../../includes/header.php") ?>
     <?php include("../../includes/menu.php") ?>
+    <?php include("../../includes/div_erro.php") ?>
     <div class="content">
         <table>
             <div class="titulo">
@@ -57,7 +58,7 @@ include("../../database/utils/conexao.php");
                             </form>
                         </td>
                         <td>
-                            <form class='action' action='../../database/marcas/deletar_marca.php' method='post' style='display:".(($status == 1) ? "none" : "block")."'>
+                            <form class='action' action='../../database/marcas/deletar_marca.php' method='post' style='display:" . (($status == 1) ? "none" : "block") . "'>
                                 <input type='hidden' name='deletar' value='1'>
                                 <input type='hidden' name='id' value='$id'>
                                 <input type='hidden' name='status' value='$status'>
@@ -71,14 +72,6 @@ include("../../database/utils/conexao.php");
             </tbody>
         </table>
     </div>
-    <script>
-        <?php
-        if (isset($_SESSION['resposta'])) {
-            echo "alert('" . $_SESSION['resposta'] . "')";
-            unset($_SESSION['resposta']);
-        }
-        ?>
-    </script>
 </body>
 
 </html>
