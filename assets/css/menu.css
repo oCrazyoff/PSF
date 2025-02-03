@@ -15,7 +15,7 @@ body {
     display: flex;
     left: 0;
     position: fixed;
-    width: 10em;
+    width: 12em;
     height: 100%;
     flex-direction: column;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
@@ -102,8 +102,8 @@ body {
 
 /* Conteúdo principal */
 .content {
-    margin-left: 10em;
-    width: calc(100% - 10em);
+    margin-left: 12em;
+    width: calc(100% - 12em);
     height: 100%;
     overflow-y: auto;
     padding: 1em;

@@ -72,13 +72,26 @@ while ($rowPermissao = $resultadoPermissao->fetch_assoc()) {
                             <input type="hidden" name="produtos_adm_submenu" value="0">
                         </label>
                         <label>
-                            <input type="checkbox" name="paginas[]" value="transações" data-pasta="admin/transações"
-                                data-icone="fas fa-exchange-alt"
-                                <?php echo in_array('transações', $permissoes) ? 'checked' : ''; ?>>
-                            Transações
-                            <input type="hidden" name="transações_pasta" value="admin/transações">
-                            <input type="hidden" name="transações_icone" value="fas fa-exchange-alt">
-                            <input type="hidden" name="transações_submenu" value="0">
+                            <input type="checkbox" name="paginas[]" value="vendas" data-pasta="admin/transações"
+                                data-icone="fa-solid fa-cart-shopping"
+                                <?php echo in_array('vendas', $permissoes) ? "checked" : "" ?>>
+                            Vendas
+                            <input type="hidden" name="vendas_pasta" value="2">
+                            <input type="hidden" name="vendas_icone" value="fa-solid fa-cart-shopping">
+                            <input type="hidden" name="vendas_submenu" value="2">
+
+                            <!-- Pagina transações -->
+                            <input type="hidden" name="paginas[]" value="transações"
+                                data-pasta="admin/vendas/transações" data-icone="fa-solid fa-exchange-alt">
+                            <input type="hidden" name="transações_pasta" value="admin/vendas/transações">
+                            <input type="hidden" name="transações_icone" value="fa-solid fa-exchange-alt">
+                            <input type="hidden" name="transações_submenu" value="2">
+                            <!-- Pagina do caixa -->
+                            <input type="hidden" name="paginas[]" value="caixa" data-pasta="admin/vendas/caixa"
+                                data-icone="fa-solid fa-cash-register">
+                            <input type="hidden" name="caixa_pasta" value="admin/vendas/caixa">
+                            <input type="hidden" name="caixa_icone" value="fa-solid fa-cash-register">
+                            <input type="hidden" name="caixa_submenu" value="2">
                         </label>
                         <label>
                             <input type="checkbox" name="paginas[]" value="produtos" data-pasta="pages"
