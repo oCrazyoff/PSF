@@ -177,17 +177,17 @@ include("../../database/utils/conexao.php");
     </div>
     </div>
     <script>
-    document.getElementById('imagem').addEventListener('change', function(e) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('preview').src = e.target.result;
-            document.getElementById('preview').style.display = 'block';
-        };
-        reader.readAsDataURL(this.files[0]);
-    });
+        document.getElementById('imagem').addEventListener('change', function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = 'block';
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
     </script>
     <script>
-    <?php
+        <?php
         if (isset($_SESSION['resposta'])) {
             echo "alert('" . $_SESSION['resposta'] . "')";
             unset($_SESSION['resposta']);

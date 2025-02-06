@@ -15,20 +15,26 @@ include("../../../database/utils/conexao.php");
     <link rel="stylesheet" href="../../../assets/css/table.css?v=<?php echo time(); ?>">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .suggestions {
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-        }
+    .suggestions {
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+    }
 
-        .suggestion-item {
-            padding: 10px;
-            cursor: pointer;
-        }
+    .suggestion-item {
+        padding: 10px;
+        cursor: pointer;
+    }
 
-        .suggestion-item:hover {
-            background-color: #f0f0f0;
-        }
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .info-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     </style>
 </head>
 
@@ -36,51 +42,69 @@ include("../../../database/utils/conexao.php");
     <?php include("../../../includes/header.php") ?>
     <?php include("../../../includes/menu.php") ?>
     <div class="content">
-        <div class="input-compra">
-            <input type="text" id="produto-input" placeholder="INSIRA O PRODUTO">
-            <div id="sugestao" class="suggestions"></div>
+        <div class="info-content">
+            <div class="tabela-venda">
+                <div class="input-compra">
+                    <input type="text" id="produto-input" placeholder="INSIRA O PRODUTO">
+                    <div id="sugestao" class="suggestions"></div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Preço de Custo</th>
+                            <th>Preço de Venda</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                        <!-- Produtos selecionados serão adicionados aqui -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="info-venda">
+                <select name="funcionario" id="funcionario">
+                    <option value="">Selecione o funcionário</option>
+                    <?php
+                    $sqlFuncionario = "SELECT f.id, f.cpf, p.nome FROM funcionarios f INNER JOIN pessoas p ON f.cpf = p.cpf";
+                    $resultadoFuncionario = $conn->query($sqlFuncionario);
+                    while ($rowFuncionario = $resultadoFuncionario->fetch_assoc()) :
+                    ?>
+                    <option value="<?php echo $rowFuncionario['id'] ?>"
+                        <?= ($rowFuncionario['cpf'] == $_SESSION['cpf'] ? 'selected' : '') ?>>
+                        <?php echo $rowFuncionario['nome'] ?></option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Preço de Custo</th>
-                    <th>Preço de Venda</th>
-                    <th>Quantidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="product-table-body">
-                <!-- Produtos selecionados serão adicionados aqui -->
-            </tbody>
-        </table>
     </div>
     <script>
-        $(document).ready(function() {
-            $('#produto-input').on('input', function() {
-                var query = $(this).val();
-                if (query.length > 0) {
-                    $.ajax({
-                        url: 'pesquisa.php',
-                        method: 'POST',
-                        data: {
-                            produto: query
-                        },
-                        success: function(data) {
-                            $('#sugestao').html(data);
-                        }
-                    });
-                } else {
-                    $('#sugestao').html('');
-                }
-            });
+    $(document).ready(function() {
+        $('#produto-input').on('input', function() {
+            var query = $(this).val();
+            if (query.length > 0) {
+                $.ajax({
+                    url: 'pesquisa.php',
+                    method: 'POST',
+                    data: {
+                        produto: query
+                    },
+                    success: function(data) {
+                        $('#sugestao').html(data);
+                    }
+                });
+            } else {
+                $('#sugestao').html('');
+            }
+        });
 
-            $(document).on('click', '.suggestion-item', function() {
-                var produto = $(this).data('produto');
-                var precoVenda = $(this).data('preco-venda');
-                var precoCusto = $(this).data('preco-custo');
+        $(document).on('click', '.suggestion-item', function() {
+            var produto = $(this).data('produto');
+            var precoVenda = $(this).data('preco-venda');
+            var precoCusto = $(this).data('preco-custo');
 
-                var newRow = `
+            var newRow = `
                     <tr>
                         <td>${produto}</td>
                         <td>${precoCusto}</td>
@@ -89,11 +113,11 @@ include("../../../database/utils/conexao.php");
                         <td><form action='#'><button type='submit'><i class='fa-solid fa-trash-can'></i></button></form></td>
                     </tr>
                 `;
-                $('#product-table-body').append(newRow);
-                $('#produto-input').val('');
-                $('#sugestao').html('');
-            });
+            $('#product-table-body').append(newRow);
+            $('#produto-input').val('');
+            $('#sugestao').html('');
         });
+    });
     </script>
 </body>
 

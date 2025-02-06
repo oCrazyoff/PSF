@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $senha = htmlspecialchars($_POST["senha"]);
 
-    if(isset($_POST['_csrf']) && $_POST['_csrf'] !== $_SESSION['_csrf']){
+    if (isset($_POST['_csrf']) && $_POST['_csrf'] !== $_SESSION['_csrf']) {
         $_SESSION['resposta'] = "CSRF Token ínvalido!";
         $_SESSION['_csrf'] = hash('sha256', random_bytes(32));
         header("Location: ../index.php");
@@ -21,20 +21,21 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     }
 
     if (isset($_POST["email"]) and isset($_POST["senha"])) {
-        $sql = "SELECT nome, id, cargo, email, senha FROM pessoas WHERE email = ? and status = 1";
+        $sql = "SELECT nome, cpf, id, cargo, email, senha FROM pessoas WHERE email = ? and status = 1";
 
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
             $stmt->bind_param("s", $email);
             $stmt->execute();
-            $stmt->bind_result($nome, $id, $cargo, $email, $senha_bd);
+            $stmt->bind_result($nome, $cpf, $id, $cargo, $email, $senha_bd);
             $stmt->fetch();
 
             if ($nome != '' && password_verify($senha, $senha_bd)) {
                 session_start();
                 $_SESSION["id"] = $id;
                 $_SESSION["nome"] = $nome;
+                $_SESSION["cpf"] = ($cpf == null || $cpf == '') ? '' : $cpf;
                 $_SESSION["email"] = $email;
                 $_SESSION['cargo'] = $cargo;
                 header("Location: ../pages/inicio.php");

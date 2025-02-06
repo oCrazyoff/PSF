@@ -9,7 +9,7 @@ $stmtMenu->execute();
 $resultadoMenu = $stmtMenu->get_result();
 ?>
 <div class="sidebar" id="menu">
-    <ul class="sidebar-menu">
+    <ul class=" sidebar-menu">
         <li><a href="<?php echo BASE_URL; ?>pages/inicio.php"><i class="fa-solid fa-house"></i>Inicio</a></li>
         <?php
         while ($rowMenu = $resultadoMenu->fetch_assoc()):
