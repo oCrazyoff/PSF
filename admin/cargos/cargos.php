@@ -19,6 +19,7 @@ include("../../database/utils/conexao.php");
     <?php
     include("../../includes/header.php");
     include("../../includes/menu.php");
+    include("../../includes/div_erro.php");
     ?>
     <div class="content">
         <table>

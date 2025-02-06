@@ -18,6 +18,7 @@ include("../../database/utils/conexao.php");
 <body>
     <?php include("../../includes/header.php") ?>
     <?php include("../../includes/menu.php") ?>
+    <?php include("../../includes/div_erro.php") ?>
     <div class="content">
         <table>
             <div class="titulo">
@@ -70,14 +71,6 @@ include("../../database/utils/conexao.php");
             </tbody>
         </table>
     </div>
-    <script>
-        <?php
-        if (isset($_SESSION['resposta'])) {
-            echo "alert('" . $_SESSION['resposta'] . "')";
-            unset($_SESSION['resposta']);
-        }
-        ?>
-    </script>
 </body>
 
 </html>
