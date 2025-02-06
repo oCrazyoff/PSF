@@ -33,7 +33,7 @@ $resultadoMenu = $stmtMenu->get_result();
 
                         while ($rowSubmenu = $resultadoSubmenu->fetch_assoc()): ?>
                             <li>
-                                <a href="<?php echo BASE_URL . $rowSubmenu['pasta'] . '/' . $rowSubmenu['pagina'] . '.php' ?>">
+                                <a href="<?php echo BASE_URL . $rowSubmenu['pasta'] . '/' . $rowSubmenu['pagina']?>">
                                     <i class="<?php echo $rowSubmenu['icone'] ?>"></i>
                                     <?php echo ucfirst(str_replace('_', ' ', $rowSubmenu['pagina'])); ?>
                                 </a>
@@ -49,7 +49,7 @@ $resultadoMenu = $stmtMenu->get_result();
 
             <?php if ($rowMenu['submenu'] == null): ?>
                 <li>
-                    <a href="<?php echo BASE_URL . $rowMenu['pasta'] . '/' . $rowMenu['pagina'] . '.php' ?>">
+                    <a href="<?php echo BASE_URL . $rowMenu['pasta'] . '/' . $rowMenu['pagina']?>">
                         <i class="<?php echo $rowMenu['icone'] ?>"></i>
                         <?php
                         $pagina = str_replace('_', ' ', $rowMenu['pagina']);

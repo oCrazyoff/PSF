@@ -18,6 +18,7 @@ include("../../database/utils/conexao.php");
 <body>
     <?php include("../../includes/header.php") ?>
     <?php include("../../includes/menu.php") ?>
+    <?php include("../../includes/div_erro.php") ?>
     <div class="content">
         <table>
             <div class="titulo">

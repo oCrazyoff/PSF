@@ -1,6 +1,7 @@
 <html>
     <div class="error-container" id="error-container">
         <p><?=$_SESSION['resposta']?></p>
+        <div class="progress-bar" id="progress-bar"></div>
     </div>
 
     <script defer>

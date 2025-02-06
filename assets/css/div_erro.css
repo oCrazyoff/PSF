@@ -4,16 +4,58 @@
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #25285c;
+    background-color: #868be7; /* Cor de fundo do contêiner de erro */
+    color: #181843; /* Cor do texto */
+    border: 1px solid #4e54c8; /* Cor da borda */
     border-radius: 10px;
+    padding: 20px;
     text-align: center;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
     display: none;
+    width: 80%;
+    max-width: 400px;
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 2s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .error-container p {
-    font: bold Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    padding: 1em 1.5em;
-    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    font: bold 1.2em Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: #181843; /* Cor da barra de progresso */
+    width: 100%;
+    animation: progress 2s linear;
+}
+
+@keyframes progress {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+    }
 }
