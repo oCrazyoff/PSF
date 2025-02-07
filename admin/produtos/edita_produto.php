@@ -47,7 +47,7 @@ $imgSrc = 'data:image/jpeg;base64,' . base64_encode($produto['imagem']);
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
                             <input type="file" class="form-control" name="imagem" id="imagem"
-                                accept="image/png, image/jpeg" required>
+                                accept="image/png, image/jpeg">
                         </div>
                     </div>
                 </div>
