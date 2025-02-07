@@ -39,7 +39,7 @@ if ($imagem_type === IMAGETYPE_JPEG || $imagem_type === IMAGETYPE_PNG) {
         exit;
     }
 } else {
-    $_SESSION['resposta'] = "Formato de imagem inválido 2!";
+    $_SESSION['resposta'] = "Formato de imagem inválido!";
     header("Location: ../../admin/produtos/produtos_adm.php");
     exit;
 }
@@ -50,10 +50,16 @@ if (!DateTime::createFromFormat('Y-m-d', $validade)) {
     exit;
 }
 
-$sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ?, imagem = ? WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssbi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $imagem_data, $id);
-$stmt->send_long_data(10, $imagem_data);
+if ($imagem == "" || isset($imagem) == false) {
+    $sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssssssi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $id);
+} else {
+    $sql = "UPDATE produtos SET nome = ?, codigo_barra = ?, fornecedor = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, subgrupo = ?, grupo = ?, marca = ?, validade = ?, imagem = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssssbi", $nome, $codigo, $fornecedor, $preco_custo, $preco_venda, $quantidade, $subgrupo, $grupo, $marca, $validade, $imagem_data, $id);
+    $stmt->send_long_data(10, $imagem_data);
+}
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Produto atualizado com sucesso!";
