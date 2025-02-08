@@ -5,8 +5,8 @@ include("../../../database/utils/conexao.php");
 
 $sql = "SELECT t.id, p.nome AS pessoa, v.nome AS vendedor, t.tipo, t.preco_total, t.data_transacao, t.status 
         FROM transacoes t
-        JOIN pessoas p ON t.pessoa_id = p.id
-        JOIN pessoas v ON t.vendedor_id = v.id";
+        JOIN pessoas p ON t.cliente_cpf = p.cpf
+        JOIN pessoas v ON t.vendedor_cpf = v.cpf";
 $result = $conn->query($sql);
 ?>
 
