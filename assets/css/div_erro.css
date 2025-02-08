@@ -4,9 +4,9 @@
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #868be7; /* Cor de fundo do contêiner de erro */
-    color: #181843; /* Cor do texto */
-    border: 1px solid #4e54c8; /* Cor da borda */
+    background-color: #eee6f3; /* Cor de fundo do contêiner de erro */
+    color: #9163CB; /* Cor do texto */
+    border: 1px solid #9163CB; /* Cor da borda */
     border-radius: 10px;
     padding: 20px;
     text-align: center;
@@ -46,7 +46,7 @@
     bottom: 0;
     left: 0;
     height: 5px;
-    background-color: #181843; /* Cor da barra de progresso */
+    background-color: #A06CD5; /* Cor da barra de progresso */
     width: 100%;
     animation: progress 2s linear;
 }

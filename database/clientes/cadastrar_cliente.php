@@ -1,5 +1,6 @@
 <?php
 include("../utils/conexao.php");
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $nome = htmlspecialchars($_POST["nome"]);
@@ -12,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $senha_hash = password_hash($senha, PASSWORD_BCRYPT);
         } else {
             $_SESSION['resposta'] = "As senhas não estão iguais!";
-            header("Location: ../../pages/cadastrese.php");
+            header("Location: ../../index.php");
             exit;
         }
 
@@ -34,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         } catch (Exception $erro_email) {
             if ($erro_email->getCode() == 1062) {
                 $_SESSION['resposta'] = "Email já cadastrado!";
-                header("Location: ../../pages/cadastrese.php");
+                header("Location: ../../index.php");
                 exit;
             } else {
                 $_SESSION['resposta'] = "Erro ao cadastrar usuário!";
-                header("Location: ../../pages/cadastrese.php");
+                header("Location: ../../index.php");
                 exit;
             }
         }
@@ -49,5 +50,5 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $_SESSION['resposta'] = "Método de solicitação ínvalido!";
 }
 
-header("Location: ../../pages/cadastrese.php");
+header("Location: ../../index.php");
 exit;
