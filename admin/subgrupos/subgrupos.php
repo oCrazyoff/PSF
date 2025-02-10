@@ -27,6 +27,7 @@ include("../../database/utils/conexao.php");
             </div>
             <thead>
                 <tr>
+                    <th>Grupo</th>
                     <th>Sub Grupo</th>
                     <th>Situação</th>
                     <th colspan="3">Ações</th>
@@ -34,13 +35,14 @@ include("../../database/utils/conexao.php");
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM subgrupo ORDER BY status DESC";
+                $sql = "SELECT s.id, s.nome, s.status, g.nome AS grupo_nome FROM subgrupo s INNER JOIN grupos g ON s.grupo_id = g.id ORDER BY s.status DESC";
                 $resultado = $conn->query($sql);
                 while ($row = $resultado->fetch_assoc()) {
                     $id = $row['id'];
                     $status = $row['status'];
                     echo "
                     <tr>
+                        <td>" . $row['grupo_nome'] . "</td>
                         <td>" . $row['nome'] . "</td>
                         <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                         <td>

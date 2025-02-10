@@ -4,10 +4,11 @@ include("../../auth/valida.php");
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];
+$grupo = $_POST['grupo'];
 
-$sql = "UPDATE subgrupo SET nome = ? WHERE id = ?";
+$sql = "UPDATE subgrupo SET nome = ?, grupo_id = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $nome, $id);
+$stmt->bind_param("sis", $nome, $grupo, $id);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Sub Grupo editado com sucesso!";

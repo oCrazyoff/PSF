@@ -3,10 +3,11 @@ include("../utils/conexao.php");
 include("../../auth/valida.php");
 
 $nome = $_POST['nome'];
+$grupo = $_POST['grupo'];
 
-$sql = "INSERT INTO subgrupo (nome) VALUES (?)";
+$sql = "INSERT INTO subgrupo (nome, grupo_id) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $nome);
+$stmt->bind_param("si", $nome, $grupo);
 
 if ($stmt->execute()) {
     $_SESSION['resposta'] = "Sub Grupo cadastrado com sucesso!";

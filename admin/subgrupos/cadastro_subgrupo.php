@@ -30,6 +30,24 @@ include("../../database/utils/conexao.php");
                             placeholder="Digite o nome do grupo" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
+                        <select name="grupo" id="grupo" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <?php
+                            $sqlGrupo = "SELECT id, nome FROM grupos WHERE status = 1";
+                            $resultadoGrupo = $conn->query($sqlGrupo);
+                            while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowGrupo['id'] . "'>" . $rowGrupo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3">Cadastrar</button>
             </form>
         </div>

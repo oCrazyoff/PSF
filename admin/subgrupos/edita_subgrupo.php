@@ -9,6 +9,7 @@ $sql = "SELECT * FROM subgrupo WHERE id = $id";
 $resultado = $conn->query($sql);
 $row = $resultado->fetch_assoc();
 $nome = $row['nome'];
+$grupo_id = $row['grupo_id'];
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ $nome = $row['nome'];
     <?php include("../../includes/menu.php") ?>
     <div class="content">
         <div class="form-container">
-            <form action="../../database/grupos/editar_grupo.php" method="post">
+            <form action="../../database/subgrupos/editar_subgrupo.php" method="post">
                 <h2>Editar <?php echo $row['nome'] ?></h2>
                 <div class="form-group">
                     <label for="nome">Nome</label>
@@ -35,6 +36,23 @@ $nome = $row['nome'];
                         <span class="input-group-text"><i class="fa-solid fa-pen"></i></span>
                         <input type="text" class="form-control" value="<?php echo $row['nome'] ?>" name="nome" id="nome"
                             placeholder="Digite nome do grupo" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
+                        <select name="grupo" id="grupo" required>
+                            <?php
+                            $sqlGrupo = "SELECT id, nome FROM grupos WHERE status = 1";
+                            $resultadoGrupo = $conn->query($sqlGrupo);
+                            while ($rowGrupo = $resultadoGrupo->fetch_assoc()) {
+                                echo "
+                                <option value='" . $rowGrupo['id'] . "'" . (($rowGrupo['id'] == $grupo_id) ? "selected" : "") . ">" . $rowGrupo['nome'] . "</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <input type="hidden" value="<?php echo $id ?>" name="id">
