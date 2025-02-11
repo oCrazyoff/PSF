@@ -49,16 +49,22 @@ $_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sh
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha"
+                        <input type="password" class="form-control" name="senha" id="mostrar-senha-input-cadastro" placeholder="Senha"
                             required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" name="confirma_senha" id="confirma-senha"
+                        <input type="password" class="form-control" name="confirma_senha" id="mostrar-confirmasenha-input-cadastro"
                             placeholder="Confirme sua senha" required>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="mostrar-senha-checkbox-cadastro" class="mostra-senha">
+                        <input type="checkbox" class="form-check-input" id="mostrar-senha-checkbox-cadastro">
+                        Mostrar / Esconder Senha
+                    </label>
                 </div>
                 <button type="submit" class="confirm-button">Cadastrar</button>
             </form>
@@ -77,9 +83,15 @@ $_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sh
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha"
+                        <input type="password" class="form-control" name="senha" id="mostrar-senha-input-login" placeholder="Senha"
                             required>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="mostrar-senha-checkbox-login" class="mostra-senha">
+                        <input type="checkbox" class="form-check-input" id="mostrar-senha-checkbox-login">
+                        Mostrar / Esconder Senha
+                    </label>
                 </div>
                 <button type="submit" class="confirm-button">Entrar</button>
             </form>
@@ -87,29 +99,30 @@ $_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sh
     </div>
 </body>
 <script>
-document.querySelector('.form-image-cadastrar button').addEventListener('click', function() {
-    document.querySelector('.form-image-cadastrar').classList.add('slide-out-to-left');
-    document.querySelector('.form-image-logar').classList.add('slide-in-from-right');
-    document.querySelector('.form-image-logar').classList.remove('hidden');
-    document.querySelector('.form-image-logar').classList.add('visible');
-    setTimeout(function() {
-        document.querySelector('.form-image-cadastrar').classList.add('hidden');
-        document.querySelector('.form-image-cadastrar').classList.remove('visible', 'slide-out-to-left');
-        document.querySelector('.form-image-logar').classList.remove('slide-in-from-right');
-    }, 250);
-});
+    document.querySelector('.form-image-cadastrar button').addEventListener('click', function() {
+        document.querySelector('.form-image-cadastrar').classList.add('slide-out-to-left');
+        document.querySelector('.form-image-logar').classList.add('slide-in-from-right');
+        document.querySelector('.form-image-logar').classList.remove('hidden');
+        document.querySelector('.form-image-logar').classList.add('visible');
+        setTimeout(function() {
+            document.querySelector('.form-image-cadastrar').classList.add('hidden');
+            document.querySelector('.form-image-cadastrar').classList.remove('visible', 'slide-out-to-left');
+            document.querySelector('.form-image-logar').classList.remove('slide-in-from-right');
+        }, 250);
+    });
 
-document.querySelector('.form-image-logar button').addEventListener('click', function() {
-    document.querySelector('.form-image-logar').classList.add('slide-out-to-right');
-    document.querySelector('.form-image-cadastrar').classList.add('slide-in-from-left');
-    document.querySelector('.form-image-cadastrar').classList.remove('hidden');
-    document.querySelector('.form-image-cadastrar').classList.add('visible');
-    setTimeout(function() {
-        document.querySelector('.form-image-logar').classList.add('hidden');
-        document.querySelector('.form-image-logar').classList.remove('visible', 'slide-out-to-right');
-        document.querySelector('.form-image-cadastrar').classList.remove('slide-in-from-left');
-    }, 250);
-});
+    document.querySelector('.form-image-logar button').addEventListener('click', function() {
+        document.querySelector('.form-image-logar').classList.add('slide-out-to-right');
+        document.querySelector('.form-image-cadastrar').classList.add('slide-in-from-left');
+        document.querySelector('.form-image-cadastrar').classList.remove('hidden');
+        document.querySelector('.form-image-cadastrar').classList.add('visible');
+        setTimeout(function() {
+            document.querySelector('.form-image-logar').classList.add('hidden');
+            document.querySelector('.form-image-logar').classList.remove('visible', 'slide-out-to-right');
+            document.querySelector('.form-image-cadastrar').classList.remove('slide-in-from-left');
+        }, 250);
+    });
 </script>
+<script src="assets/js/mostrar-senha.js"></script>
 
 </html>

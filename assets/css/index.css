@@ -232,6 +232,12 @@ body {
     overflow: hidden;
 }
 
+.form-group .mostra-senha {
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+}
+
 .form-group .input-group .input-group-text {
     background-color: #A06CD5;
     padding: 1em;
