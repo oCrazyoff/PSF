@@ -1,6 +1,6 @@
 <?php
-include("auth/config.php");
 session_start();
+include("auth/config.php");
 
 $_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sha256', random_bytes(32));
 ?>

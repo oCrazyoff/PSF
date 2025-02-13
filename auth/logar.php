@@ -1,7 +1,6 @@
 <?php
-require_once '../database/utils/conexao.php';
-
 session_start();
+require_once '../database/utils/conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
@@ -32,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $stmt->fetch();
 
             if ($nome != '' && password_verify($senha, $senha_bd)) {
-                session_start();
                 $_SESSION["id"] = $id;
                 $_SESSION["nome"] = $nome;
                 $_SESSION["cpf"] = ($cpf == null || $cpf == '') ? '' : $cpf;
