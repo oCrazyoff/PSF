@@ -1,7 +1,7 @@
 <?php
 include("../auth/config.php");
 include("../database/utils/conexao.php");
-include("../auth/valida.php");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +15,11 @@ include("../auth/valida.php");
 </head>
 
 <body>
-    <?php include("../includes/header.php") ?>
-    <?php include("../includes/menu.php") ?>
+    <?php include("../includes/header.php");?>
+    <?php 
+    if (isset($_SESSION['nome'])){
+        include("../includes/menu.php"); 
+    } ?>
     <div class="content">
         <div class="catalog-container">
             <h1 class="catalog-title">Catálogo de Produtos</h1>

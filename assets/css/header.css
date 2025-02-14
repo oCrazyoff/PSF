@@ -17,24 +17,61 @@ header {
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
+    position: relative;
 }
 
 .user-info {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
-.user-name {
-    font-size: 1rem;
+.user-info .user-arrow i {
+    font-size: 1.2rem;
+    color: #fff;
+    padding: 0em 0.5em;
+    transition: transform 0.3s ease;
+}
+
+.user-info .user-avatar i {
+    font-size: 2.2rem;
     color: #fff;
 }
 
-.user-avatar i {
-    font-size: 2rem;
+.user-info .user-submenu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1a1c53;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar .user-submenu ul li {
+    cursor: pointer;
+}
+
+.user-info .user-submenu ul li a {
+    list-style: none;
+    text-decoration: none;
+    text-align: left;
+    font-size: 1.2em;
     color: #fff;
+}
+
+.user-avatar .user-submenu ul li:hover {
+    background-color: #ca771e;
+}
+
+.user-info:hover .user-submenu ul {
+    display: block;
+}
+
+.user-info:hover .user-arrow i {
+    transform: rotate(180deg);
 }
 
 .btn-menu {
