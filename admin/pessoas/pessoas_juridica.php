@@ -76,6 +76,7 @@ include("../../database/utils/conexao.php");
                                 </td>
                                 <td>
                                     <form class='action' action='../../database/pessoas/deletar_pessoa_juridica.php' method='post'>
+                                        <input type='hidden' name='deletar' value='0'>
                                         <input type='hidden' name='id' value='$id'>
                                         <input type='hidden' name='status' value='$status'>
                                         <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>

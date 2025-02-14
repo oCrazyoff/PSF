@@ -42,8 +42,8 @@ include("../../database/utils/conexao.php");
                     $status = $row['status'];
                     echo "
                     <tr>
-                        <td>" . $row['grupo_nome'] . "</td>
-                        <td>" . $row['nome'] . "</td>
+                        <td>" . htmlentities($row['grupo_nome']) . "</td>
+                        <td>" . htmlentities($row['nome']) . "</td>
                         <td>" . ($status == 1 ? "Ativo" : "Inativo") . "</td>
                         <td>
                             <form class='action' action='edita_subgrupo.php' method='post'>
@@ -53,6 +53,7 @@ include("../../database/utils/conexao.php");
                         </td>
                         <td>
                             <form class='action' action='../../database/subgrupos/deletar_subgrupo.php' method='post'>
+                            <input type='hidden' name='deletar' value='0'>
                                 <input type='hidden' name='id' value='$id'>
                                 <input type='hidden' name='status' value='$status'>
                                 <button type='submit'>" . (($status == 1) ? "<i class='fa-solid fa-trash-can'></i>" : "<i class='fa-solid fa-plus'></i>") . "</button>

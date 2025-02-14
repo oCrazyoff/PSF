@@ -20,25 +20,22 @@ $file_type = $_FILES['imagem']['type'];
 $imagem_info = getimagesize($imagem);
 $imagem_type = $imagem_info[2];
 
-
-if($imagem_type === IMAGETYPE_JPEG || $imagem_type === IMAGETYPE_PNG) {
-    if((($extencao === 'jpg' || $extencao === 'jpeg') && ($file_type === 'image/jpeg'))) {
-        if($imagem_type === IMAGETYPE_PNG) {
-            $imagem_original = imagecreatefrompng($imagem); 
-        } else {
-            $imagem_original = imagecreatefromjpeg($imagem);  
-        }
+if ($imagem_type == IMAGETYPE_JPEG || $imagem_type === IMAGETYPE_PNG) {
+    if ((($extencao === 'jpg' || $extencao === 'jpeg') && ($file_type === 'image/jpeg'))) {
+        $imagem_original = imagecreatefromjpeg($imagem);
         ob_start();
         imagejpeg($imagem_original, null, 20);
         $imagem_data = ob_get_clean();
         imagedestroy($imagem_original);
-    } else {
-        $_SESSION['resposta'] = "Formato de imagem inválido!";
-        header("Location: ../../admin/produtos/cadastro_produto.php");
-        exit;
+    } else if (($extencao === 'png' && $file_type === 'image/png')) {
+        $imagem_original = imagecreatefrompng($imagem);
+        ob_start();
+        imagejpeg($imagem_original, null, 20);
+        $imagem_data = ob_get_clean();
+        imagedestroy($imagem_original);
     }
 } else {
-    $_SESSION['resposta'] = "Formato de imagem inválido 2!";
+    $_SESSION['resposta'] = "Formato de imagem inválido!";
     header("Location: ../../admin/produtos/cadastro_produto.php");
     exit;
 }

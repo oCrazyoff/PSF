@@ -22,38 +22,51 @@ include("../auth/valida.php");
             <h1 class="catalog-title">Catálogo de Produtos</h1>
             <div class="product-list">
                 <?php
-                $sql = "SELECT g.nome AS grupo_nome, p.nome AS produto_nome, p.preco_venda, p.imagem 
-                            FROM grupos g 
-                            JOIN produtos p ON g.id = p.grupo 
-                            WHERE p.status = 1";
-                $resultado = $conn->query($sql);
+                $sql_grupos = "SELECT id, nome FROM grupos";
+                $resultado_grupos = $conn->query($sql_grupos);
+                $produtos_encontrados = false;
 
-                $grupos = [];
-                while ($row = $resultado->fetch_assoc()) {
-                    $grupos[$row['grupo_nome']][] = $row;
+                if ($resultado_grupos->num_rows > 0) {
+                    while ($grupo = $resultado_grupos->fetch_assoc()) {
+                        $sql_produtos = "SELECT nome, preco_venda, imagem 
+                                         FROM produtos 
+                                         WHERE grupo = ? AND status = 1";
+                        $stmt = $conn->prepare($sql_produtos);
+                        $stmt->bind_param("i", $grupo['id']);
+                        $stmt->execute();
+                        $resultado_produtos = $stmt->get_result();
+
+                        if ($resultado_produtos->num_rows > 0) {
+                            $produtos_encontrados = true;
+                            ?>
+                            <div class="group-container">
+                                <h2 class="group-title"><?= htmlspecialchars($grupo['nome']); ?></h2>
+                                <div class="group-products">
+                                    <?php
+                                    while ($produto = $resultado_produtos->fetch_assoc()) {
+                                    ?>
+                                        <div class="product-item">
+                                            <img src="<?= ($produto['imagem'] == null ? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" : 'data:image/jpeg;base64,' . base64_encode($produto['imagem'])) ?>"
+                                                alt="Imagem do <?= htmlspecialchars($produto['nome']); ?>"
+                                                class="product-image">
+                                            <h3 class="product-name"><?= htmlspecialchars($produto['nome']); ?></h3>
+                                            <p class="product-price">
+                                                R$<?= htmlspecialchars(number_format($produto['preco_venda'], 2, ',', '.')); ?>
+                                            </p>
+                                            <button class="btn-add-cart">Comprar</button>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
                 }
 
-                foreach ($grupos as $grupo_nome => $produtos) {
-                ?>
-                <div class="group-container">
-                    <h2 class="group-title"><?php echo htmlspecialchars($grupo_nome); ?></h2>
-                    <div class="group-products">
-                        <?php foreach ($produtos as $produto) { ?>
-                        <div class="product-item">
-                            <?php $imagem = 'data:image/jpeg;base64,'. base64_encode($produto['imagem']);?>
-                            <img src="<?= ($produto['imagem'] == null ? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" : $imagem) ?>"
-                                alt="Imagem do <?php echo htmlspecialchars($produto['produto_nome']); ?>"
-                                class="product-image">
-                            <h3 class="product-name"><?php echo htmlspecialchars($produto['produto_nome']); ?></h3>
-                            <p class="product-price">
-                                R$<?php echo htmlspecialchars(number_format($produto['preco_venda'], 2, ',', '.')); ?>
-                            </p>
-                            <button class="btn-add-cart">Comprar</button>
-                        </div>
-                        <?php } ?>
-                    </div>
-                </div>
-                <?php
+                if (!$produtos_encontrados) {
+                    echo "<p class='error-message'>Nenhum produto encontrado!</p>";
                 }
                 ?>
             </div>

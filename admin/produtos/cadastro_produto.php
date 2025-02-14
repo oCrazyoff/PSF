@@ -34,6 +34,7 @@ include("../../database/utils/conexao.php");
                             <input type="file" class="form-control" name="imagem" id="imagem"
                                 accept="image/png, image/jpeg" required>
                         </div>
+                        <label for="descricao">Somente imagens PNG, JPEG</label>
                     </div>
                 </div>
         </div>

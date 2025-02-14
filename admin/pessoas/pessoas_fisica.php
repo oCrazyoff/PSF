@@ -80,6 +80,7 @@ include("../../database/utils/conexao.php");
                                 </td>
                                 <td>
                                     <form class='action' action='../../database/pessoas/deletar_pessoa_fisica.php' method='post'>
+                                        <input type='hidden' name='deletar' value='0'>
                                         <input type='hidden' name='id' value='$id'>
                                         <input type='hidden' name='emailAtual' value='$email'>
                                         <input type='hidden' name='status' value='$status'>
