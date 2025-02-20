@@ -9,19 +9,19 @@
         <div class="user-info">
             <span class="user-arrow"><i class="fa-solid fa-caret-down"></i></span>
             <span class="user-avatar"><i class="fas fa-user-circle"></i></span>
-            <span class="user-submenu">
+            <nav class="user-submenu">
                 <ul>
-                    <li><a href="<?= BASE_URL . "pages/produtos.php" ?>">Catálogo</a></li>
-                    <li><a href="<?= BASE_URL . "pages/carrinho.php" ?>">Carrinho</a></li>
+                    <li><a href="<?= BASE_URL . "pages/produtos.php" ?>"><i class="fa-solid fa-box"></i>Catálogo</a></li>
+                    <li><a href="<?= BASE_URL . "pages/carrinho.php" ?>"><i class="fa-solid fa-cart-shopping"></i>Carrinho</a></li>
                     <?php
                     if (isset($_SESSION['nome'])) {
-                        echo "<li><a href='" . BASE_URL . "auth/sair.php'>Sair</a></li>";
+                        echo "<li><a href='" . BASE_URL . "auth/sair.php'><i class='fa-solid fa-right-from-bracket'></i>Sair</a></li>";
                     } else {
-                        echo "<li><a href='" . BASE_URL . "index.php'>Login</a></li>";
+                        echo "<li><a href='" . BASE_URL . "index.php'><i class='fa-solid fa-right-to-bracket'></i>Login</a></li>";
                     }
                     ?>
                 </ul>
-            </span>
+            </nav>
 
         </div>
     </div>
