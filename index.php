@@ -11,7 +11,7 @@ $_SESSION['_csrf'] = (isset($_SESSION['_csrf'])) ? $_SESSION['_csrf'] : hash('sh
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logar</title>
+    <title>Login</title>
     <?php include("includes/link_head.php") ?>
     <?php include("includes/div_erro.php") ?>
     <link rel="stylesheet" href="assets/css/index.css?v=<?php echo time(); ?>">
