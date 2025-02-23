@@ -48,9 +48,10 @@ header {
     right: 0;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(-10px);
+    visibility: hidden;
     opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
 .user-info .user-submenu ul {
@@ -85,7 +86,7 @@ header {
 }
 
 .user-info:hover .user-submenu {
-    display: flex;
+    visibility: visible;
     opacity: 1;
     transform: translateY(0);
 }
