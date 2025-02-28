@@ -25,10 +25,3 @@
         </div>
     </div>
 </header>
-
-<script>
-    function menu() {
-        var menu = document.getElementById('menu');
-        menu.classList.toggle('active');
-    }
-</script>
