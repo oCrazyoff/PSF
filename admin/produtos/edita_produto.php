@@ -13,7 +13,10 @@ $result = $stmt->get_result();
 $produto = $result->fetch_assoc();
 $stmt->close();
 
-$imgSrc = 'data:image/jpeg;base64,' . base64_encode($produto['imagem']);
+if($produto['imagem'] != null || $produto['imagem'] != "") {
+    $imgSrc = 'data:image/jpeg;base64,' . base64_encode(stream_get_contents($produto['imagem']));
+}
+
 
 ?>
 <!DOCTYPE html>
