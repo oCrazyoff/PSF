@@ -8,13 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo = 1;
     $status = 0;
     $total = $_POST['total'];
+    $produtos = $_POST['produtos'];
 
-    // Verifique se a conexão com o banco de dados está funcionando
-    if ($conn->connect_error) {
-        $_SESSION['resposta'] = "Erro na conexão com o banco de dados: " . $conn->connect_error;
-        header("Location: ../../admin/vendas/caixa/caixa.php");
-        exit();
-    }
+    var_dump($_POST);
+    die;
+    
 
     $sql = "INSERT INTO transacoes (cliente_cpf, vendedor_cpf, tipo, preco_total, status) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
@@ -28,12 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
     $conn->close();
-
-    // Redirecionar de volta para a página do caixa
-    header("Location: ../../admin/vendas/caixa/caixa.php");
-    exit();
 } else {
     $_SESSION['resposta'] = "Método não permitido";
-    header("Location: ../../admin/vendas/caixa/caixa.php");
-    exit();
 }

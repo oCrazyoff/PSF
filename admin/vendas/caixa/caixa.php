@@ -233,6 +233,7 @@ include("../../../database/utils/conexao.php");
                 <table>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nome</th>
                             <th>Preço de Custo</th>
                             <th>Preço de Venda</th>
@@ -308,7 +309,7 @@ include("../../../database/utils/conexao.php");
                     </div>
                 </div>
                 <div class="buttons">
-                    <button id="enviar-venda">Enviar</button>
+                    <button type="submit" id="enviar-venda">Enviar</button>
                 </div>
             </div>
         </div>
@@ -364,12 +365,14 @@ include("../../../database/utils/conexao.php");
             });
 
             $(document).on('click', '.suggestion-item', function() {
+                var id_produto = $(this).data('id');
                 var produto = $(this).data('produto');
                 var precoVenda = $(this).data('preco-venda').toString().replace('.', ',');
                 var precoCusto = $(this).data('preco-custo').toString().replace('.', ',');
 
                 var newRow = `
                     <tr>
+                        <td>${id_produto}</td>
                         <td>${produto}</td>
                         <td>R$ ${precoCusto}</td>
                         <td>R$ ${precoVenda}</td>
@@ -419,11 +422,31 @@ include("../../../database/utils/conexao.php");
                 $('#cliente').val(cliente);
                 $('#sugestao-cliente').html('');
             });
-
             $('#enviar-venda').on('click', function() {
                 let total = $('#total').text().replace('R$ ', '').replace(',', '.');
                 let funcionarioCpf = $('#funcionario').val();
                 let clienteCpf = $('#cliente').val();
+
+                // Criar um array para armazenar os produtos selecionados
+                let produtos = [];
+
+                $('#product-table-body tr').each(function() {
+                    let id_produto = $(this).find('td').eq(0).text();
+                    let produto = $(this).find('td').eq(1).text(); // Nome do produto
+                    let precoCusto = $(this).find('td').eq(2).text().replace('R$ ', '').replace(',', '.');
+                    let precoVenda = $(this).find('td').eq(3).text().replace('R$ ', '').replace(',', '.');
+                    let quantidade = $(this).find('.quantidade').val();
+
+                    produtos.push({
+                        id: id_produto,
+                        produto: produto,
+                        precoCusto: precoCusto,
+                        precoVenda: precoVenda,
+                        quantidade: quantidade
+                    });
+                });
+
+                console.log("Produtos:", produtos); // Verificar se os dados estão corretos no console
 
                 $.ajax({
                     url: '../../../database/vendas/cadastrar_transacao.php',
@@ -431,16 +454,18 @@ include("../../../database/utils/conexao.php");
                     data: {
                         total: total,
                         clienteCpf: clienteCpf,
-                        funcionarioCpf: funcionarioCpf
+                        funcionarioCpf: funcionarioCpf,
+                        produtos: JSON.stringify(produtos) // Enviar os produtos como JSON
                     },
                     success: function(response) {
-                        location.reload();
+                        alert("Venda cadastrada com sucesso!");
                     },
                     error: function() {
-                        location.reload();
+                        alert("Erro ao cadastrar venda!");
                     }
                 });
             });
+
         });
     </script>
 </body>
