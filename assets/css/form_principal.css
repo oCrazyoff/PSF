@@ -1,0 +1,273 @@
+html * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: rgb(238, 229, 242);
+    background: linear-gradient(90deg, rgba(238, 229, 242, 1) 15%, rgba(209, 182, 232, 1) 85%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.form-container {
+    background-color: white;
+    width: 55em;
+    height: 35em;
+    display: flex;
+    border-radius: 1em;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.281);
+    position: relative;
+}
+
+/* Imagem Animada */
+
+.form-image-cadastrar {
+    background-color: #A06CD5;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 0px 100px 100px 0px;
+    flex-direction: column;
+}
+
+.form-image-cadastrar h2 {
+    font-size: 30px;
+    color: white;
+    padding: 0.5em;
+}
+
+.form-image-cadastrar p {
+    color: white;
+    font-size: 18px;
+    width: 80%;
+    text-align: center;
+    padding: 1em;
+}
+
+.form-image-cadastrar button {
+    padding: 0.5em;
+    width: 10em;
+    border-radius: 10px;
+    border: white 3px solid;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.form-image-logar {
+    background-color: #A06CD5;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    z-index: 1;
+    border-radius: 100px 0px 0px 100px;
+    flex-direction: column;
+}
+
+.form-image-logar h2 {
+    font-size: 30px;
+    color: white;
+    padding: 0.5em;
+}
+
+.form-image-logar p {
+    color: white;
+    font-size: 18px;
+    width: 80%;
+    text-align: center;
+    padding: 1em;
+}
+
+.form-image-logar button {
+    padding: 0.5em;
+    width: 10em;
+    border-radius: 10px;
+    border: white 3px solid;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+@keyframes slideInFromRight {
+    from {
+        right: -50%;
+    }
+    to {
+        right: 0;
+    }
+}
+
+@keyframes slideOutToLeft {
+    from {
+        left: 0;
+    }
+    to {
+        left: -50%;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        left: -50%;
+    }
+    to {
+        left: 0;
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        right: 0;
+    }
+    to {
+        right: -50%;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
+
+.slide-in-from-right {
+    animation: slideInFromRight 0.25s forwards;
+}
+
+.slide-out-to-left {
+    animation: slideOutToLeft 0.25s forwards;
+}
+
+.slide-in-from-left {
+    animation: slideInFromLeft 0.25s forwards;
+}
+
+.slide-out-to-right {
+    animation: slideOutToRight 0.25s forwards;
+}
+
+/* Formulário de Login */
+.form-login {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-login form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-login h2 {
+    font-size: 30px;
+    padding: 0.7em;
+}
+
+
+/* Formulário de Cadastro */
+.form-cadastro {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-cadastro form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-cadastro h2 {
+    font-size: 30px;
+    padding: 0.7em;
+}
+
+/* Formulário Geral*/
+
+.form-group {
+    padding: 0.5em;
+    margin-bottom: 0.3em;
+    width: 25em;
+}
+
+.form-group .input-group {
+    background-color: rgb(209, 209, 209);
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.form-group .mostra-senha {
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+}
+
+.form-group .input-group .input-group-text {
+    background-color: #A06CD5;
+    padding: 1em;
+    width: 50px;
+}
+
+.form-group .input-group .input-group-text i {
+    color: white;
+    font-size: 20px;
+}
+
+.form-group .input-group input {
+    background-color: #ebe2f0;
+    border: none;
+    outline: none;
+    width: 25em;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.confirm-button {
+    background-color: #A06CD5;
+    color: white;
+    padding: 0.5em;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    width: 10em;
+    margin: 1em;
+    font-weight: bold;
+}
