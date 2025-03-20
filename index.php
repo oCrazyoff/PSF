@@ -24,6 +24,17 @@
             </a>
         </div>
     </header>
+    <section id="hero">
+        <div class="left">
+            <h1>Venha ser <span>PSF</span></h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, quisquam voluptas? </p>
+            <a href="pages/form_principal.php">Crie sua conta</a>
+        </div>
+        <div class="right">
+            <img src="https://img.freepik.com/vetores-premium/desenhos-animados-de-mulheres-de-negocios-com-design-de-quadro-infografico-gestao-empresarial-e-tema-corporativo_24911-60671.jpg" alt="moças conversando">
+        </div>
+
+    </section>
 </body>
 
 </html>

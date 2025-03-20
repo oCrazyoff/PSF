@@ -15,7 +15,7 @@ header {
 
 }
 
-.left {
+header .left {
     display: flex;
     gap: 1em;
     justify-content: center;
@@ -23,24 +23,64 @@ header {
     height: 100%;
 }
 
-.left img {
+header .left img {
     height: 100%;
 }
 
-.right {
+header .right {
     display: flex;
 }
 
-.right a {
+header .right a {
     color: #fff;
     padding: 1em;
     border-radius: 1em;
     text-decoration: none;
     background-color: #A06CD5;
     transition: .3s;
+}
+
+header .right a:hover {
+    background-color: #60437c;
+}
+
+#hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+#hero .left {
+    width: 35%;
+}
+
+#hero .left h1 {
+    font-size: 4em;
+    margin: 0;
+}
+
+#hero .left h1 span {
+    color: #A06CD5;
 
 }
 
-.right a:hover {
+#hero .left p {
+    font-size: 1.5em;
+    width: 70%;
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+#hero .left a {
+    color: #fff;
+    padding: 1em;
+    border-radius: 5em;
+    text-decoration: none;
+    background-color: #A06CD5;
+    transition: .3s;
+}
+
+#hero .left a:hover {
     background-color: #60437c;
 }
